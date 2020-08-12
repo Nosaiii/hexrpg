@@ -1,0 +1,164 @@
+command-and-chat-execution:
+  not-allowed: '&cYou are not allowed to use this command!'
+
+  too-few-arguments: '&cYou have entered too less arguments!'
+  too-many-arguments: '&cYou have entered too many arguments!'
+
+  invalid-command-argument: '&cYou have entered an invalid argument in the command!'
+
+  invalid-player: '&cYou have entered an invalid player that either does not exist or is not online!'
+  invalid-amount: '&cYou have entered an invalid amount!'
+
+  backpacks:
+    invalid-size: '&cYou have entered an invalid size for a backpack!'
+    size-out-of-range: '&cYou have entered a backpack size which is out of range of the allowed size between 1 and 6!'
+    received: '&aYou have received a backpack!'
+    sent: '&aYou have sent a backpack!'
+
+  effect-sockets:
+    available: '&6Available effect sockets:'
+    invalid-effect-socket: '&cThe effects socket ''&7{0}&c'' does not exist!'
+    received: '&aYou have received an amount of effect sockets ({0}x)!'
+    sent: '&aYou have sent an amount of effect sockets ({0}x)!'
+
+  scrolls:
+    available: '&6Available scrolls:'
+    invalid-scroll: '&cThe scroll ''&7{0}&c'' does not exist!'
+    received: '&aYou have received an amount of scrolls ({0}x)!'
+    sent: '&aYou have sent an amount of scrolls ({0}x)!'
+
+  rupees:
+    received: '&aYou have received an amount of rupees ({0}x)!'
+    sent: '&aYou have sent an amount of rupees ({0}x)!'
+
+  rpg-items:
+    available: '&6Available RPG items:'
+    invalid-rpg-item: '&cThe RPG item ''&7{0}&c'' does not exist!'
+    invalid-yes-no: '&cYou have entered an invalid yes/no value determining the item''s identification!'
+    invalid-tier: '&cThe value ''&7{0}&c'' is an invalid tier type!'
+    invalid-durability: '&cYou have entered an invalid durability value!'
+    received: '&aYou have received an RPG item!'
+
+  personal-shop:
+    created: '&aYou have successfully created a personal shop!'
+
+  loot-drop:
+    invalid-coordinates: '&cYou have entered invalid values for the coordination!'
+    dropped: '&aYou have successfully spawned a lootdrop at the given location!'
+
+  chat-processor:
+    cancelled: '&7The action has been cancelled!'
+
+backpacks:
+  backpacks-stacking-not-allowed: '&cYou cannot store backpacks inside of other backpacks!'
+
+rpg-items:
+  item-broke: '&c* Your item broke *'
+
+personal-shop:
+  item-purchased: '&aYou have successfully purchased the item!'
+  not-enough-rupees-to-purchase-item: '&cYou do not have enough rupees to purchase this item!'
+  not-enough-rupees-to-upgrade-slots: '&cYou do not have enough rupees to upgrade your player shop slots!'
+  no-rupees-to-collect: 'You have no rupees to collect!'
+  selling-rupees-not-allowed: '&cYou cannot sell rupees in a player shop!'
+  left-click-to-upgrade-slots: '&7Left click to upgrade slots for &c{0} &7{1}' # {1} is either the translation for 'Rupee' or 'Rupees', depending on the amount of {0}
+  left-click-to-collect: '&7Left-click to collect &c{0} &7{1}' # {1} is either the translation for 'Rupee' or 'Rupees', depending on the amount of {0}
+
+loot-drop:
+  right-click-to-open: '&7(Right-click the loot drop to open...)'
+
+applicables:
+  successfully-applied: '&a* Successfully applied the {0} *'
+  failed-to-apply: '&a* The {0} failed to apply *'
+  effect-socket-lore:
+    - '&fUse this effect socket in combination with a combat item'
+    - '&fto apply the aura effect.'
+
+player-leveling:
+  experience-gained: '&e+{0} experience'
+
+player-menu:
+  click-to-trade: '&7Click to trade with {0}'
+  click-to-steal: '&7Click to steal from {0}'
+
+  trading:
+    request-sent: '&aYou have sent a trade request to ''&6{0}&a''!'
+    request-received: '&a''&6{0}&a'' has sent you a trade request! Use the player-menu to accept this request.'
+    invitation-cancelled: '&7(The trading invitation was cancelled)'
+
+  stealing:
+    no-items-found: '&cYou have found no items that could be stolen!'
+    failed-to-steal: '&cYou failed to steal!'
+    stealing-interrupted: '&7(The stealing process was interrupted)'
+    item-stolen: '&aYou have successfully stole from ''&6{0}&a''!'
+    stolen-from: '&cYou got robbed an item by ''&7{0}&c''!'
+    in-progress: 'Stealing in progress...'
+
+chat-processors:
+  cancel-instructions: '&7(Type ''cancel'' to cancel this action)'
+
+  player-shop-add-item:
+    initialize: '&bEnter the price of the item you would like to add in the chat...'
+    invalid-value: '&cYou have entered an invalid input value. Please try again.'
+    no-item-found: '&cThere was no item found at the clicked slot to add to the player shop!'
+    no-free-slots: '&cThere are no slots free in your shop to add the item.'
+
+  player-shop-confirmation-removal:
+    initialize: '&bAre you sure you would like to remove this item from your shop? (Yes/No)'
+    invalid-value: '&cYou have entered an invalid input value. Please try again.'
+    no-item-found: '&cThere was no item found at the clicked slot to retrieve back from!'
+
+  player-shop-delete-confirmation:
+    initialize: '&bAre you sure you would like to delete this shop? (Yes/No)'
+    invalid-value: '&cYou have entered an invalid input value. Please try again.'
+
+  player-shop-renaming:
+    initialize: '&bEnter the name of your shop in the chat...'
+    shop-name-has-limit: '&cA shop name has a limit of 20 characters!'
+
+language-menu:
+  title: 'Choose a language:'
+  language-changed: '&aYour language has been switched to ''&6{0}&a''!'
+
+plugin:
+  reloaded: '&aThe plugin has successfully been reloaded!'
+
+literal-translations:
+  name: 'Name'
+  amount: 'Amount'
+  player: 'Player'
+
+  identified: 'Identified'
+  tier: 'Tier'
+  durability: 'Durability'
+
+  y: 'y' # Abbreviation for 'Yes'
+  yes: 'Yes'
+  n: 'n' # Abbreviation for 'No'
+  no: 'No'
+
+  world: 'World'
+
+  cancel: 'Cancel'
+
+  rupee: 'Rupee'
+  rupees: 'Rupees'
+  editing: 'Editing'
+  price: 'Price'
+  rename: 'Rename'
+  delete: 'Delete'
+  upgrade-slots: 'Upgrade slots'
+
+  player-menu: 'Player menu'
+  trade: 'Trade'
+  steal: 'Steal'
+
+  previous-page: 'Previous page'
+  next-page: 'Next page'
+
+  backpack: 'Backpack'
+
+  none: 'None'
+
+  version: 'Version'
+  authors: 'Authors'

@@ -1,0 +1,35 @@
+stats:
+   pve-damage: 'PVE Damage'
+   pvp-damage: 'PVP Damage'
+   critical-rate: 'Critical rate'
+   critical-damage-multiplier: 'Critical damage multiplier'
+   health: 'Health'
+   armor: 'Armor'
+   dodge-chance: 'Dodge chance'
+   tenacity: 'Tenacity'
+   lifesteal: 'Lifesteal'
+   armor-penetration: 'Armor penetration'
+   travel-speed: 'Travel speed'
+   flamable-chance: 'Flamable chance'
+   overhaul: 'Overhaul'
+
+   durability: 'Durability'
+   unidentified-item: 'Unidentified {0}' # {0} is the name of the RPG combat item
+   upgrades-applied: 'Upgrades applied'
+   identification-lore: 'Apply an identification scroll to identify this item'
+   click-to-apply-applicable: 'Click to apply the applicable on ''{0}''' # {0} is the name of the RPG combat item
+
+backpack:
+   item-name: 'Backpack'
+   title: 'Backpack'
+   size: 'Size'
+
+rpg-items:
+   pre-applicable-apply: '&9&lClick to apply the applicable...'
+
+etc:
+  stats: 'Stats'
+  effect-socket: 'Effect socket'
+  none: 'None'
+
+  rupee: 'Rupee'
