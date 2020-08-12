@@ -1,0 +1,346 @@
+# Notes:
+# - A glow effect makes the scroll hide the list of applied enchantments and adds a  Durability I enchantment just for the glow effect.
+# - When settings 'identification' to 'true' the scrolls only purpose will be to identify unidentified items. All other settings will not be applied to the item.
+# - It is possible to give a negative value. Doing this will decrease the specific stat on the item. Keep in mind that a stat can never be lower than 0.
+# - It is possible to make a scroll upgrade(/downgrade) a stat with a random value in a range. Instead of typing one number, just type two numbers divided by a '-'
+# - You can set whether scrolls can be applied on armor, weapons and/or on items that are identified, yes or no. Please use correct values so (as an example) you can only apply health on armor items
+
+identification-scroll:
+  appearance:
+    display-name: '&eIdentification Scroll'
+    lore:
+      - '&fUse this scroll in combination with an unidentified item'
+      - '&fin the crafting table to reveal its stats.'
+    glow: true
+  rates:
+    success: 60
+    destroy: 0
+  can-be-applied-on:
+    armor: true
+    weapon: true
+    arrow: true
+    identified-item: false
+    unidentified-item: true
+  attribute-changes:
+    identification: true
+    pve-damage: 0
+    pvp-damage: 0
+    critical-damage-multiplier: 0
+    additional-health: 0
+    agility: 0
+    armor: 0
+    dodge-chance: 0
+    tenacity: 0
+    lifesteal: 0
+    travel-speed: 0
+    flamable-chance: 0
+powerful-identification-scroll:
+  appearance:
+    display-name: '&5Powerful Identification Scroll'
+    lore:
+      - '&fUse this scroll in combination with an unidentified item'
+      - '&fin the crafting table to reveal its stats.'
+    glow: true
+  rates:
+    success: 90
+    destroy: 0
+  can-be-applied-on:
+    armor: true
+    weapon: true
+    arrow: true
+    identified-item: false
+    unidentified-item: true
+  attribute-changes:
+    identification: true
+    pve-damage: 0
+    pvp-damage: 0
+    critical-damage-multiplier: 0
+    additional-health: 0
+    agility: 0
+    armor: 0
+    dodge-chance: 0
+    tenacity: 0
+    lifesteal: 0
+    travel-speed: 0
+    flamable-chance: 0
+scroll-of-strength:
+  appearance:
+    display-name: '&5Scroll of Strength'
+    lore:
+      - '&fUse this scroll in combination with a combat item to'
+      - '&fincrease the following stats:'
+      - '&7• PVE damage: &f+&92&f-&93'
+      - '&7• PVP damage: &f+&92.2'
+      - '&7• Lifesteal: &f+&90%&f-&93%'
+    glow: true
+  rates:
+    success: 80
+    destroy: 0
+  can-be-applied-on:
+    armor: false
+    weapon: true
+    arrow: true
+    identified-item: true
+    unidentified-item: false
+  attribute-changes:
+    identification: false
+    pve-damage: 2-3
+    pvp-damage: 2.2
+    critical-damage-multiplier: 0
+    additional-health: 0
+    agility: 0
+    armor: 0
+    dodge-chance: 0
+    tenacity: 0
+    lifesteal: 0-3
+    travel-speed: 0
+    flamable-chance: 0
+scroll-of-constitution:
+  appearance:
+    display-name: '&5Scroll of Constitution'
+    lore:
+      - '&fUse this scroll in combination with a combat item to'
+      - '&fincrease the following stats:'
+      - '&7• Health: &f+&94'
+    glow: true
+  rates:
+    success: 80
+    destroy: 0
+  can-be-applied-on:
+    armor: true
+    weapon: false
+    arrow: false
+    identified-item: true
+    unidentified-item: false
+  attribute-changes:
+    identification: false
+    pve-damage: 0
+    pvp-damage: 0
+    critical-damage-multiplier: 0
+    additional-health: 4
+    agility: 0
+    armor: 0
+    dodge-chance: 0
+    tenacity: 0
+    lifesteal: 0-3
+    travel-speed: 0
+    flamable-chance: 0
+scroll-of-the-guardian:
+  appearance:
+    display-name: '&5Scroll of the Guardian'
+    lore:
+      - '&fUse this scroll in combination with a combat item to'
+      - '&fincrease the following stats:'
+      - '&7• Armor: &f+&92'
+    glow: true
+  rates:
+    success: 75
+    destroy: 0
+  can-be-applied-on:
+    armor: true
+    weapon: false
+    arrow: false
+    identified-item: true
+    unidentified-item: false
+  attribute-changes:
+    identification: false
+    pve-damage: 0
+    pvp-damage: 0
+    critical-damage-multiplier: 0
+    additional-health: 0
+    agility: 0
+    armor: 2
+    dodge-chance: 0
+    tenacity: 0
+    lifesteal: 0
+    travel-speed: 0
+    flamable-chance: 0
+agility-scroll:
+  appearance:
+    display-name: '&5Agility Scroll'
+    lore:
+      - '&fUse this scroll in combination with a combat item to'
+      - '&fincrease the following stats:'
+      - '&7• Agility: &f+&94%'
+    glow: true
+  rates:
+    success: 100
+    destroy: 0
+  can-be-applied-on:
+    armor: true
+    weapon: false
+    arrow: false
+    identified-item: true
+    unidentified-item: false
+  attribute-changes:
+    identification: false
+    pve-damage: 0
+    pvp-damage: 0
+    critical-damage-multiplier: 0
+    additional-health: 0
+    agility: 4
+    armor: 0
+    dodge-chance: 0
+    tenacity: 0
+    lifesteal: 0
+    travel-speed: 0
+    flamable-chance: 0
+tenacity-scroll:
+  appearance:
+    display-name: '&5Agility Scroll'
+    lore:
+      - '&fUse this scroll in combination with a combat item to'
+      - '&fincrease the following stats:'
+      - '&7• Tenacity: &f+&92%'
+    glow: true
+  rates:
+    success: 75
+    destroy: 0
+  can-be-applied-on:
+    armor: false
+    weapon: true
+    arrow: false
+    identified-item: true
+    unidentified-item: false
+  attribute-changes:
+    identification: false
+    pve-damage: 0
+    pvp-damage: 0
+    critical-damage-multiplier: 0
+    additional-health: 0
+    agility: 0
+    armor: 0
+    dodge-chance: 0
+    tenacity: 2
+    lifesteal: 0
+    travel-speed: 0
+    flamable-chance: 0
+xaisians-combat-scroll:
+  appearance:
+    display-name: "&6&lXaisian's Combat Scroll"
+    lore:
+      - '&fUse this scroll in combination with a combat item to'
+      - '&fincrease the following stats:'
+      - '&7• PVE damage: &f+&93'
+      - '&7• PVP damage: &f+&93.5'
+      - '&7• Critical damage multiplier: &f+&98%&f-&912%'
+      - '&7• Additional health: &f+&93&f-&96'
+      - '&7• Armor: &f+&91&f-&92'
+      - '&7• Dodge chance: &f+&910%&f-&915%'
+      - '&7• Lifesteal: &f+&95%'
+    glow: true
+  rates:
+    success: 40
+    destroy: 20
+  can-be-applied-on:
+    armor: false
+    weapon: true
+    arrow: false
+    identified-item: true
+    unidentified-item: false
+  attribute-changes:
+    identification: false
+    pve-damage: 3
+    pvp-damage: 3.5
+    critical-damage-multiplier: 8-12
+    additional-health: 0
+    agility: 0
+    armor: 0
+    dodge-chance: 0
+    tenacity: 0
+    lifesteal: 5
+    travel-speed: 0
+    flamable-chance: 0
+xaisians-defensive-scroll:
+  appearance:
+    display-name: "&6&lXaisian's Defensive Scroll"
+    lore:
+      - '&fUse this scroll in combination with a combat item to'
+      - '&fincrease the following stats:'
+      - '&7• Additional health: &f+&93&f-&96'
+      - '&7• Armor: &f+&91&f-&92'
+      - '&7• Dodge chance: &f+&910%&f-&915%'
+    glow: true
+  rates:
+    success: 40
+    destroy: 20
+  can-be-applied-on:
+    armor: true
+    weapon: false
+    arrow: false
+    identified-item: true
+    unidentified-item: false
+  attribute-changes:
+    identification: false
+    pve-damage: 0
+    pvp-damage: 0
+    critical-damage-multiplier: 0
+    additional-health: 3-6
+    agility: 0
+    armor: 1-2
+    dodge-chance: 10-15
+    tenacity: 0
+    lifesteal: 0
+    travel-speed: 0
+    flamable-chance: 0
+infernal-projectile-scroll:
+  appearance:
+    display-name: "&4&lInfernal projectile scroll"
+    lore:
+      - '&fUse this scroll in combination with an arrow to'
+      - '&fincrease the following stats:'
+      - '&7• Flamable chance: &f+&92&f-&95'
+    glow: true
+  rates:
+    success: 40
+    destroy: 20
+  can-be-applied-on:
+    armor: false
+    weapon: false
+    arrow: true
+    identified-item: true
+    unidentified-item: false
+  attribute-changes:
+    identification: false
+    pve-damage: 0
+    pvp-damage: 0
+    critical-damage-multiplier: 0
+    additional-health: 0
+    agility: 0
+    armor: 0
+    dodge-chance: 0
+    tenacity: 0
+    lifesteal: 0
+    travel-speed: 0
+    flamable-chance: 2-5
+anti-destroy-scroll:
+  appearance:
+    display-name: "&5Anti-destroy Scroll"
+    lore:
+      - '&fUse this scroll in combination with a combat item to'
+      - '&fincrease the following stats:'
+      - '&7• Overhaul: &f+&915&f-&940%'
+    glow: true
+  rates:
+    success: 50
+    destroy: 10
+  can-be-applied-on:
+    armor: true
+    weapon: true
+    arrow: false
+    identified-item: true
+    unidentified-item: false
+  attribute-changes:
+    identification: false
+    pve-damage: 0
+    pvp-damage: 0
+    critical-damage-multiplier: 0
+    additional-health: 0
+    agility: 0
+    armor: 0
+    dodge-chance: 0
+    tenacity: 0
+    lifesteal: 0
+    travel-speed: 0
+    flamable-chance: 0
+    overhaul: 15-40
