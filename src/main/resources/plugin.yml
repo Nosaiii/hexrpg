@@ -1,0 +1,25 @@
+name: HexRPG
+main: me.cheesyfreezy.hexrpg.main.Main
+version: '0.7'
+author: CheesyFreezy
+description: Innovative RPG plugin including many unique features
+api-version: '1.15'
+commands:
+  hexrpg:
+    description: Command to handle the back-end of the plugin
+  hexrpglanguage:
+    description: Opens a menu in which the player can select a personal language for the plugin
+  givebackpack:
+    description: Gives a specific player a backpack
+  giverpgitem:
+    description: Gives a set amount of a specific custom RPG item
+  giverpgscroll:
+    description: Gives a specific player any type of RPG scroll
+  giverpgeffectsocket:
+    description: Gives a specific player any type of RPG effect socket
+  giverupees:
+    description: Gives a specific amount of rupees to a player
+  createshop:
+    description: Creates a personal shop on the current location
+  spawnlootdrop:
+    description: Spawns a loot drop at the current location

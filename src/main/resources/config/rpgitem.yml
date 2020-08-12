@@ -1,0 +1,236 @@
+# For material (item type) names please use the list on https://www.minecraftinfo.com/idnamelist.htm
+
+sinister-blade:
+    name: 'Sinister blade'
+    material: 'iron_sword'
+    
+    durability: 1500
+    durability-loss: 1
+    
+    tiers:
+        rates:
+            common: 45
+            decent: 28
+            ordinary: 16
+            rare: 8
+            grand: 3
+        stats-multipliers:
+            common: 1.0
+            decent: 1.1
+            ordinary: 1.25
+            rare: 1.575
+            grand: 1.85
+        durability-multipliers:
+            common: 1
+            decent: 1.15
+            ordinary: 1.4
+            rare: 1.8
+            grand: 2.4
+    stats:
+        pve-damage: 3
+        pvp-damage: 2.8
+        critical-rate: 5
+        critical-damage-multiplier: 1.05
+        additional-health: 0
+        agility: 0
+        armor: 0
+        dodge-chance: 0
+        tenacity: 0
+        lifesteal: 4
+        overhaul: 4
+gracing-bow:
+    name: 'Gracing bow'
+    material: 'bow'
+
+    durability: 250
+    durability-loss: 1-2
+
+    tiers:
+        rates:
+            common: 30
+            decent: 25
+            ordinary: 20
+            rare: 18
+            grand: 7
+        stats-multipliers:
+            common: 1.0
+            decent: 1.2
+            ordinary: 1.3
+            rare: 1.7
+            grand: 2
+        durability-multipliers:
+            common: 1
+            decent: 1.1
+            ordinary: 1.2
+            rare: 1.35
+            grand: 1.5
+    stats:
+        pve-damage: 6
+        pvp-damage: 5.75
+        critical-rate: 3
+        critical-damage-multiplier: 1.1
+        additional-health: 0
+        agility: 0
+        armor: 0
+        dodge-chance: 0
+        tenacity: 0
+        lifesteal: 0
+        overhaul: 0-6
+xaisians-sword:
+    name: 'Xaisians sword'
+    material: 'diamond_sword'
+    
+    durability: 1800
+    durability-loss: 1-3
+    
+    tiers:
+        rates:
+            common: 40
+            decent: 24
+            ordinary: 20
+            rare: 10
+            grand: 6
+        stats-multipliers:
+            common: 1.1
+            decent: 1.25
+            ordinary: 1.625
+            rare: 1.85
+            grand: 2.1
+        durability-multipliers:
+            common: 1
+            decent: 1.15
+            ordinary: 1.4
+            rare: 1.8
+            grand: 2.4
+    stats:
+        pve-damage: 4.5
+        pvp-damage: 5.2
+        critical-rate: 20
+        critical-damage-multiplier: 1.08
+        additional-health: 0
+        agility: 0
+        armor: 0
+        dodge-chance: 0
+        tenacity: 0
+        lifesteal: 0
+        overhaul: 5-8
+helm-of-nozit:
+    name: 'Helm of nozit'
+    material: 'diamond_helmet'
+    
+    durability: 1500
+    durability-loss: 1
+    
+    tiers:
+        rates:
+            common: 45
+            decent: 28
+            ordinary: 16
+            rare: 8
+            grand: 3
+        stats-multipliers:
+            common: 1.0
+            decent: 1.1
+            ordinary: 1.25
+            rare: 1.575
+            grand: 1.85
+        durability-multipliers:
+            common: 1
+            decent: 1.15
+            ordinary: 1.4
+            rare: 1.8
+            grand: 2.4
+    stats:
+        pve-damage: 0
+        pvp-damage: 0
+        critical-rate: 0
+        critical-damage-multiplier: 0
+        additional-health: 3
+        agility: 5
+        armor: 10
+        dodge-chance: 3
+        tenacity: 0
+        lifesteal: 0
+        overhaul: 1-3
+helios-platebody:
+    name: 'Helios platebody'
+    material: 'diamond_chestplate'
+    
+    durability: 1500
+    durability-loss: 1-2
+    
+    tiers:
+        rates:
+            common: 50
+            decent: 30
+            ordinary: 12
+            rare: 6
+            grand: 2
+        stats-multipliers:
+            common: 1.05
+            decent: 1.175
+            ordinary: 1.3
+            rare: 1.8
+            grand: 2.1
+        durability-multipliers:
+            common: 1
+            decent: 1.15
+            ordinary: 1.4
+            rare: 1.8
+            grand: 2.4
+    stats:
+        pve-damage: 0
+        pvp-damage: 0
+        critical-rate: 0
+        critical-damage-multiplier: 0
+        additional-health: 2
+        agility: 6
+        armor: 12
+        dodge-chance: 5
+        tenacity: 0
+        lifesteal: 0
+        overhaul: 2
+powerful-arrow:
+    name: 'Powerful arrow'
+    material: 'arrow'
+
+    tiers:
+        rates:
+            common: 50
+            decent: 30
+            ordinary: 12
+            rare: 6
+            grand: 2
+        stats-multipliers:
+            common: 1.05
+            decent: 1.175
+            ordinary: 1.3
+            rare: 1.8
+            grand: 2.1
+    stats:
+        pve-damage: 2
+        pvp-damage: 2.5
+        travel-speed: 100
+        flamable-chance: 7.5
+hunting-arrow:
+    name: 'Hunting arrow'
+    material: 'arrow'
+
+    tiers:
+        rates:
+            common: 60
+            decent: 25
+            ordinary: 10
+            rare: 3
+            grand: 2
+        stats-multipliers:
+            common: 1
+            decent: 1.1
+            ordinary: 1.3
+            rare: 1.5
+            grand: 1.75
+    stats:
+        pve-damage: 3
+        pvp-damage: 1.9
+        travel-speed: 180
+        flamable-chance: 0
