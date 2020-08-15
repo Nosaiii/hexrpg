@@ -18,6 +18,7 @@ import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.codingforcookies.armorequip.ArmorEquipEvent.EquipMethod;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Arnah
@@ -27,7 +28,7 @@ public class ArmorListener implements Listener{
 
 	private final List<String> blockedMaterials;
 
-	public ArmorListener(List<String> blockedMaterials){
+	public ArmorListener(@Nullable List<String> blockedMaterials){
 		this.blockedMaterials = blockedMaterials;
 	}
 	//Event Priority is highest because other plugins might cancel the events before we check.
@@ -59,7 +60,7 @@ public class ArmorListener implements Listener{
 				if(e.getRawSlot() == newArmorType.getSlot()){
 					equipping = false;
 				}
-				if(newArmorType.equals(ArmorType.HELMET) && (equipping ? isAirOrNull(e.getWhoClicked().getInventory().getHelmet()) : !isAirOrNull(e.getWhoClicked().getInventory().getHelmet())) || newArmorType.equals(ArmorType.CHESTPLATE) && (equipping ? isAirOrNull(e.getWhoClicked().getInventory().getChestplate()) : !isAirOrNull(e.getWhoClicked().getInventory().getChestplate())) || newArmorType.equals(ArmorType.LEGGINGS) && (equipping ? isAirOrNull(e.getWhoClicked().getInventory().getLeggings()) : !isAirOrNull(e.getWhoClicked().getInventory().getLeggings())) || newArmorType.equals(ArmorType.BOOTS) && (equipping ? isAirOrNull(e.getWhoClicked().getInventory().getBoots()) : !isAirOrNull(e.getWhoClicked().getInventory().getBoots()))){
+				if(newArmorType.equals(ArmorType.HELMET) && (equipping == isAirOrNull(e.getWhoClicked().getInventory().getHelmet())) || newArmorType.equals(ArmorType.CHESTPLATE) && (equipping == isAirOrNull(e.getWhoClicked().getInventory().getChestplate())) || newArmorType.equals(ArmorType.LEGGINGS) && (equipping == isAirOrNull(e.getWhoClicked().getInventory().getLeggings())) || newArmorType.equals(ArmorType.BOOTS) && (equipping == isAirOrNull(e.getWhoClicked().getInventory().getBoots()))){
 					ArmorEquipEvent armorEquipEvent = new ArmorEquipEvent((Player) e.getWhoClicked(), EquipMethod.SHIFT_CLICK, newArmorType, equipping ? null : e.getCurrentItem(), equipping ? e.getCurrentItem() : null);
 					Bukkit.getServer().getPluginManager().callEvent(armorEquipEvent);
 					if(armorEquipEvent.isCancelled()){
@@ -116,8 +117,10 @@ public class ArmorListener implements Listener{
 				if(e.getClickedBlock() != null && e.getAction() == Action.RIGHT_CLICK_BLOCK && !player.isSneaking()){// Having both of these checks is useless, might as well do it though.
 					// Some blocks have actions when you right click them which stops the client from equipping the armor in hand.
 					Material mat = e.getClickedBlock().getType();
-					for(String s : blockedMaterials){
-						if(mat.name().equalsIgnoreCase(s)) return;
+					if (blockedMaterials != null) {
+						for (String s : blockedMaterials) {
+							if (mat.name().equalsIgnoreCase(s)) return;
+						}
 					}
 				}
 			}
