@@ -254,7 +254,6 @@ public class Main extends JavaPlugin {
 		// codingforcookies.armorequip
 		getServer().getPluginManager().registerEvents(new ArmorListener(null), this);
 		try{
-			//Better way to check for this? Only in 1.13.1+?
 			Class.forName("org.bukkit.event.block.BlockDispenseArmorEvent");
 			getServer().getPluginManager().registerEvents(new DispenserArmorListener(), this);
 		}catch(Exception ignored){}
