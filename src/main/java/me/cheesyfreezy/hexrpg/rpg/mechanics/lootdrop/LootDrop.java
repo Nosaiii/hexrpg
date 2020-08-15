@@ -1,18 +1,11 @@
 package me.cheesyfreezy.hexrpg.rpg.mechanics.lootdrop;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import javax.annotation.Nullable;
-
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.cheesyfreezy.hexrpg.main.Plugin;
+import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
+import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
+import me.cheesyfreezy.hexrpg.tools.RandomTools;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,12 +18,17 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.main.Plugin;
-import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
-import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
-import me.cheesyfreezy.hexrpg.tools.RandomTools;
+import java.io.File;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LootDrop {
 	private Location location;

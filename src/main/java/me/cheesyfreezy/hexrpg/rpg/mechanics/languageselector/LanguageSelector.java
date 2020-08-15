@@ -1,6 +1,6 @@
 package me.cheesyfreezy.hexrpg.rpg.mechanics.languageselector;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.cheesyfreezy.hexrpg.main.Plugin;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.CustomInventory;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;

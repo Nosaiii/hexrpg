@@ -1,34 +1,43 @@
 package me.cheesyfreezy.hexrpg.main;
 
-import java.io.*;
-import java.util.Scanner;
-
+import com.codingforcookies.armorequip.ArmorListener;
+import com.codingforcookies.armorequip.DispenserArmorListener;
 import me.cheesyfreezy.hexrpg.commands.configuration.HexRPGCmd;
 import me.cheesyfreezy.hexrpg.commands.configuration.HexRPGLanguageCmd;
-import me.cheesyfreezy.hexrpg.commands.items.*;
-import me.cheesyfreezy.hexrpg.listeners.inventory.*;
-import me.cheesyfreezy.hexrpg.listeners.item.*;
-import me.cheesyfreezy.hexrpg.listeners.world.entity.*;
-import me.cheesyfreezy.hexrpg.rpg.tools.Feature;
-import me.cheesyfreezy.hexrpg.tools.ConfigFile;
-import net.milkbowl.vault.economy.Economy;
-import org.bukkit.*;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import lowbrain.armorequip.ArmorListener;
-import me.cheesyfreezy.hexrpg.bstats.Metrics;
+import me.cheesyfreezy.hexrpg.commands.items.GiveBackpackCmd;
+import me.cheesyfreezy.hexrpg.commands.items.GiveRPGEffectSocket;
+import me.cheesyfreezy.hexrpg.commands.items.GiveRPGItemCmd;
+import me.cheesyfreezy.hexrpg.commands.items.GiveRPGScrollCmd;
+import me.cheesyfreezy.hexrpg.commands.items.GiveRupeesCmd;
 import me.cheesyfreezy.hexrpg.commands.shop.CreateshopCmd;
 import me.cheesyfreezy.hexrpg.commands.world.SpawnLootDropCmd;
 import me.cheesyfreezy.hexrpg.listeners.chat.OnChatProcessor;
+import me.cheesyfreezy.hexrpg.listeners.inventory.OnCustomInventoryClose;
+import me.cheesyfreezy.hexrpg.listeners.inventory.OnInBackpackClick;
+import me.cheesyfreezy.hexrpg.listeners.inventory.OnLanguageSelectorClick;
+import me.cheesyfreezy.hexrpg.listeners.inventory.OnPlayerMenuClick;
+import me.cheesyfreezy.hexrpg.listeners.inventory.OnPlayerShopClick;
+import me.cheesyfreezy.hexrpg.listeners.item.OnBackpackOpen;
+import me.cheesyfreezy.hexrpg.listeners.item.OnRPGApplicableApply;
+import me.cheesyfreezy.hexrpg.listeners.item.OnRPGDamageApply;
+import me.cheesyfreezy.hexrpg.listeners.item.OnRPGForcedStatsApply;
+import me.cheesyfreezy.hexrpg.listeners.item.OnRPGItemDurabilityLoss;
+import me.cheesyfreezy.hexrpg.listeners.item.OnRPGPersonalStatsApply;
 import me.cheesyfreezy.hexrpg.listeners.world.block.OnBreakLootDrop;
 import me.cheesyfreezy.hexrpg.listeners.world.block.OnBreakPlayerShop;
 import me.cheesyfreezy.hexrpg.listeners.world.block.OnDisableFarmlandRemoval;
 import me.cheesyfreezy.hexrpg.listeners.world.block.OnOpenLootDrop;
 import me.cheesyfreezy.hexrpg.listeners.world.block.OnOpenPlayerShop;
+import me.cheesyfreezy.hexrpg.listeners.world.entity.OnArrowStatsApply;
+import me.cheesyfreezy.hexrpg.listeners.world.entity.OnDisableDeathMessage;
+import me.cheesyfreezy.hexrpg.listeners.world.entity.OnDisableHostileBurn;
+import me.cheesyfreezy.hexrpg.listeners.world.entity.OnDropTableRoll;
+import me.cheesyfreezy.hexrpg.listeners.world.entity.OnEntityDeathExperienceGain;
+import me.cheesyfreezy.hexrpg.listeners.world.entity.OnFireworkDamage;
+import me.cheesyfreezy.hexrpg.listeners.world.entity.OnPlayerMenuOpen;
+import me.cheesyfreezy.hexrpg.listeners.world.entity.OnRPGItemDrop;
+import me.cheesyfreezy.hexrpg.listeners.world.entity.OnReobtainArrowStats;
+import me.cheesyfreezy.hexrpg.listeners.world.entity.OnStealingStop;
 import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableService;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.CustomInventory;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.EffectSocketService;
@@ -36,7 +45,27 @@ import me.cheesyfreezy.hexrpg.rpg.mechanics.lootdrop.LootDropService;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.menus.PlayerMenuTrade;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.stealing.PlayerStealingService;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.trading.PlayerTradingService;
+import me.cheesyfreezy.hexrpg.rpg.tools.Feature;
 import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.ChatProcessorService;
+import me.cheesyfreezy.hexrpg.tools.ConfigFile;
+import net.milkbowl.vault.economy.Economy;
+import org.bstats.bukkit.Metrics;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.util.Scanner;
 
 public class Main extends JavaPlugin {
 	public final static String PREFIX = ChatColor.GOLD + "[" + ChatColor.RED + "HexRPG" + ChatColor.GOLD + "] ";
@@ -222,8 +251,13 @@ public class Main extends JavaPlugin {
 		
 		PluginManager pm = Bukkit.getServer().getPluginManager();
 		
-		// lowbrain.armorequip
-		pm.registerEvents(new ArmorListener(null), this);
+		// codingforcookies.armorequip
+		getServer().getPluginManager().registerEvents(new ArmorListener(null), this);
+		try{
+			//Better way to check for this? Only in 1.13.1+?
+			Class.forName("org.bukkit.event.block.BlockDispenseArmorEvent");
+			getServer().getPluginManager().registerEvents(new DispenserArmorListener(), this);
+		}catch(Exception ignored){}
 		
 		// listeners -> chat
 		pm.registerEvents(new OnChatProcessor(), this);

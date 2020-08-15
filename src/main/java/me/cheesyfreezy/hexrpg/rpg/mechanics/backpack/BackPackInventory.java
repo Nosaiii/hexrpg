@@ -1,14 +1,12 @@
 package me.cheesyfreezy.hexrpg.rpg.mechanics.backpack;
 
-import de.tr7zw.hexrpg.nbtapi.NBTCompound;
-import de.tr7zw.hexrpg.nbtapi.NBTContainer;
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTContainer;
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.cheesyfreezy.hexrpg.rpg.items.other.Backpack;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.CustomInventory;
 import me.cheesyfreezy.hexrpg.tools.InventoryTools;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
