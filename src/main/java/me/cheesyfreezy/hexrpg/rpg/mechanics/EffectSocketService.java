@@ -1,9 +1,11 @@
 package me.cheesyfreezy.hexrpg.rpg.mechanics;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.cheesyfreezy.hexrpg.main.Plugin;
+import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
+import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
+import me.cheesyfreezy.hexrpg.tools.VectorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -13,11 +15,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.main.Plugin;
-import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
-import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
-import me.cheesyfreezy.hexrpg.tools.VectorUtils;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EffectSocketService {
 	public static final String FILE_NAME = "effect_sockets.yml";

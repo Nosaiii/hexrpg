@@ -1,11 +1,10 @@
 package me.cheesyfreezy.hexrpg.rpg.tools;
 
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
 
 public class RupeeTools {
 	public static int getRupeesOfPlayer(Player player) {

@@ -1,16 +1,6 @@
 package me.cheesyfreezy.hexrpg.listeners.inventory;
 
-import me.cheesyfreezy.hexrpg.tools.ConfigFile;
-import me.cheesyfreezy.hexrpg.tools.LanguageManager;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.cheesyfreezy.hexrpg.main.Plugin;
 import me.cheesyfreezy.hexrpg.rpg.items.other.Rupee;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.CustomInventory;
@@ -21,6 +11,15 @@ import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.processors.PlayerShopAddIt
 import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.processors.PlayerShopConfirmItemRemoval;
 import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.processors.PlayerShopDeleteConfirmationChatProcessor;
 import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.processors.PlayerShopRenamingChatProcessor;
+import me.cheesyfreezy.hexrpg.tools.ConfigFile;
+import me.cheesyfreezy.hexrpg.tools.LanguageManager;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class OnPlayerShopClick implements Listener {
 	@EventHandler

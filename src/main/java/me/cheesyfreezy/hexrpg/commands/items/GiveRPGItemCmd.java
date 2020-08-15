@@ -1,9 +1,10 @@
 package me.cheesyfreezy.hexrpg.commands.items;
 
-import java.util.Arrays;
-
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
+import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItemTier;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
-import org.bukkit.Bukkit;
+import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,10 +13,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
-import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItemTier;
-import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
+import java.util.Arrays;
 
 public class GiveRPGItemCmd implements CommandExecutor {
 	@Override

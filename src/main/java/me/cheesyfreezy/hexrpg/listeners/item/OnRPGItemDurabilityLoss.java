@@ -1,7 +1,10 @@
 package me.cheesyfreezy.hexrpg.listeners.item;
 
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import me.cheesyfreezy.hexrpg.rpg.tools.Feature;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
+import me.cheesyfreezy.hexrpg.tools.RandomTools;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -12,10 +15,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
-import me.cheesyfreezy.hexrpg.tools.RandomTools;
 
 public class OnRPGItemDurabilityLoss implements Listener {
 	@EventHandler
