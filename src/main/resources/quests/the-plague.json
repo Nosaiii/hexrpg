@@ -1,0 +1,96 @@
+{
+  "id": 1,
+  "name": "The Plague",
+  "difficulty": "Easy",
+  "length": "Short",
+  "requirements": [],
+  "rewards": [
+    {
+      "type": "item",
+      "data": {
+        "namespace": "hexrpg",
+        "name": "rupee",
+        "amount": 1
+      }
+    },
+    {
+      "type": "item",
+      "data": {
+        "namespace": "minecraft",
+        "name": "mushroom_stew",
+        "amount": 3
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": 0,
+      "type": "talk_with_npc",
+      "data": {
+        "npc-id": 1,
+        "dialogue": [
+          {
+            "speaker-npc-id": 1,
+            "text": {
+              "english": "Oh god. Oh god! No. Please don't tell me this is true!"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Calm down. What is it? Tell me what is going on."
+            }
+          },
+          {
+            "speaker-npc-id": 1,
+            "text": {
+              "english": "Haven't you heard about it yet? It's the plague. THE PLAGUE!"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "The... plague?"
+            }
+          },
+          {
+            "speaker-npc-id": 1,
+            "text": {
+              "english": "Yes, the plague!"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Alright. Stay calm. Stay inside. Stay safe. I can offer to help you and your village out."
+            }
+          },
+          {
+            "speaker-npc-id": 1,
+            "text": {
+              "english": "That would great! I don't know much about it yet, so I might not be the right person to talk to."
+            }
+          },
+          {
+            "speaker-npc-id": 1,
+            "text": {
+              "english": "You should go and talk to Ben, the smith. He informed me about the plague yesterday."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Thank you. I will go and talk to him."
+            }
+          },
+          {
+            "speaker-npc-id": 1,
+            "text": {
+              "english": "No, thank you. Stay safe."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
