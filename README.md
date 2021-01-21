@@ -30,6 +30,10 @@ git clone https://github.com/Nosaiii/hexrpg HexRPG
 
 Now open up your IDE, load the project by navigating to the folder you just created and enjoy coding!
 
+### Compiling
+
+HexRPG uses gradle and compiles on JDK 8. Run the build task from your IDE or use `./gradlew build` from command-line in the project root.
+
 ## Contributing
 
 Since HexRPG is open-source and freely accessible using Git, you are able to contribute to the project.

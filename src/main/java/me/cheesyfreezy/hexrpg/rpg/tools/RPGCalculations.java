@@ -1,11 +1,10 @@
 package me.cheesyfreezy.hexrpg.rpg.tools;
 
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import me.cheesyfreezy.hexrpg.tools.RandomTools;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class RPGCalculations {
 	public static RPGDamage calculateDamage(RPGCombatItem[] items, Player target) {

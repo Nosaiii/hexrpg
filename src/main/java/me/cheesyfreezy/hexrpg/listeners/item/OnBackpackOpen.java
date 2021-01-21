@@ -1,6 +1,6 @@
 package me.cheesyfreezy.hexrpg.listeners.item;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.cheesyfreezy.hexrpg.rpg.items.other.Backpack;
 import me.cheesyfreezy.hexrpg.rpg.tools.Feature;
 import org.bukkit.Material;

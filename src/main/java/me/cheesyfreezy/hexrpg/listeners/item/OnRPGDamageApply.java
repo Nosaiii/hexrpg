@@ -1,14 +1,15 @@
 package me.cheesyfreezy.hexrpg.listeners.item;
 
-import java.util.ArrayList;
-
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.cheesyfreezy.hexrpg.main.Plugin;
+import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
+import me.cheesyfreezy.hexrpg.rpg.tools.RPGCalculations;
+import me.cheesyfreezy.hexrpg.rpg.tools.RPGCalculations.RPGDamage;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,10 +17,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
-import me.cheesyfreezy.hexrpg.rpg.tools.RPGCalculations;
-import me.cheesyfreezy.hexrpg.rpg.tools.RPGCalculations.RPGDamage;
+import java.util.ArrayList;
 
 public class OnRPGDamageApply implements Listener {
 	@EventHandler

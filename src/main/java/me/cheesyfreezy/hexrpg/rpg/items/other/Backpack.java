@@ -1,10 +1,9 @@
 package me.cheesyfreezy.hexrpg.rpg.items.other;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.cheesyfreezy.hexrpg.rpg.items.RPGItem;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.backpack.BackPackInventory;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -14,7 +13,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 public class Backpack extends RPGItem {
     public final static int MAX_SIZE = 6;

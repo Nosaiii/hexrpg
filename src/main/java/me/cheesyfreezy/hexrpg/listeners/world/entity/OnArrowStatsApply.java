@@ -1,17 +1,16 @@
 package me.cheesyfreezy.hexrpg.listeners.world.entity;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTEntity;
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.cheesyfreezy.hexrpg.main.Plugin;
 import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import me.cheesyfreezy.hexrpg.tools.RandomTools;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 
@@ -31,7 +30,7 @@ public class OnArrowStatsApply implements Listener {
         }
 
         NBTItem nbtItem = new NBTItem(mainHandItem);
-        NBTItem nbtArrow = new NBTItem(event.getArrowItem());
+        NBTEntity nbtArrow = new NBTEntity(event.getEntity());
         if(!nbtItem.hasKey("rpgdata_combatitem") || !nbtArrow.hasKey("rpgdata_combatitem")) {
             return;
         }
