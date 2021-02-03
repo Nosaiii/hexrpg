@@ -34,6 +34,8 @@ dependencies {
 
     implementation 'de.tr7zw:item-nbt-api:2.5.0' // nbt-api
     implementation 'org.bstats:bstats-bukkit:1.7' // plugin stats
+
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1' // JSON parser
 }
 
 shadowJar {
