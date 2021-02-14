@@ -1,15 +1,19 @@
 package me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.processors;
 
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
+import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.ChatProcessorService;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playershop.PlayerShop;
 import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.IChatProcessor;
 
 public class PlayerShopDeleteConfirmationChatProcessor implements IChatProcessor {
+	@Inject private HexRPGPlugin plugin;
+	@Inject private ChatProcessorService chatProcessorService;
+
 	private PlayerShop shop;
 	
 	public PlayerShopDeleteConfirmationChatProcessor(PlayerShop shop) {
@@ -26,14 +30,14 @@ public class PlayerShopDeleteConfirmationChatProcessor implements IChatProcessor
 	public void process(Player player, String message) {
 		switch(message.toUpperCase()) {
 			case "YES":
-				Bukkit.getServer().getScheduler().runTask(Plugin.getMain(), () -> {
+				Bukkit.getServer().getScheduler().runTask(plugin, () -> {
 					shop.delete();
 				});
-				Plugin.getMain().getChatProcessorService().removeStatus(player);
+				chatProcessorService.removeStatus(player);
 				
 				break;
 			case "NO":
-				Bukkit.getServer().getScheduler().runTask(Plugin.getMain(), () -> {
+				Bukkit.getServer().getScheduler().runTask(plugin, () -> {
 					shop.open(player, shop.isEditing());
 				});
 				break;

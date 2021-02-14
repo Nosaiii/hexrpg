@@ -1,15 +1,19 @@
 package me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.processors;
 
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
+import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.ChatProcessorService;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playershop.PlayerShop;
 import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.IChatProcessor;
 
 public class PlayerShopConfirmItemRemoval implements IChatProcessor {
+	@Inject private HexRPGPlugin plugin;
+	@Inject private ChatProcessorService chatProcessorService;
+
 	private PlayerShop shop;
 	private int itemSlot;
 	
@@ -27,7 +31,7 @@ public class PlayerShopConfirmItemRemoval implements IChatProcessor {
 	@Override
 	public void process(Player player, String message) {
 		if(message.equalsIgnoreCase(LanguageManager.getMessage("literal-translations.yes", player.getUniqueId()))) {
-			Bukkit.getServer().getScheduler().runTask(Plugin.getMain(), () -> {
+			Bukkit.getServer().getScheduler().runTask(plugin, () -> {
 				if(shop.getSoldItem(itemSlot) != null) {
 					shop.sellSoldItem(shop.getSoldItem(itemSlot), itemSlot, player, false);
 				} else {
@@ -36,9 +40,10 @@ public class PlayerShopConfirmItemRemoval implements IChatProcessor {
 
 				shop.open(player, shop.isEditing());
 			});
-			Plugin.getMain().getChatProcessorService().removeStatus(player);
+
+			chatProcessorService.removeStatus(player);
 		} else if(message.equalsIgnoreCase(LanguageManager.getMessage("literal-translations.no", player.getUniqueId()))) {
-			Bukkit.getServer().getScheduler().runTask(Plugin.getMain(), () -> {
+			Bukkit.getServer().getScheduler().runTask(plugin, () -> {
 				shop.open(player, shop.isEditing());
 			});
 		} else {

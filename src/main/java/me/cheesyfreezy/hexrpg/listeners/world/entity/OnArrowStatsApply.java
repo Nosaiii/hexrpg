@@ -1,8 +1,9 @@
 package me.cheesyfreezy.hexrpg.listeners.world.entity;
 
+import com.google.inject.Inject;
 import de.tr7zw.changeme.nbtapi.NBTEntity;
 import de.tr7zw.changeme.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.main.Plugin;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import me.cheesyfreezy.hexrpg.tools.RandomTools;
 import org.bukkit.Material;
@@ -15,6 +16,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 
 public class OnArrowStatsApply implements Listener {
+    @Inject private HexRPGPlugin plugin;
+
     @EventHandler
     public void onEntityShootBow(EntityShootBowEvent event) {
         if(!(event.getEntity() instanceof Player)) {
@@ -37,8 +40,8 @@ public class OnArrowStatsApply implements Listener {
         RPGCombatItem rpgItem = nbtItem.getObject("rpgdata_combatitem", RPGCombatItem.class);
         RPGCombatItem rpgArrow = nbtArrow.getObject("rpgdata_combatitem", RPGCombatItem.class);
 
-        arrow.setMetadata("rpgdata_combatitem", new FixedMetadataValue(Plugin.getMain(), rpgItem));
-        arrow.setMetadata("rpgdata_combatarrow", new FixedMetadataValue(Plugin.getMain(), rpgArrow));
+        arrow.setMetadata("rpgdata_combatitem", new FixedMetadataValue(plugin, rpgItem));
+        arrow.setMetadata("rpgdata_combatarrow", new FixedMetadataValue(plugin, rpgArrow));
 
         arrow.setVelocity(arrow.getVelocity().multiply(1d + rpgItem.getTotalTravelSpeed() / 100d));
 

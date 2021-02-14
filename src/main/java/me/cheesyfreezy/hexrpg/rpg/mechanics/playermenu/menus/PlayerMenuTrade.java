@@ -3,7 +3,8 @@ package me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.menus;
 import java.util.Arrays;
 import java.util.OptionalInt;
 
-import me.cheesyfreezy.hexrpg.tools.LanguageManager;
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.trading.PlayerTradingService;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -11,18 +12,19 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.PlayerMenuInventory;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.PlayerMenuOption;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.trading.TradingPlayer;
 
 public class PlayerMenuTrade extends PlayerMenuInventory {
+	@Inject private PlayerTradingService playerTradingService;
+
 	public static final int[][] TRADING_SLOTS = new int[][] {
 		{1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 27, 28, 29, 30, 36, 37, 38, 39, 45, 46, 47, 48},
 		{5, 6, 7, 14, 15, 16, 17, 23, 24, 25, 26, 32, 33, 34, 35, 41, 42, 43, 44, 50, 51, 52, 53}
 	};
 	
-	private TradingPlayer[] players;
+	private final TradingPlayer[] players;
 	
 	public PlayerMenuTrade(Player inviter, Player invitee) {
 		super("⇄ (" + inviter.getName() + " - " + invitee.getName() + ")", 6);
@@ -49,7 +51,7 @@ public class PlayerMenuTrade extends PlayerMenuInventory {
 				players[iFinal].setAccepted(true);
 				
 				if(didBothAccept()) {
-					Plugin.getMain().getPlayerTradingService().confirmTrade(players[0].getPlayer(), this);
+					playerTradingService.confirmTrade(players[0].getPlayer(), this);
 				}
 			}, (player) -> {
 				return players[iFinal].getPlayer() == player;
@@ -100,7 +102,7 @@ public class PlayerMenuTrade extends PlayerMenuInventory {
 	}
 	
 	public boolean didBothAccept() {
-		return Arrays.stream(players).allMatch(tp -> tp.hasAccepted());
+		return Arrays.stream(players).allMatch(TradingPlayer::hasAccepted);
 	}
 	
 	public TradingPlayer[] getTradingPlayers() {

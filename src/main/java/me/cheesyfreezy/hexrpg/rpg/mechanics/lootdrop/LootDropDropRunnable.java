@@ -1,5 +1,7 @@
 package me.cheesyfreezy.hexrpg.rpg.mechanics.lootdrop;
 
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
@@ -8,9 +10,9 @@ import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
-
 public class LootDropDropRunnable implements Runnable {
+	@Inject private HexRPGPlugin plugin;
+
 	private LootDrop lootDrop;
 	private int yGoal, currentY;
 
@@ -36,9 +38,9 @@ public class LootDropDropRunnable implements Runnable {
 		fwMeta.addEffect(FireworkEffect.builder().flicker(true).trail(true).with(Type.BURST).withColor(lootDrop.getTier().getFireworkColor()).build());
 		fw.setFireworkMeta(fwMeta);
 		
-		fw.setMetadata("nodamage", new FixedMetadataValue(Plugin.getMain(), true));
+		fw.setMetadata("nodamage", new FixedMetadataValue(plugin, true));
 
-		Bukkit.getServer().getScheduler().runTaskLater(Plugin.getMain(), () -> {
+		Bukkit.getServer().getScheduler().runTaskLater(plugin, () -> {
 			fw.detonate();
 		}, 1);
 		

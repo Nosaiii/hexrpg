@@ -1,25 +1,25 @@
 package me.cheesyfreezy.hexrpg.commands.items;
 
-import java.io.File;
-import java.util.Arrays;
-
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableService;
 import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableType;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
+import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
-import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
+import java.util.Arrays;
 
 public class GiveRPGScrollCmd implements CommandExecutor {
+	@Inject private ApplicableService applicableService;
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		String command = cmd.getName();
@@ -49,7 +49,7 @@ public class GiveRPGScrollCmd implements CommandExecutor {
 						player.sendMessage(LanguageManager.getMessage("command-and-chat-execution.scrolls.invalid-scroll", player.getUniqueId(), true, args[0]));
 						return true;
 					}
-					ItemStack scrollItem = Plugin.getMain().getApplicableService().getReference(ApplicableType.SCROLL, args[0]).getTemporaryItem();
+					ItemStack scrollItem = applicableService.getReference(ApplicableType.SCROLL, args[0]).getTemporaryItem();
 					
 					int amount = 1;
 					if(args.length >= 2) {

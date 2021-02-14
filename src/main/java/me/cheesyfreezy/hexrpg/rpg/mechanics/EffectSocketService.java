@@ -1,7 +1,8 @@
 package me.cheesyfreezy.hexrpg.rpg.mechanics;
 
+import com.google.inject.Inject;
 import de.tr7zw.changeme.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.main.Plugin;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
@@ -19,10 +20,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class EffectSocketService {
+	@Inject private HexRPGPlugin plugin;
+
 	public static final String FILE_NAME = "effect_sockets.yml";
 	
 	public void start() {
-		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Plugin.getMain(), () -> {
+		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
 			for(Player player : Bukkit.getOnlinePlayers()) {
 				ArrayList<ItemStack> items = new ArrayList<>();
 				items.add(player.getInventory().getItemInMainHand());
@@ -64,7 +67,7 @@ public class EffectSocketService {
 			}
 			int tickDelay = Integer.parseInt(particleDataSplitted[5]);
 			
-			Bukkit.getServer().getScheduler().runTaskLater(Plugin.getMain(), () -> {
+			Bukkit.getServer().getScheduler().runTaskLater(plugin, () -> {
 				Particle particle = null;
 				int count = 0;
 				double xOffset = 0d, yOffset = 0d, zOffset = 0d;

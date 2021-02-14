@@ -1,8 +1,7 @@
 package me.cheesyfreezy.hexrpg.tools;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -11,6 +10,9 @@ import java.util.List;
 import java.util.Set;
 
 public class ConfigFile {
+    @Inject
+    private static HexRPGPlugin plugin;
+
     private String path;
     private YamlConfiguration config;
 
@@ -20,7 +22,7 @@ public class ConfigFile {
     }
 
     public static ConfigFile getConfig(String name) {
-        return new ConfigFile(Plugin.getMain().getDataFolder() + File.separator + "config" + File.separator + name);
+        return new ConfigFile(plugin.getDataFolder() + File.separator + "config" + File.separator + name);
     }
 
     public String getString(String path) {

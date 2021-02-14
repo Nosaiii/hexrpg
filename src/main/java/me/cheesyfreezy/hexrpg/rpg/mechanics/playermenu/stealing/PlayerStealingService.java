@@ -5,21 +5,19 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
-
 public class PlayerStealingService {
-	private HashMap<Player, StealProcess> stealing = new HashMap<Player, StealProcess>();
+	private final HashMap<Player, StealProcess> stealing = new HashMap<>();
 	
 	public void steal(Player stealer, Player victim) {
-		StealProcess sp = new StealProcess(stealer, victim, Plugin.getMain().getConfig().getInt("stealing.stealing-time"));
+		StealProcess sp = new StealProcess(stealer, victim, ConfigFile.getConfig("config.yml").getInteger("stealing.stealing-time"));
 		
 		sp.onSucceeded((lStealer, lVictim) -> {
 			Inventory victimInv = lVictim.getInventory();
@@ -78,7 +76,7 @@ public class PlayerStealingService {
 		return null;
 	}
 	
-	public StealProcess getStealProces(Player stealer) {
+	public StealProcess getStealProcess(Player stealer) {
 		return stealing.get(stealer);
 	}
 }
