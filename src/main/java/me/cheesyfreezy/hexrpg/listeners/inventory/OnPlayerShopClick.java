@@ -2,11 +2,9 @@ package me.cheesyfreezy.hexrpg.listeners.inventory;
 
 import com.google.inject.Inject;
 import de.tr7zw.changeme.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.rpg.items.other.Rupee;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.CustomInventory;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playershop.PlayerShop;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playershop.SoldItem;
-import me.cheesyfreezy.hexrpg.rpg.tools.RupeeTools;
 import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.ChatProcessorService;
 import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.processors.PlayerShopAddItemChatProcessor;
 import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.processors.PlayerShopConfirmItemRemoval;
@@ -48,7 +46,7 @@ public class OnPlayerShopClick implements Listener {
 				if(clickedSoldItem != null && clickedSoldItem.getItem() != null && !clickedSoldItem.getItem().getType().equals(Material.AIR)) {
 					if(!shop.isOwner(player)) {
 						int price = clickedSoldItem.getPrice();
-						int balance = economy == null ? RupeeTools.getRupeesOfPlayer(player) : (int) Math.floor(economy.getBalance(player));
+						int balance = (int) Math.floor(economy.getBalance(player));
 
 						if(price <= balance) {
 							if(!shop.isEditing()) {
@@ -56,12 +54,8 @@ public class OnPlayerShopClick implements Listener {
 									player.sendMessage(LanguageManager.getMessage("personal-shop.item-purchased", player.getUniqueId(), true));
 									player.playSound(player.getEyeLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 2);
 								}
-								
-								if(economy == null) {
-									RupeeTools.removeRupeesFromPlayer(player, price);
-								} else {
-									economy.withdrawPlayer(player, price);
-								}
+
+								economy.withdrawPlayer(player, price);
 							}
 							
 							shop.sellSoldItem(clickedSoldItem, event.getSlot(), player, shop.isOwner(player));
@@ -87,15 +81,10 @@ public class OnPlayerShopClick implements Listener {
 					player.closeInventory();
 
 					int upgradeCost = ConfigFile.getConfig("config.yml").getInteger("player-shop-settings.upgrade-slots-cost");
-					int balance = economy == null ? RupeeTools.getRupeesOfPlayer(player) : (int) Math.floor(economy.getBalance(player));
+					int balance = (int) Math.floor(economy.getBalance(player));
 
 					if(upgradeCost <= balance) {
-						if(economy == null) {
-							RupeeTools.removeRupeesFromPlayer(player, upgradeCost);
-						} else {
-							economy.withdrawPlayer(player, upgradeCost);
-						}
-
+						economy.withdrawPlayer(player, upgradeCost);
 						shop.upgradeSlots(player);
 					} else {
 						player.sendMessage(LanguageManager.getMessage("personal-shop.not-enough-rupees-to-upgrade-slots", player.getUniqueId(), true));
@@ -106,13 +95,7 @@ public class OnPlayerShopClick implements Listener {
 					int storedBalance = shop.getStoredRupees();
 					
 					if(storedBalance > 0) {
-						if(economy == null) {
-							for(int i = 0; i < storedBalance; i++) {
-								player.getInventory().addItem(new Rupee().getTemporaryItem());
-							}
-						} else {
-							economy.depositPlayer(player, storedBalance);
-						}
+						economy.depositPlayer(player, storedBalance);
 
 						player.sendMessage(ChatColor.GREEN + "+" + storedBalance + " " + shop.getPriceLabel(player, storedBalance));
 						player.playSound(player.getEyeLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 2);

@@ -11,7 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
-import me.cheesyfreezy.hexrpg.rpg.items.other.Rupee;
 import me.cheesyfreezy.hexrpg.tools.RandomTools;
 
 public class DropTableItem {
@@ -49,9 +48,7 @@ public class DropTableItem {
 		ConfigFile scrollsConfig = ConfigFile.getConfig("scrolls.yml");
 		ConfigFile effectSocketConfig = ConfigFile.getConfig("effect_sockets.yml");
 		
-		if(itemKey.equalsIgnoreCase("RUPEE")) {
-			item = new Rupee().getTemporaryItem();
-		} else if(itemKey.equalsIgnoreCase("BACKPACK")) {
+		if(itemKey.equalsIgnoreCase("BACKPACK")) {
 			item = new Backpack(3).getTemporaryItem();
 		} else if(scrollsConfig.getRootKeys().contains(itemKey) || effectSocketConfig.getRootKeys().contains(itemKey)) {
 			ApplicableType type = scrollsConfig.getRootKeys().contains(itemKey) ? ApplicableType.SCROLL : ApplicableType.EFFECT_SOCKET;

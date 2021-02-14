@@ -41,13 +41,6 @@ player-shop-settings:
   upgrade-slots-cost: 400
   max-rows: 4
 
-# [ECONOMY SETTINGS]
-economy-settings:
-  # Vault is the economy plugin used by the Essentials plugin and many other plugins
-  # Enabling this will replace rupees by the Vault economy system
-  # If rupees are present on a drop table and Vault is enabled, instead of rupees, cash will be stored on the player's bank account
-  vault: false
-
 # [ STATS SETTINGS ]
 stats-settings:
   # Enabling forced stats will result in ALL items to be given stats or be set to unidentified items if the item meets the material given in the rpgitem.yml file

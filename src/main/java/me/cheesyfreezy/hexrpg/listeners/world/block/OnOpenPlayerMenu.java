@@ -1,4 +1,4 @@
-package me.cheesyfreezy.hexrpg.listeners.world.entity;
+package me.cheesyfreezy.hexrpg.listeners.world.block;
 
 import me.cheesyfreezy.hexrpg.rpg.tools.Feature;
 import org.bukkit.entity.Player;
@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.menus.PlayerMenuMain;
 
-public class OnPlayerMenuOpen implements Listener {
+public class OnOpenPlayerMenu implements Listener {
 	@EventHandler
 	public void onPlayerInteractAtEntity(PlayerInteractAtEntityEvent event) {
 		if(!Feature.getFeature("player-menu.trading").isEnabled() && !Feature.getFeature("player-menu.stealing").isEnabled()) {

@@ -1,9 +1,10 @@
 name: HexRPG
-main: me.cheesyfreezy.hexrpg.main.Main
+main: me.cheesyfreezy.hexrpg.main.HexRPGPlugin
 version: @version@
 author: CheesyFreezy
 description: Innovative RPG plugin including many unique features
 api-version: '1.16'
+depend: [Vault]
 commands:
   hexrpg:
     description: Command to handle the back-end of the plugin
