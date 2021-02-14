@@ -5,7 +5,6 @@ import com.codingforcookies.armorequip.DispenserArmorListener;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Scopes;
 import me.cheesyfreezy.hexrpg.commands.configuration.HexRPGCmd;
 import me.cheesyfreezy.hexrpg.commands.configuration.HexRPGLanguageCmd;
 import me.cheesyfreezy.hexrpg.commands.items.*;
