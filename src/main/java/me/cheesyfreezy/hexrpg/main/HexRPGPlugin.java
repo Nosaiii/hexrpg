@@ -17,6 +17,9 @@ import me.cheesyfreezy.hexrpg.listeners.world.block.*;
 import me.cheesyfreezy.hexrpg.listeners.world.entity.*;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.EffectSocketService;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.trading.PlayerTradingService;
+import me.cheesyfreezy.hexrpg.rpg.quests.Quest;
+import me.cheesyfreezy.hexrpg.rpg.quests.QuestParser;
+import me.cheesyfreezy.hexrpg.rpg.quests.QuestService;
 import me.cheesyfreezy.hexrpg.rpg.tools.Feature;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import org.bstats.bukkit.Metrics;
@@ -73,6 +76,9 @@ public class HexRPGPlugin extends JavaPlugin {
 	@Inject private OnRPGItemDrop onRPGItemDrop;
 	@Inject private OnStealingStop onStealingStop;
 
+	@Inject private QuestParser questParser;
+	@Inject private QuestService questService;
+
 	@Override
 	public void onEnable() {
 		PluginBinder binder = new PluginBinder(this);
@@ -84,6 +90,7 @@ public class HexRPGPlugin extends JavaPlugin {
 		setupFiles();
 		setupCommands();
 		setupListeners();
+		setupQuests();
 		applyConfigurationSettings();
 	}
 	
@@ -239,6 +246,16 @@ public class HexRPGPlugin extends JavaPlugin {
 		}
 		if(Feature.getFeature("player-menu.stealing").isEnabled()) {
 			pm.registerEvents(onStealingStop, this);
+		}
+	}
+
+	private void setupQuests() {
+		File questsFolder = new File(getDataFolder() + File.separator + "quests");
+		File[] jsonFiles = questsFolder.listFiles((dir, name) -> name.matches("^.*\\.json$"));
+
+		for(File questFile : jsonFiles) {
+			Quest quest = questParser.parse(questFile);
+			questService.registerQuest(quest);
 		}
 	}
 

@@ -23,6 +23,9 @@ import me.cheesyfreezy.hexrpg.rpg.mechanics.lootdrop.LootDropService;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.stealing.PlayerStealingService;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.trading.PlayerTradingService;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playershop.PlayerShop;
+import me.cheesyfreezy.hexrpg.rpg.quests.QuestParser;
+import me.cheesyfreezy.hexrpg.rpg.quests.QuestService;
+import me.cheesyfreezy.hexrpg.rpg.quests.reward.factory.QuestRewardFactory;
 import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.ChatProcessorService;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
@@ -113,6 +116,11 @@ public class PluginBinder extends AbstractModule {
         addSingleton(LootDropService.class);
         addSingleton(PlayerTradingService.class);
         addSingleton(PlayerStealingService.class);
+
+        // Quest bindings
+        addSingleton(QuestRewardFactory.class);
+        addSingleton(QuestParser.class);
+        addSingleton(QuestService.class);
 
         // Static bindings
         requestStaticInjection(ConfigFile.class);

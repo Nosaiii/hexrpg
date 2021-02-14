@@ -3,20 +3,18 @@
   "name": "The Plague",
   "difficulty": "Easy",
   "length": "Short",
-  "requirements": [],
+  "quest-requirements": [],
   "rewards": [
     {
       "type": "item",
       "data": {
-        "namespace": "hexrpg",
-        "name": "rupee",
+        "name": "milk_bucket",
         "amount": 1
       }
     },
     {
       "type": "item",
       "data": {
-        "namespace": "minecraft",
         "name": "mushroom_stew",
         "amount": 3
       }
