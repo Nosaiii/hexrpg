@@ -15,7 +15,9 @@ import me.cheesyfreezy.hexrpg.listeners.inventory.*;
 import me.cheesyfreezy.hexrpg.listeners.item.*;
 import me.cheesyfreezy.hexrpg.listeners.world.block.*;
 import me.cheesyfreezy.hexrpg.listeners.world.entity.*;
+import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableService;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.EffectSocketService;
+import me.cheesyfreezy.hexrpg.rpg.mechanics.lootdrop.LootDropService;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.trading.PlayerTradingService;
 import me.cheesyfreezy.hexrpg.rpg.quests.Quest;
 import me.cheesyfreezy.hexrpg.rpg.quests.QuestParser;
@@ -81,12 +83,9 @@ public class HexRPGPlugin extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		PluginBinder binder = new PluginBinder(this);
-		dependencyInjector = binder.createInjector();
-		dependencyInjector.injectMembers(this);
-
 		new Metrics(this, 6929);
 
+		setupDependencyInjection();
 		setupFiles();
 		setupCommands();
 		setupListeners();
@@ -98,6 +97,15 @@ public class HexRPGPlugin extends JavaPlugin {
 	public void onDisable() {
 		PlayerTradingService playerTradingService = dependencyInjector.getInstance(PlayerTradingService.class);
 		playerTradingService.closePendingTrades();
+	}
+
+	private void setupDependencyInjection() {
+		PluginBinder binder = new PluginBinder(this);
+		dependencyInjector = binder.createInjector();
+		dependencyInjector.injectMembers(this);
+
+		dependencyInjector.getProvider(ApplicableService.class).get().register();
+		dependencyInjector.getProvider(LootDropService.class).get().start();
 	}
 
 	private void setupFiles() {
