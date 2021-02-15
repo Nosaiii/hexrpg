@@ -10,6 +10,7 @@ import me.cheesyfreezy.hexrpg.commands.items.*;
 import me.cheesyfreezy.hexrpg.commands.shop.CreateshopCmd;
 import me.cheesyfreezy.hexrpg.commands.world.SpawnLootDropCmd;
 import me.cheesyfreezy.hexrpg.dependencyinjection.PluginBinder;
+import me.cheesyfreezy.hexrpg.exceptions.quests.QuestNotFoundException;
 import me.cheesyfreezy.hexrpg.listeners.chat.OnChatProcessor;
 import me.cheesyfreezy.hexrpg.listeners.inventory.*;
 import me.cheesyfreezy.hexrpg.listeners.item.*;
@@ -22,6 +23,8 @@ import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.trading.PlayerTradingServ
 import me.cheesyfreezy.hexrpg.rpg.quests.Quest;
 import me.cheesyfreezy.hexrpg.rpg.quests.QuestParser;
 import me.cheesyfreezy.hexrpg.rpg.quests.QuestService;
+import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPC;
+import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPCParser;
 import me.cheesyfreezy.hexrpg.rpg.tools.Feature;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import org.bstats.bukkit.Metrics;
@@ -80,6 +83,7 @@ public class HexRPGPlugin extends JavaPlugin {
 
 	@Inject private QuestParser questParser;
 	@Inject private QuestService questService;
+	@Inject private QuestNPCParser questNPCParser;
 
 	@Override
 	public void onEnable() {
@@ -89,6 +93,7 @@ public class HexRPGPlugin extends JavaPlugin {
 		setupFiles();
 		setupCommands();
 		setupListeners();
+		setupQuestNPCs();
 		setupQuests();
 		applyConfigurationSettings();
 	}
@@ -115,6 +120,7 @@ public class HexRPGPlugin extends JavaPlugin {
 				"config/" + EffectSocketService.FILE_NAME,
 				"config/loot_drop.yml",
 				"config/player_leveling.yml",
+				"config/quest_npcs.json",
 				"config/rpgitem.yml",
 				"config/scrolls.yml",
 				"lang/english.yml",
@@ -257,6 +263,15 @@ public class HexRPGPlugin extends JavaPlugin {
 		}
 	}
 
+	private void setupQuestNPCs() {
+		File questNpcsFile = new File(getDataFolder() + File.separator + "config" + File.separator + "quest_npcs.json");
+
+		QuestNPC[] questNpcs = questNPCParser.parse(questNpcsFile);
+		for(QuestNPC questNPC : questNpcs) {
+			questService.registerNPC(questNPC);
+		}
+	}
+
 	private void setupQuests() {
 		File questsFolder = new File(getDataFolder() + File.separator + "quests");
 		File[] jsonFiles = questsFolder.listFiles((dir, name) -> name.matches("^.*\\.json$"));
@@ -264,6 +279,14 @@ public class HexRPGPlugin extends JavaPlugin {
 		for(File questFile : jsonFiles) {
 			Quest quest = questParser.parse(questFile);
 			questService.registerQuest(quest);
+		}
+
+		for(Quest quest : questService.getQuests()) {
+			try {
+				quest.validateQuestRequirements(questService);
+			} catch (QuestNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -275,5 +298,9 @@ public class HexRPGPlugin extends JavaPlugin {
 				}
 			}, 0, 600);
 		}
+	}
+
+	public Injector getDependencyInjector() {
+		return dependencyInjector;
 	}
 }

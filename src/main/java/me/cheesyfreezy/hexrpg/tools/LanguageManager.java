@@ -13,6 +13,22 @@ import java.util.UUID;
 public class LanguageManager {
     @Inject private static HexRPGPlugin plugin;
 
+    public static String getLocalization(UUID uuid) {
+        return getLocalizedFileName(uuid).replaceAll("\\..*$", "");
+    }
+
+    private static String getLocalizedFileName(UUID uuid) {
+        File languageDataFile = new File(plugin.getDataFolder() + File.separator + "data", "language_data.yml");
+        YamlConfiguration languageDataConfig = YamlConfiguration.loadConfiguration(languageDataFile);
+
+        String languageFileName = ConfigFile.getConfig("config.yml").getString("language-settings.default");
+        if (uuid != null && languageDataFile.exists() && languageDataConfig.isSet(uuid.toString())) {
+            languageFileName = languageDataConfig.getString(uuid.toString());
+        }
+
+        return languageFileName;
+    }
+
     public static String getMessage(String path, UUID uuid, String... replacements) {
         return getMessage(path, uuid, false, replacements);
     }
@@ -69,15 +85,7 @@ public class LanguageManager {
     }
 
     private static YamlConfiguration getLanguageConfig(UUID uuid) {
-        File languageDataFile = new File(plugin.getDataFolder() + File.separator + "data", "language_data.yml");
-        YamlConfiguration languageDataConfig = YamlConfiguration.loadConfiguration(languageDataFile);
-
-        String languageFileName = ConfigFile.getConfig("config.yml").getString("language-settings.default");
-        if (uuid != null && languageDataFile.exists() && languageDataConfig.isSet(uuid.toString())) {
-            languageFileName = languageDataConfig.getString(uuid.toString());
-        }
-
-        File languageFile = new File(plugin.getDataFolder() + File.separator + "lang", languageFileName);
+        File languageFile = new File(plugin.getDataFolder() + File.separator + "lang", getLocalizedFileName(uuid));
         return YamlConfiguration.loadConfiguration(languageFile);
     }
 }

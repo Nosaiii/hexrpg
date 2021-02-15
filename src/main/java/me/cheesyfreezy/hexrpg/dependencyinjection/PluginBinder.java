@@ -25,7 +25,10 @@ import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.trading.PlayerTradingServ
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playershop.PlayerShop;
 import me.cheesyfreezy.hexrpg.rpg.quests.QuestParser;
 import me.cheesyfreezy.hexrpg.rpg.quests.QuestService;
+import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPCParser;
 import me.cheesyfreezy.hexrpg.rpg.quests.reward.factory.QuestRewardFactory;
+import me.cheesyfreezy.hexrpg.rpg.quests.steps.factory.QuestStepFactory;
+import me.cheesyfreezy.hexrpg.rpg.quests.steps.factory.mappers.QuestDialogueStepMapper;
 import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.ChatProcessorService;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
@@ -119,8 +122,11 @@ public class PluginBinder extends AbstractModule {
 
         // Quest bindings
         addSingleton(QuestRewardFactory.class);
+        addSingleton(QuestStepFactory.class);
+        addSingleton(QuestDialogueStepMapper.class);
         addSingleton(QuestParser.class);
         addSingleton(QuestService.class);
+        addSingleton(QuestNPCParser.class);
 
         // Static bindings
         requestStaticInjection(ConfigFile.class);

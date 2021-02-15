@@ -1,0 +1,14 @@
+{
+  "npcs": [
+    {
+      "id": 1,
+      "name": "Wyat",
+      "profession": "butcher"
+    },
+    {
+      "id": 2,
+      "name": "Ben",
+      "profession": "blacksmith"
+    }
+  ]
+}
