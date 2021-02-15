@@ -10,6 +10,7 @@ import me.cheesyfreezy.hexrpg.commands.configuration.HexRPGLanguageCmd;
 import me.cheesyfreezy.hexrpg.commands.items.*;
 import me.cheesyfreezy.hexrpg.commands.shop.CreateshopCmd;
 import me.cheesyfreezy.hexrpg.commands.world.SpawnLootDropCmd;
+import me.cheesyfreezy.hexrpg.commands.world.SpawnQuestNpcCmd;
 import me.cheesyfreezy.hexrpg.listeners.chat.OnChatProcessor;
 import me.cheesyfreezy.hexrpg.listeners.inventory.*;
 import me.cheesyfreezy.hexrpg.listeners.item.*;
@@ -80,6 +81,7 @@ public class PluginBinder extends AbstractModule {
         addSingleton(GiveRPGScrollCmd.class);
         addSingleton(CreateshopCmd.class);
         addSingleton(SpawnLootDropCmd.class);
+        addSingleton(SpawnQuestNpcCmd.class);
 
         // Listener bindings
         bind(ArmorListener.class).toInstance(new ArmorListener(null));

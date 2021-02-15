@@ -9,6 +9,7 @@ import me.cheesyfreezy.hexrpg.commands.configuration.HexRPGLanguageCmd;
 import me.cheesyfreezy.hexrpg.commands.items.*;
 import me.cheesyfreezy.hexrpg.commands.shop.CreateshopCmd;
 import me.cheesyfreezy.hexrpg.commands.world.SpawnLootDropCmd;
+import me.cheesyfreezy.hexrpg.commands.world.SpawnQuestNpcCmd;
 import me.cheesyfreezy.hexrpg.dependencyinjection.PluginBinder;
 import me.cheesyfreezy.hexrpg.exceptions.quests.QuestNotFoundException;
 import me.cheesyfreezy.hexrpg.listeners.chat.OnChatProcessor;
@@ -50,6 +51,7 @@ public class HexRPGPlugin extends JavaPlugin {
 	@Inject private GiveRPGScrollCmd giveRPGScrollCmd;
 	@Inject private CreateshopCmd createshopCmd;
 	@Inject private SpawnLootDropCmd spawnLootDropCmd;
+	@Inject private SpawnQuestNpcCmd spawnQuestNpcCmd;
 
 	@Inject private ArmorListener armorListener;
 	@Inject private DispenserArmorListener dispenserArmorListener;
@@ -93,8 +95,12 @@ public class HexRPGPlugin extends JavaPlugin {
 		setupFiles();
 		setupCommands();
 		setupListeners();
-		setupQuestNPCs();
-		setupQuests();
+
+		if(Feature.getFeature("quests").isEnabled()) {
+			setupQuestNPCs();
+			setupQuests();
+		}
+
 		applyConfigurationSettings();
 	}
 	
@@ -189,6 +195,9 @@ public class HexRPGPlugin extends JavaPlugin {
 		}
 		if(Feature.getFeature("loot-drops").isEnabled()) {
 			getCommand("spawnlootdrop").setExecutor(spawnLootDropCmd);
+		}
+		if(Feature.getFeature("quests").isEnabled()) {
+			getCommand("spawnquestnpc").setExecutor(spawnQuestNpcCmd);
 		}
 	}
 

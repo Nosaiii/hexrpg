@@ -24,3 +24,5 @@ commands:
     description: Creates a personal shop on the current location
   spawnlootdrop:
     description: Spawns a loot drop at the current location
+  spawnquestnpc:
+    description: Spawns an instance of a quest npc

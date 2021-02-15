@@ -9,6 +9,7 @@ feature-settings:
   loot-drops: true
   backpacks: true
   drop-tables: true
+  quests: true
   player-menu:
     trading: true
     stealing: true
