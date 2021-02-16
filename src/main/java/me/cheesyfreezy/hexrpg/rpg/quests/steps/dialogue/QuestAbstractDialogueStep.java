@@ -10,41 +10,28 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
-public class QuestDialogueStep extends QuestStep {
+public abstract class QuestAbstractDialogueStep extends QuestStep {
     @Inject private HexRPGPlugin plugin;
 
     private final QuestNPC npc;
 
-    private final QuestDialogue[] dialogue;
     private int currentDialogueIndex;
 
-    public QuestDialogueStep(int id, QuestNPC npc, QuestDialogue[] dialogue) {
+    public QuestAbstractDialogueStep(int id, QuestNPC npc) {
         super(id);
 
         this.npc = npc;
 
-        this.dialogue = dialogue;
         currentDialogueIndex = 0;
     }
 
-    @Override
-    public void start(Player player) {
-        registerListener(player.getUniqueId(), new OnQuestDialogueInteractToTalk(player, this));
+    public abstract void startDialogue(Player player);
 
-        if(id == 0) {
-            startDialogue(player);
-        }
-    }
-
-    @Override
-    public void finish(Player player) {
-        unregisterListener(player.getUniqueId(), OnQuestDialogueFreeze.class);
-    }
-
-    public void startDialogue(Player player) {
-        unregisterListener(player.getUniqueId(), OnQuestDialogueInteractToTalk.class);
-        registerListener(player.getUniqueId(), new OnQuestDialogueFreeze(player));
+    protected void startDialogueRunnable(Player player, QuestStep step, QuestDialogue[] dialogue, Consumer<Integer> onIteration, Runnable onFinish) {
+        step.unregisterListener(player.getUniqueId(), OnQuestDialogueInteractToTalk.class);
+        step.registerListener(player.getUniqueId(), new OnQuestDialogueFreeze(player));
 
         AtomicInteger dialogueTimer = new AtomicInteger();
 
@@ -58,15 +45,18 @@ public class QuestDialogueStep extends QuestStep {
                         dialogueTimer.set(0);
 
                         player.sendMessage(dialogue[currentDialogueIndex].getDialogue(player.getUniqueId()));
+                        onIteration.accept(currentDialogueIndex);
                         currentDialogueIndex++;
 
                         if(currentDialogueIndex == dialogue.length) {
                             cancel();
-                            onNext(player);
+                            onFinish.run();
+                            currentDialogueIndex = 0;
                         }
                     }
                 } else {
                     player.sendMessage(dialogue[0].getDialogue(player.getUniqueId()));
+                    onIteration.accept(currentDialogueIndex);
                     currentDialogueIndex++;
                 }
             }

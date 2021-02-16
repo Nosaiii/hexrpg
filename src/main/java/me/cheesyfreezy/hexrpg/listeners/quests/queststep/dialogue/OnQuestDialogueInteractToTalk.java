@@ -1,7 +1,8 @@
 package me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue;
 
 import de.tr7zw.changeme.nbtapi.NBTEntity;
-import me.cheesyfreezy.hexrpg.rpg.quests.steps.dialogue.QuestDialogueStep;
+import me.cheesyfreezy.hexrpg.rpg.quests.steps.dialogue.QuestAbstractDialogueStep;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,9 +11,9 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
 public class OnQuestDialogueInteractToTalk implements Listener {
     private final Player player;
-    private final QuestDialogueStep dialogueStep;
+    private final QuestAbstractDialogueStep dialogueStep;
 
-    public OnQuestDialogueInteractToTalk(Player player, QuestDialogueStep dialogueStep) {
+    public OnQuestDialogueInteractToTalk(Player player, QuestAbstractDialogueStep dialogueStep) {
         this.player = player;
         this.dialogueStep = dialogueStep;
     }

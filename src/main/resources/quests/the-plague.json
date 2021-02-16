@@ -336,6 +336,7 @@
       "type": "talk_with_npc_with_items",
       "data": {
         "npc-id": 2,
+        "take-items-at": 3,
         "items": [
           {
             "name": "mushroom_stew",

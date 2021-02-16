@@ -6,7 +6,7 @@ import me.cheesyfreezy.hexrpg.rpg.quests.QuestService;
 import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPC;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.QuestStep;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.dialogue.QuestDialogue;
-import me.cheesyfreezy.hexrpg.rpg.quests.steps.dialogue.QuestDialogueStep;
+import me.cheesyfreezy.hexrpg.rpg.quests.steps.dialogue.QuestConcreteDialogueStep;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.OptionalInt;
 
-public class QuestDialogueStepMapper implements IQuestStepMapper {
+public class QuestConcreteDialogueStepMapper implements IQuestStepMapper {
     @Inject private QuestService questService;
 
     @Override
@@ -65,6 +65,6 @@ public class QuestDialogueStepMapper implements IQuestStepMapper {
             }
         }
 
-        return new QuestDialogueStep(stepId, interactNpc, dialogue);
+        return new QuestConcreteDialogueStep(stepId, interactNpc, dialogue);
     }
 }

@@ -40,7 +40,7 @@ public class Quest {
     private final QuestStep[] steps;
 
     private final File file;
-    private final JSONObject json;
+    private JSONObject json;
 
     public Quest(int id, String name, QuestDifficulty difficulty, QuestLength length, int[] questRequirementIds, QuestNPC startNPC, IQuestReward[] rewards, QuestStep[] steps, File file, JSONObject json) {
         this.id = id;
@@ -215,7 +215,7 @@ public class Quest {
     }
 
     /**
-     * Retrieves the data of a given player by UUID
+     * Retrieves the data of a given player by UUID and also updated this instances {@code json}
      * @param uuid The UUID of the player to retrieve the data from
      * @return A {@link JSONObject} object containing the data of the player of this quest
      * @throws InvalidQuestPlayerData Thrown when the player data of the given player was invalid
@@ -223,7 +223,7 @@ public class Quest {
     private JSONObject getPlayerData(UUID uuid) throws InvalidQuestPlayerData {
         try(FileReader reader = new FileReader(file)) {
             JSONParser parser = new JSONParser();
-            JSONObject json = (JSONObject) parser.parse(reader);
+            json = (JSONObject) parser.parse(reader);
             JSONArray playerData = (JSONArray) json.get("player-data");
 
             @SuppressWarnings("unchecked") // Supressing this statement is ok in this case

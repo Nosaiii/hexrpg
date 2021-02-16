@@ -30,7 +30,8 @@ import me.cheesyfreezy.hexrpg.rpg.quests.QuestService;
 import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPCParser;
 import me.cheesyfreezy.hexrpg.rpg.quests.reward.factory.QuestRewardFactory;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.factory.QuestStepFactory;
-import me.cheesyfreezy.hexrpg.rpg.quests.steps.factory.mappers.QuestDialogueStepMapper;
+import me.cheesyfreezy.hexrpg.rpg.quests.steps.factory.mappers.QuestConcreteDialogueStepMapper;
+import me.cheesyfreezy.hexrpg.rpg.quests.steps.factory.mappers.QuestOptionalDialogueStepMapper;
 import me.cheesyfreezy.hexrpg.rpg.tools.chatprocessor.ChatProcessorService;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
@@ -126,7 +127,8 @@ public class PluginBinder extends AbstractModule {
         // Quest bindings
         addSingleton(QuestRewardFactory.class);
         addSingleton(QuestStepFactory.class);
-        addSingleton(QuestDialogueStepMapper.class);
+        addSingleton(QuestConcreteDialogueStepMapper.class);
+        addSingleton(QuestOptionalDialogueStepMapper.class);
         addSingleton(QuestParser.class);
         addSingleton(QuestService.class);
         addSingleton(QuestNPCParser.class);
