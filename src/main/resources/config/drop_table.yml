@@ -8,7 +8,6 @@ default:
   override-default: true
   rolls: 1
   drops:
-    - '25:rupee:1-2'
     - '0.5:sinister-blade:1'
     - '0.05:xaisians-sword:1'
     - '0.2:xaisians-combat-scroll:1'
@@ -50,7 +49,6 @@ sheep:
   override-default: true
   rolls: 3
   drops:
-    - '10:rupee:2-3'
     - '20:white_wool:1'
     - '20:orange_wool:1'
     - '20:red_wool:1'

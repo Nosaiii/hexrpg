@@ -5,18 +5,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import com.google.inject.Inject;
 import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
 
 public class PlayerLevel {
-	@Inject private HexRPGPlugin plugin;
+	private final HexRPGPlugin plugin;
 
-	private UUID uuid;
+	private final UUID uuid;
 
-	public PlayerLevel(UUID uuid) {
+	public PlayerLevel(HexRPGPlugin plugin, UUID uuid) {
+		this.plugin = plugin;
 		this.uuid = uuid;
 	}
 

@@ -2,8 +2,9 @@ package me.cheesyfreezy.hexrpg.listeners.world.entity;
 
 import java.util.Random;
 
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,6 +14,8 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.PlayerLevel;
 
 public class OnEntityDeathExperienceGain implements Listener {
+	@Inject private HexRPGPlugin plugin;
+
 	@EventHandler
 	public void onEntityDeathExperienceGain(EntityDeathEvent event) {
 		if(event.getEntity().getKiller() == null) {
@@ -25,7 +28,7 @@ public class OnEntityDeathExperienceGain implements Listener {
 			return;
 		}
 		
-		PlayerLevel playerLevel = new PlayerLevel(killer.getUniqueId());
+		PlayerLevel playerLevel = new PlayerLevel(plugin, killer.getUniqueId());
 		playerLevel.setExperience(playerLevel.getExperience() + expGained);
 		
 		Random r = new Random();
