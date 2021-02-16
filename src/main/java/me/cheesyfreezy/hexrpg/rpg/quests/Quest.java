@@ -9,7 +9,6 @@ import me.cheesyfreezy.hexrpg.rpg.quests.reward.IQuestReward;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.QuestStep;
 import me.cheesyfreezy.hexrpg.tools.ChatUtils;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;

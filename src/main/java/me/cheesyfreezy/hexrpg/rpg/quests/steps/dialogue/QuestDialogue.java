@@ -40,10 +40,8 @@ public class QuestDialogue {
      * @return The average time in seconds required to read the message
      */
     public double getReadingTime(UUID uuid) {
-        return 2;
-
-        /*String message = localizedMessages.get(LanguageManager.getLocalization(uuid));
-        return Math.max(message.trim().split(" ").length * 0.375d, 2.5d);*/
+        String message = localizedMessages.get(LanguageManager.getLocalization(uuid));
+        return Math.max(message.trim().split(" ").length * 0.375d, 2.5d);
     }
 
     /**
