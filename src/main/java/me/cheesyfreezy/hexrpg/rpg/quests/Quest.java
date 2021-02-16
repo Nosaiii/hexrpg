@@ -213,6 +213,38 @@ public class Quest {
         }
     }
 
+    public boolean hasFinished(UUID uuid) {
+        if(!hasStarted(uuid)) {
+            return false;
+        }
+
+        try {
+            //noinspection unused
+            JSONObject playerSpecificData = getPlayerData(uuid);
+            return (boolean) playerSpecificData.get("finished");
+        } catch (InvalidQuestPlayerData invalidQuestPlayerData) {
+            invalidQuestPlayerData.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean hasBeenRewarded(UUID uuid) {
+        if(!hasStarted(uuid)) {
+            return false;
+        }
+
+        try {
+            //noinspection unused
+            JSONObject playerSpecificData = getPlayerData(uuid);
+            return (boolean) playerSpecificData.get("rewards-received");
+        } catch (InvalidQuestPlayerData invalidQuestPlayerData) {
+            invalidQuestPlayerData.printStackTrace();
+        }
+
+        return false;
+    }
+
     /**
      * Retrieves the data of a given player by UUID and also updated this instances {@code json}
      * @param uuid The UUID of the player to retrieve the data from
