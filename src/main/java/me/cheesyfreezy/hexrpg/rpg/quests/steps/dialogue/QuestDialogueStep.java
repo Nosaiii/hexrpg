@@ -6,7 +6,6 @@ import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogu
 import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPC;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.QuestStep;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -62,8 +61,8 @@ public class QuestDialogueStep extends QuestStep {
                         currentDialogueIndex++;
 
                         if(currentDialogueIndex == dialogue.length) {
-                            onNext(player);
                             cancel();
+                            onNext(player);
                         }
                     }
                 } else {

@@ -10,7 +10,9 @@ import me.cheesyfreezy.hexrpg.rpg.quests.steps.dialogue.QuestDialogueStep;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.OptionalInt;
 
 public class QuestDialogueStepMapper implements IQuestStepMapper {
     @Inject private QuestService questService;
@@ -49,6 +51,18 @@ public class QuestDialogueStepMapper implements IQuestStepMapper {
             }
 
             dialogue[i] = new QuestDialogue(speakerName, localizedMessages);
+        }
+
+        OptionalInt longestNameLengthOptional = Arrays.stream(dialogue)
+                .filter(d -> d.getSpeakerName() != null)
+                .mapToInt(d -> d.getSpeakerName().length())
+                .max();
+        if(longestNameLengthOptional.isPresent()) {
+            int longestNameLength = longestNameLengthOptional.getAsInt();
+
+            for(QuestDialogue questDialogue : dialogue) {
+                questDialogue.setSpeakerNamePadding(longestNameLength);
+            }
         }
 
         return new QuestDialogueStep(stepId, interactNpc, dialogue);

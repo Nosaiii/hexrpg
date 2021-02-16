@@ -102,17 +102,18 @@ public class Quest {
         try {
             JSONObject playerSpecificData = getPlayerData(player.getUniqueId());
 
-            int currentStep = (int) playerSpecificData.get("step");
+            int currentStep = ((Long) playerSpecificData.get("step")).intValue();
+
+            // Finish previous step
+            QuestStep finishedStep = steps[currentStep - 1];
+            finishedStep.finish(player);
+
             if(currentStep == steps.length) {
                 finish(player.getUniqueId());
             } else {
                 //noinspection unchecked
                 playerSpecificData.put("step", currentStep + 1);
                 saveJson();
-
-                // Finish previous step
-                QuestStep newStep = steps[currentStep - 2];
-                newStep.finish(player);
 
                 // Start new step
                 callCurrentStep(player);
