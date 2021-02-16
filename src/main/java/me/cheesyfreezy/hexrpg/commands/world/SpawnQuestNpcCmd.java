@@ -34,11 +34,11 @@ public class SpawnQuestNpcCmd implements CommandExecutor {
                 }
 
                 if(args.length == 0) {
-                    player.sendMessage(ChatColor.RED + "/GiveRPGItem [NPC_Id] <x> <y> <z>");
+                    player.sendMessage(ChatColor.RED + "/SpawnQuestNPC [NPC_Id] <x> <y> <z>");
 
                     List<String> formattedNpcList = new ArrayList<>();
                     for(QuestNPC npc : questService.getNPCs()) {
-                        formattedNpcList.add(ChatColor.BLUE + npc.getName() + ": " + ChatColor.RED + npc.getId());
+                        formattedNpcList.add(ChatColor.BLUE + npc.getName() + ": " + ChatColor.GOLD + npc.getId());
                     }
                     player.sendMessage(String.join(", ", formattedNpcList));
                 } else if(args.length <= 4) {
