@@ -1,5 +1,6 @@
 package me.cheesyfreezy.hexrpg.rpg.quests.reward;
 
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -22,5 +23,10 @@ public class QuestRewardItem implements IQuestReward {
         for(ItemStack dropItem : player.getInventory().addItem(buildItem()).values()) {
             player.getWorld().dropItem(player.getEyeLocation(), dropItem);
         }
+    }
+
+    @Override
+    public String getLabel() {
+        return WordUtils.capitalizeFully(buildItem().getType().toString().replace("_", " ")) + " (" + amount + "x)";
     }
 }

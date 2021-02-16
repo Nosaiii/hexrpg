@@ -8,4 +8,5 @@ public interface IQuestReward {
      * @param player The player to give the reward to
      */
     void reward(Player player);
+    String getLabel();
 }

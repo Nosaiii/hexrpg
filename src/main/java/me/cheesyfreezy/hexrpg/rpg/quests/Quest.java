@@ -7,7 +7,11 @@ import me.cheesyfreezy.hexrpg.rpg.quests.constants.QuestLength;
 import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPC;
 import me.cheesyfreezy.hexrpg.rpg.quests.reward.IQuestReward;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.QuestStep;
+import me.cheesyfreezy.hexrpg.tools.ChatUtils;
+import me.cheesyfreezy.hexrpg.tools.LanguageManager;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONArray;
@@ -19,8 +23,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public class Quest {
     private final int id;
@@ -152,8 +155,29 @@ public class Quest {
             saveJson();
 
             OfflinePlayer offlinePlayer = Bukkit.getPlayer(uuid);
-            if(offlinePlayer.isOnline()) {
-                reward(offlinePlayer.getPlayer());
+            if(offlinePlayer != null && offlinePlayer.isOnline() && offlinePlayer.getPlayer() != null) {
+                Player player = offlinePlayer.getPlayer();
+
+                String border = ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "----------------------------------------------------";
+                String questFinishMessage = LanguageManager.getMessage("quests.quest-completed", uuid, true, getName());
+
+                List<String> rewardLabels = new ArrayList<>();
+                for(IQuestReward reward : getRewards()) {
+                    rewardLabels.add(LanguageManager.getMessage("quests.quest-reward-item", uuid, true, reward.getLabel()));
+                }
+
+                player.sendMessage(border);
+                player.sendMessage("");
+                player.sendMessage(ChatUtils.getCenteredMessage(questFinishMessage));
+                player.sendMessage("");
+                player.sendMessage(ChatUtils.getCenteredMessage(LanguageManager.getMessage("quests.quest-rewards", uuid, true)));
+                for(String rewardLabel : rewardLabels) {
+                    player.sendMessage(ChatUtils.getCenteredMessage(rewardLabel));
+                }
+                player.sendMessage("");
+                player.sendMessage(border);
+
+                reward(player);
             }
         } catch (InvalidQuestPlayerData invalidQuestPlayerData) {
             invalidQuestPlayerData.printStackTrace();

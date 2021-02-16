@@ -127,6 +127,11 @@ language-menu:
 plugin:
   reloaded: '&aThe plugin has successfully been reloaded!'
 
+quests:
+  quest-completed: '&aCongratulations on completing ''&9&l{0}''!'
+  quest-rewards: '&f&nRewards:'
+  quest-reward-item: '&c - &f{0}'
+
 literal-translations:
   name: 'Name'
   amount: 'Amount'
