@@ -35,6 +35,6 @@ public class QuestDialogue {
 
     public double getReadingTime(UUID uuid) {
         String message = localizedMessages.get(LanguageManager.getLocalization(uuid));
-        return message.trim().split(" ").length * 0.75d;
+        return message.trim().split(" ").length * 0.4d;
     }
 }
