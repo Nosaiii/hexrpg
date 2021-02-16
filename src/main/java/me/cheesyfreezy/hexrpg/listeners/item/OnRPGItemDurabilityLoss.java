@@ -67,13 +67,17 @@ public class OnRPGItemDurabilityLoss implements Listener {
 		PlayerInventory inv = player.getInventory();
 
 		ItemStack mainHandItem = inv.getItemInMainHand();
-		if(mainHandItem != null && !mainHandItem.getType().equals(Material.AIR)) {
+		if(!mainHandItem.getType().equals(Material.AIR)) {
 			ItemStack damagedItem = applyDamageLoss(player, mainHandItem);
 			inv.setItemInMainHand(damagedItem);
 		}
 	}
 	
 	private ItemStack applyDamageLoss(Player player, ItemStack item) {
+		if(item == null || item.getType().equals(Material.AIR)) {
+			return item;
+		}
+
 		NBTItem nbtItem = new NBTItem(item);
 		if(!nbtItem.hasKey("rpgdata_combatitem")) {
 			return item;
