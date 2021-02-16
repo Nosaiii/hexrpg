@@ -90,6 +90,390 @@
           }
         ]
       }
+    },
+    {
+      "id": 1,
+      "type": "talk_with_npc",
+      "data": {
+        "npc-id": 2,
+        "dialogue": [
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Hello, Ben!"
+            }
+          },
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "G'day. What can I do for you today?"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "I have been informed by your friend Wyat that there has been a plague around here in the village."
+            }
+          },
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "Oh, so you have heard the news as well. It is so unfortunate, especially during these times..."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "May I ask what \"times\" we are talking about?"
+            }
+          },
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "Oh, right. My friend Dann and I were both doing good business, but because of the Plague people are staying inside of their homes."
+            }
+          },
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "His business has always been outstanding, but my business was growing very quickly and was also getting there."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Alright. I will go and talk to Dann and see what he can tell me about the Plague."
+            }
+          },
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "Sure. Stay safe!"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "talk_with_npc",
+      "data": {
+        "npc-id": 3,
+        "dialogue": [
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "Busy, busy, busy, busy. I am SO busy!"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Ehhm... Sir? May I have a small talk with you for a little bit?"
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "Did you not understand what I was saying? I am extremely busy at the moment!"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "I have a feeling that can wait. There is currently a Plague spreading around. Were you aware of this?"
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "The Plague?"
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "..."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "..."
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "..."
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "Oh right! The \"Plague\". Ha ha ha."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Sorry, but what is so funny about it?"
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "You have missed the news, buddy. I made that entire thing up for the better good."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "For the better good? In what world is making up such a story for the better good?"
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "Well... recently my old friend Ben has been growing as a business man and he started growing as a business faster than ever imaginable."
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "For that reason, I had to come up with something to have him not take over MY business."
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "I told the entire village there was a Plague spreading around so nobody would come to his business."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "*whispers* Pathetic"
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "Sorry, what did you say?"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Nothing. Forget about it."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Don't you think there is a better solution for this sort of competition between businesses?"
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "Oh yes. I believe there are many solutions, but this was the first one that came to mind."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Then why don't we think of another solution and convince the village that the Plague was fake?"
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "Sounds like a plan. As long as it does not bother my business, of course."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "We can figure something out. What are your thoughts?"
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "This might sound very strange, but I heard that people get convinced easily if you give them some food and something to drink before trying to convince them of something."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "That is indeed very strange. Anyway, I believe you."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "What kind of food and drink are we talking about?"
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "I believe a nice warm mushroom stew and fresh milk will do."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Alright. I will take a loot at it and see if I can convince Ben that the Plague is fake."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "talk_with_npc_with_items",
+      "data": {
+        "npc-id": 2,
+        "items": [
+          {
+            "name": "mushroom_stew",
+            "amount": 1
+          },
+          {
+            "name": "milk_bucket",
+            "amount": 1
+          }
+        ],
+        "deny-dialogue": [
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "Good to see you again. Have you heard anything new about the Plague?"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Yes. I believe it is fake."
+            }
+          },
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "Fake? I am unsure whether I have to believe what you are saying. Please go look for more information about it."
+            }
+          }
+        ],
+        "accept-dialogue": [
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Good to see you again, Ben!"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "While I was wondering around trying to get some information, I have found this mushroom stew and milk. Would you like some?"
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "I cannot say no to that! Thank you very much."
+            }
+          },
+          {
+            "speaker-npc-id": 3,
+            "text": {
+              "english": "So the Plague, huh? Have you been able to find more information about it?"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Actually, yes. I have been talking to your friend Dann. He told me the truth about it all."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "He told me that he was jealous when he saw that your business was growing. So then he began spreading fake news that there was a virus among the villagers."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "With that, he was hoping that your business would not get many customers, because they would be afraid to go outside."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "By talking with him, we both agreed to come with a better solution to still be friends and continue with the competition in a non-childish way."
+            }
+          },
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "Wow. I did not think he would go that far. I am sure he is willing to work this out, but that is a whole other story."
+            }
+          },
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "Thank you for figuring this out for me. Now I can go continue and work on the growth of my business again."
+            }
+          },
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "You might want to talk to Wyat again and tell him as well that the Plague is fake."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "I will certainly do that."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "talk_with_npc",
+      "data": {
+        "npc-id": 1,
+        "dialogue": [
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Wyat, I have good news."
+            }
+          },
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "I know. I have heard the news already. It spreads even faster than an actual virus would. Ha ha ha."
+            }
+          },
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "Thank you for calming down the village by figuring out what was going on."
+            }
+          },
+          {
+            "speaker-npc-id": 2,
+            "text": {
+              "english": "For that reason, take this mushroom stew and milk as a reward. I still had it hanging around somewhere."
+            }
+          }
+        ]
+      }
     }
   ],
   "player-data": []

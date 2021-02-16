@@ -9,6 +9,11 @@
       "id": 2,
       "name": "Ben",
       "profession": "weaponsmith"
+    },
+    {
+      "id": 3,
+      "name": "Dann",
+      "profession": "fletcher"
     }
   ]
 }
