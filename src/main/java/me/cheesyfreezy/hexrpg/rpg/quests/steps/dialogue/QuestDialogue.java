@@ -30,10 +30,7 @@ public class QuestDialogue {
         }
 
         String message = localizedMessages.get(LanguageManager.getLocalization(uuid));
-        return
-                ChatColor.GOLD + speakerName +
-                ChatColor.DARK_GRAY + " » " +
-                ChatColor.BLUE + message;
+        return ChatColor.BLUE + "" + ChatColor.BOLD + speakerName + "   " + ChatColor.WHITE + message;
     }
 
     public double getReadingTime(UUID uuid) {

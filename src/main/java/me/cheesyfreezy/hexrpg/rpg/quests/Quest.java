@@ -12,8 +12,11 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Optional;
@@ -126,7 +129,7 @@ public class Quest {
     private void callCurrentStep(Player player) {
         try {
             JSONObject playerSpecificData = getPlayerData(player.getUniqueId());
-            int currentStep = (int) playerSpecificData.get("step");
+            int currentStep = ((Long) playerSpecificData.get("step")).intValue();
 
             QuestStep newStep = steps[currentStep - 1];
             newStep.start(player);
@@ -193,17 +196,25 @@ public class Quest {
      * @throws InvalidQuestPlayerData Thrown when the player data of the given player was invalid
      */
     private JSONObject getPlayerData(UUID uuid) throws InvalidQuestPlayerData {
-        JSONArray playerData = (JSONArray) json.get("player-data");
+        try(FileReader reader = new FileReader(file)) {
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject) parser.parse(reader);
+            JSONArray playerData = (JSONArray) json.get("player-data");
 
-        @SuppressWarnings("unchecked") // Supressing this statement is ok in this case
-        Optional<JSONObject> playerSpecificDataOpt = playerData.stream()
-                .filter(pd -> ((String) ((JSONObject) pd).get("uuid")).equalsIgnoreCase(uuid.toString()))
-                .findFirst();
+            @SuppressWarnings("unchecked") // Supressing this statement is ok in this case
+            Optional<JSONObject> playerSpecificDataOpt = playerData.stream()
+                    .filter(pd -> ((String) ((JSONObject) pd).get("uuid")).equalsIgnoreCase(uuid.toString()))
+                    .findFirst();
 
-        if(!playerSpecificDataOpt.isPresent()) {
-            throw new InvalidQuestPlayerData(this, uuid);
+            if(!playerSpecificDataOpt.isPresent()) {
+                throw new InvalidQuestPlayerData(this, uuid);
+            }
+            return playerSpecificDataOpt.get();
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
         }
-        return playerSpecificDataOpt.get();
+
+        throw new InvalidQuestPlayerData(this, uuid);
     }
 
     /**
