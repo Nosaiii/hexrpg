@@ -9,11 +9,13 @@ import org.bukkit.entity.Villager;
 public class QuestNPC {
     private final int id;
     private final String name;
+    private final ChatColor color;
     private final Villager.Profession profession;
 
-    public QuestNPC(int id, String name, Villager.Profession profession) {
+    public QuestNPC(int id, String name, ChatColor color, Villager.Profession profession) {
         this.id = id;
         this.name = name;
+        this.color = color;
         this.profession = profession;
     }
 
@@ -25,7 +27,7 @@ public class QuestNPC {
         Villager npc = (Villager) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
 
         // Naming
-        npc.setCustomName(ChatColor.GOLD + name);
+        npc.setCustomName(color + name);
         npc.setCustomNameVisible(true);
 
         // Appearance
@@ -54,5 +56,13 @@ public class QuestNPC {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * The color of the NPC
+     * @return The color of the NPC
+     */
+    public ChatColor getColor() {
+        return color;
     }
 }

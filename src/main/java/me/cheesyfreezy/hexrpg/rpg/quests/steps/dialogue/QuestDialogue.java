@@ -9,11 +9,13 @@ import java.util.UUID;
 
 public class QuestDialogue {
     private final String speakerName;
+    private final ChatColor prefixColor;
     private final HashMap<String, String> localizedMessages;
     private int speakerNamePadding = 8; // Default padding is '8'
 
-    public QuestDialogue(String speakerName, HashMap<String, String> localizedMessages) {
+    public QuestDialogue(String speakerName, ChatColor prefixColor, HashMap<String, String> localizedMessages) {
         this.speakerName = speakerName;
+        this.prefixColor = prefixColor;
         this.localizedMessages = localizedMessages;
     }
 
@@ -25,13 +27,11 @@ public class QuestDialogue {
     public String getDialogue(UUID uuid) {
         String speakerName = this.speakerName;
         if(this.speakerName == null) {
-            /*OfflinePlayer offlinePlayer = Bukkit.getServer().getOfflinePlayer(uuid);
-            speakerName = offlinePlayer.getName();*/
             speakerName = LanguageManager.getMessage("literal-translations.you", uuid);
         }
 
         String message = localizedMessages.get(LanguageManager.getLocalization(uuid));
-        return ChatColor.BLUE + "" + ChatColor.BOLD + StringUtils.rightPad(speakerName, speakerNamePadding) + " " + ChatColor.WHITE + message;
+        return prefixColor + "" + ChatColor.BOLD + StringUtils.rightPad(speakerName, speakerNamePadding) + " " + ChatColor.WHITE + message;
     }
 
     /**

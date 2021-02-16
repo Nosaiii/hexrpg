@@ -2,6 +2,7 @@ package me.cheesyfreezy.hexrpg.rpg.quests.npc;
 
 import me.cheesyfreezy.hexrpg.rpg.quests.Quest;
 import me.cheesyfreezy.hexrpg.tools.EnumUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Villager;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -34,9 +35,10 @@ public class QuestNPCParser {
 
                 int id = ((Long) npcJson.get("id")).intValue();
                 String name = (String) npcJson.get("name");
+                ChatColor color = ChatColor.getByChar(((String) npcJson.get("color")).charAt(0));
                 Villager.Profession profession = EnumUtils.fromName(Villager.Profession.class, (String) npcJson.get("profession"));
 
-                npcs[i] = new QuestNPC(id, name, profession);
+                npcs[i] = new QuestNPC(id, name, color, profession);
             }
 
             return npcs;

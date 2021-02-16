@@ -6,6 +6,7 @@ import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogu
 import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPC;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.QuestStep;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -13,6 +14,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 public abstract class QuestAbstractDialogueStep extends QuestStep {
+    public static final ChatColor DEFAULT_PREFIX_COLOR = ChatColor.BLUE;
+
     @Inject private HexRPGPlugin plugin;
 
     private final QuestNPC npc;

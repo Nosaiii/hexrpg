@@ -5,8 +5,10 @@ import me.cheesyfreezy.hexrpg.exceptions.quests.QuestNPCNotFoundException;
 import me.cheesyfreezy.hexrpg.rpg.quests.QuestService;
 import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPC;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.QuestStep;
+import me.cheesyfreezy.hexrpg.rpg.quests.steps.dialogue.QuestAbstractDialogueStep;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.dialogue.QuestDialogue;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.dialogue.QuestConcreteDialogueStep;
+import org.bukkit.ChatColor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -33,12 +35,15 @@ public class QuestConcreteDialogueStepMapper implements IQuestStepMapper {
         for(int i = 0; i < dialogue.length; i++) {
             JSONObject dialogueJson = (JSONObject) dialogueArray.get(i);
 
+            ChatColor prefixColor = QuestAbstractDialogueStep.DEFAULT_PREFIX_COLOR;
+
             int speakerNpcId = ((Long) dialogueJson.get("speaker-npc-id")).intValue();
             String speakerName = null;
             if(speakerNpcId != -1) {
                 try {
                     QuestNPC npc = questService.getNPC(speakerNpcId);
                     speakerName = npc.getName();
+                    prefixColor = npc.getColor();
                 } catch (QuestNPCNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -50,7 +55,7 @@ public class QuestConcreteDialogueStepMapper implements IQuestStepMapper {
                 localizedMessages.put((String) localization, (String) texts.get(localization));
             }
 
-            dialogue[i] = new QuestDialogue(speakerName, localizedMessages);
+            dialogue[i] = new QuestDialogue(speakerName, prefixColor, localizedMessages);
         }
 
         OptionalInt longestNameLengthOptional = Arrays.stream(dialogue)

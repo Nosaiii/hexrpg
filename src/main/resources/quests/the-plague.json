@@ -456,19 +456,19 @@
             }
           },
           {
-            "speaker-npc-id": 2,
+            "speaker-npc-id": 1,
             "text": {
               "english": "I know. I have heard the news already. It spreads even faster than an actual virus would. Ha ha ha."
             }
           },
           {
-            "speaker-npc-id": 2,
+            "speaker-npc-id": 1,
             "text": {
               "english": "Thank you for calming down the village by figuring out what was going on."
             }
           },
           {
-            "speaker-npc-id": 2,
+            "speaker-npc-id": 1,
             "text": {
               "english": "For that reason, take this mushroom stew and milk as a reward. I still had it hanging around somewhere."
             }
