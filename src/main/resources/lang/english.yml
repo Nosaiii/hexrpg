@@ -129,6 +129,8 @@ plugin:
 
 quests:
   quest-completed: '&aCongratulations on completing ''&9&l{0}''!'
+  quest-difficulty: '&c{0}&f: {1}'
+  quest-length: '&c{0}&f: {1}'
   quest-rewards: '&f&nRewards:'
   quest-reward-item: '&c - &f{0}'
 
@@ -173,3 +175,15 @@ literal-translations:
   authors: 'Authors'
 
   you: 'You'
+
+  difficulty: 'Difficulty'
+  easy: 'Easy'
+  medium: 'Medium'
+  hard: 'Hard'
+  master: 'Master'
+  grand-master: 'Grand Master'
+
+  length: 'Length'
+  short: 'Short'
+  long: 'Long'
+  very-long: 'Very long'

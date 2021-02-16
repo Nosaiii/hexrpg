@@ -157,17 +157,32 @@ public class Quest {
             if(offlinePlayer != null && offlinePlayer.isOnline() && offlinePlayer.getPlayer() != null) {
                 Player player = offlinePlayer.getPlayer();
 
+                // Border
                 String border = ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "----------------------------------------------------";
+
+                // Header message
                 String questFinishMessage = LanguageManager.getMessage("quests.quest-completed", uuid, true, getName());
 
+                // Difficulty and length
+                String difficultyLabel = LanguageManager.getMessage("literal-translations.difficulty", uuid);
+                String lengthLabel = LanguageManager.getMessage("literal-translations.length", uuid);
+
+                String difficultyValue = LanguageManager.getMessage("literal-translations." + difficulty.toString().toLowerCase().replace("-", "_"), uuid);
+                String lengthValue = LanguageManager.getMessage("literal-translations." + length.toString().toLowerCase().replace("-", "_"), uuid);
+
+                // Reward labels
                 List<String> rewardLabels = new ArrayList<>();
                 for(IQuestReward reward : getRewards()) {
                     rewardLabels.add(LanguageManager.getMessage("quests.quest-reward-item", uuid, true, reward.getLabel()));
                 }
 
+                // Printing result
                 player.sendMessage(border);
                 player.sendMessage("");
                 player.sendMessage(ChatUtils.getCenteredMessage(questFinishMessage));
+                player.sendMessage("");
+                player.sendMessage(LanguageManager.getMessage("quests.quest-difficulty", uuid, true, difficultyLabel, difficultyValue));
+                player.sendMessage(LanguageManager.getMessage("quests.quest-length", uuid, true, lengthLabel, lengthValue));
                 player.sendMessage("");
                 player.sendMessage(ChatUtils.getCenteredMessage(LanguageManager.getMessage("quests.quest-rewards", uuid, true)));
                 for(String rewardLabel : rewardLabels) {
@@ -176,6 +191,7 @@ public class Quest {
                 player.sendMessage("");
                 player.sendMessage(border);
 
+                // Give reward
                 reward(player);
             }
         } catch (InvalidQuestPlayerData invalidQuestPlayerData) {
@@ -203,6 +219,11 @@ public class Quest {
         }
     }
 
+    /**
+     * Checks whether the player with the given UUID has start this quest
+     * @param uuid The UUID of the player to check for
+     * @return True if the player has started this quest. False if the player has not started this quest
+     */
     public boolean hasStarted(UUID uuid) {
         try {
             //noinspection unused
@@ -213,6 +234,11 @@ public class Quest {
         }
     }
 
+    /**
+     * Checks whether the player with the given UUID has finished this quest
+     * @param uuid The UUID of the player to check for
+     * @return True if the player has finished this quest. False if the player has not finished this quest
+     */
     public boolean hasFinished(UUID uuid) {
         if(!hasStarted(uuid)) {
             return false;
@@ -229,6 +255,11 @@ public class Quest {
         return false;
     }
 
+    /**
+     * Checks whether the player with the given UUID has been rewarded for this quest
+     * @param uuid The UUID of the player to check for
+     * @return True if the player has been rewarded. False if the player has not been rewarded
+     */
     public boolean hasBeenRewarded(UUID uuid) {
         if(!hasStarted(uuid)) {
             return false;
