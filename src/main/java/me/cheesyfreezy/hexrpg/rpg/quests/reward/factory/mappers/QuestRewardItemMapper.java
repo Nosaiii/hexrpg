@@ -8,7 +8,7 @@ public class QuestRewardItemMapper implements IQuestRewardMapper {
     @Override
     public IQuestReward map(JSONObject jsonData) {
         String materialName = (String) jsonData.get("name");
-        int amount = (int) jsonData.get("amount");
+        int amount = ((Long) jsonData.get("amount")).intValue();
 
         return new QuestRewardItem(materialName, amount);
     }

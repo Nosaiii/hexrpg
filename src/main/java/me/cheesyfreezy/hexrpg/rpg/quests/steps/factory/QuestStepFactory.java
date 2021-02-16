@@ -9,11 +9,11 @@ import org.json.simple.JSONObject;
 import java.util.HashMap;
 
 public class QuestStepFactory {
-    @Inject private QuestDialogueStepMapper questDialogueStepMapper;
+    private final HashMap<String, IQuestStepMapper> mappers;
 
-    private final HashMap<String, IQuestStepMapper> mappers = new HashMap<>();
-
-    public QuestStepFactory() {
+    @Inject
+    public QuestStepFactory(QuestDialogueStepMapper questDialogueStepMapper) {
+        mappers = new HashMap<>();
         mappers.put("talk_with_npc", questDialogueStepMapper);
     }
 

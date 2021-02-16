@@ -34,7 +34,7 @@ public class QuestParser {
             JSONObject questJson = (JSONObject) parser.parse(reader);
 
             // Parsing meta deta
-            int id = (int) questJson.get("id");
+            int id = ((Long) questJson.get("id")).intValue();
             String name = (String) questJson.get("name");
             QuestDifficulty difficulty = EnumUtils.fromName(QuestDifficulty.class, (String) questJson.get("difficulty"));
             QuestLength length = EnumUtils.fromName(QuestLength.class, (String) questJson.get("length"));
@@ -50,7 +50,7 @@ public class QuestParser {
             IQuestReward[] questRewards = new IQuestReward[questRewardsArray.size()];
 
             for(int i = 0; i < questRewards.length; i++) {
-                JSONObject rewardJson = (JSONObject) questRequirementsArray.get(i);
+                JSONObject rewardJson = (JSONObject) questRewardsArray.get(i);
                 String rewardType = (String) rewardJson.get("type");
                 JSONObject rewardData = (JSONObject) rewardJson.get("data");
 
@@ -64,7 +64,7 @@ public class QuestParser {
 
             for(int i = 0; i < questSteps.length; i++) {
                 JSONObject stepJson = (JSONObject) questStepsArray.get(i);
-                int stepId = (int) stepJson.get("id");
+                int stepId = ((Long) stepJson.get("id")).intValue();
                 String stepType = (String) stepJson.get("type");
                 JSONObject stepData = (JSONObject) stepJson.get("data");
 

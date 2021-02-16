@@ -32,7 +32,7 @@ public class QuestNPCParser {
             for(int i = 0; i < npcs.length; i++) {
                 JSONObject npcJson = (JSONObject) npcArray.get(i);
 
-                int id = (int) npcJson.get("id");
+                int id = ((Long) npcJson.get("id")).intValue();
                 String name = (String) npcJson.get("name");
                 Villager.Profession profession = EnumUtils.fromName(Villager.Profession.class, (String) npcJson.get("profession"));
 

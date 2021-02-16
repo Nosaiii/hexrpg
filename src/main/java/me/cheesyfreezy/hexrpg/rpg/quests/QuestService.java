@@ -61,7 +61,7 @@ public class QuestService {
      * @return An array with {@link Quest} objects
      */
     public Quest[] getQuests() {
-        return (Quest[]) quests.toArray();
+        return quests.toArray(new Quest[0]);
     }
 
     /**
@@ -69,6 +69,6 @@ public class QuestService {
      * @return An array with {@link QuestNPC} objects
      */
     public QuestNPC[] getNPCs() {
-        return (QuestNPC[]) questNPCs.toArray();
+        return questNPCs.toArray(new QuestNPC[0]);
     }
 }

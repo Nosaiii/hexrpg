@@ -17,7 +17,7 @@ public class QuestDialogueStepMapper implements IQuestStepMapper {
 
     @Override
     public QuestStep map(int stepId, JSONObject jsonData) {
-        int npcId = (int) jsonData.get("npc-id");
+        int npcId = ((Long) jsonData.get("npc-id")).intValue();
         QuestNPC interactNpc = null;
         try {
             interactNpc = questService.getNPC(npcId);
@@ -31,7 +31,7 @@ public class QuestDialogueStepMapper implements IQuestStepMapper {
         for(int i = 0; i < dialogue.length; i++) {
             JSONObject dialogueJson = (JSONObject) dialogueArray.get(i);
 
-            int speakerNpcId = (int) dialogueJson.get("speaker-npc-id");
+            int speakerNpcId = ((Long) dialogueJson.get("speaker-npc-id")).intValue();
             String speakerName = null;
             if(speakerNpcId != -1) {
                 try {
