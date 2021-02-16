@@ -31,15 +31,19 @@ public class QuestDialogueStep extends QuestStep {
     @Override
     public void start(Player player) {
         registerListener(player.getUniqueId(), new OnQuestDialogueInteractToTalk(player, this));
+
+        if(id == 0) {
+            startDialogue(player);
+        }
     }
 
     @Override
     public void finish(Player player) {
         unregisterListener(player.getUniqueId(), OnQuestDialogueFreeze.class);
-        unregisterListener(player.getUniqueId(), OnQuestDialogueInteractToTalk.class);
     }
 
     public void startDialogue(Player player) {
+        unregisterListener(player.getUniqueId(), OnQuestDialogueInteractToTalk.class);
         registerListener(player.getUniqueId(), new OnQuestDialogueFreeze(player));
 
         AtomicInteger dialogueTimer = new AtomicInteger();

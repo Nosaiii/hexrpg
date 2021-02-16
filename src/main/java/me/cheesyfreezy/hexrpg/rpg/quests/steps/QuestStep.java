@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public abstract class QuestStep {
     @Inject private HexRPGPlugin plugin;
 
-    private final int id;
+    protected final int id;
 
     private final HashMap<UUID, List<Listener>> registeredListeners;
     private final List<Quest> questObservers;

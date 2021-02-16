@@ -1,8 +1,10 @@
 package me.cheesyfreezy.hexrpg.rpg.quests;
 
 import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.exceptions.quests.QuestNPCNotFoundException;
 import me.cheesyfreezy.hexrpg.rpg.quests.constants.QuestDifficulty;
 import me.cheesyfreezy.hexrpg.rpg.quests.constants.QuestLength;
+import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPC;
 import me.cheesyfreezy.hexrpg.rpg.quests.reward.IQuestReward;
 import me.cheesyfreezy.hexrpg.rpg.quests.reward.factory.QuestRewardFactory;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.QuestStep;
@@ -20,6 +22,7 @@ import java.io.IOException;
 public class QuestParser {
     @Inject private QuestRewardFactory questRewardFactory;
     @Inject private QuestStepFactory questStepFactory;
+    @Inject private QuestService questService;
 
     /**
      * Parses a .json file into a {@link Quest} object
@@ -43,6 +46,14 @@ public class QuestParser {
             int[] questRequirementIds = new int[questRequirementsArray.size()];
             for(int i = 0; i < questRequirementIds.length; i++) {
                 questRequirementIds[i] = (int) questRequirementsArray.get(i);
+            }
+
+            int startNPCId = ((Long) questJson.get("start-npc-id")).intValue();
+            QuestNPC startNPC = null;
+            try {
+                startNPC = questService.getNPC(startNPCId);
+            } catch (QuestNPCNotFoundException questNPCNotFoundException) {
+                questNPCNotFoundException.printStackTrace();
             }
 
             // Parsing rewards
@@ -73,7 +84,7 @@ public class QuestParser {
             }
 
             // Building Quest
-            return new Quest(id, name, difficulty, length, questRequirementIds, questRewards, questSteps, questFile, questJson);
+            return new Quest(id, name, difficulty, length, questRequirementIds, startNPC, questRewards, questSteps, questFile, questJson);
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }

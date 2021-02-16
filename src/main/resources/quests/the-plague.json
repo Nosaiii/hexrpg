@@ -4,6 +4,7 @@
   "difficulty": "Easy",
   "length": "Short",
   "quest-requirements": [],
+  "start-npc-id": 1,
   "rewards": [
     {
       "type": "item",

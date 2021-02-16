@@ -4,6 +4,7 @@ import me.cheesyfreezy.hexrpg.exceptions.quests.InvalidQuestPlayerData;
 import me.cheesyfreezy.hexrpg.exceptions.quests.QuestNotFoundException;
 import me.cheesyfreezy.hexrpg.rpg.quests.constants.QuestDifficulty;
 import me.cheesyfreezy.hexrpg.rpg.quests.constants.QuestLength;
+import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPC;
 import me.cheesyfreezy.hexrpg.rpg.quests.reward.IQuestReward;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.QuestStep;
 import org.bukkit.Bukkit;
@@ -23,20 +24,25 @@ public class Quest {
     private final String name;
     private final QuestDifficulty difficulty;
     private final QuestLength length;
+
     private final int[] questRequirementIds;
     private Quest[] questRequirements;
+
+    private final QuestNPC startNPC;
+
     private final IQuestReward[] rewards;
     private final QuestStep[] steps;
 
     private final File file;
     private final JSONObject json;
 
-    public Quest(int id, String name, QuestDifficulty difficulty, QuestLength length, int[] questRequirementIds, IQuestReward[] rewards, QuestStep[] steps, File file, JSONObject json) {
+    public Quest(int id, String name, QuestDifficulty difficulty, QuestLength length, int[] questRequirementIds, QuestNPC startNPC, IQuestReward[] rewards, QuestStep[] steps, File file, JSONObject json) {
         this.id = id;
         this.name = name;
         this.difficulty = difficulty;
         this.length = length;
         this.questRequirementIds = questRequirementIds;
+        this.startNPC = startNPC;
         this.rewards = rewards;
         this.steps = steps;
 
@@ -80,7 +86,6 @@ public class Quest {
         JSONArray playerData = (JSONArray) json.get("player-data");
         //noinspection unchecked
         playerData.add(playerSpecificData);
-
         saveJson();
 
         callCurrentStep(player);
@@ -171,6 +176,16 @@ public class Quest {
         }
     }
 
+    public boolean hasStarted(UUID uuid) {
+        try {
+            //noinspection unused
+            JSONObject playerSpecificData = getPlayerData(uuid);
+            return true;
+        } catch (InvalidQuestPlayerData invalidQuestPlayerData) {
+            return false;
+        }
+    }
+
     /**
      * Retrieves the data of a given player by UUID
      * @param uuid The UUID of the player to retrieve the data from
@@ -182,7 +197,7 @@ public class Quest {
 
         @SuppressWarnings("unchecked") // Supressing this statement is ok in this case
         Optional<JSONObject> playerSpecificDataOpt = playerData.stream()
-                .filter(pd -> ((JSONObject) pd).get("uuid") == uuid.toString())
+                .filter(pd -> ((String) ((JSONObject) pd).get("uuid")).equalsIgnoreCase(uuid.toString()))
                 .findFirst();
 
         if(!playerSpecificDataOpt.isPresent()) {
@@ -241,6 +256,14 @@ public class Quest {
      */
     public Quest[] getQuestRequirements() {
         return questRequirements;
+    }
+
+    /**
+     * The NPC that has to be interacted with to start this quest
+     * @return The NPC that has to be interacted with to start this quest
+     */
+    public QuestNPC getStartNPC() {
+        return startNPC;
     }
 
     /**

@@ -33,6 +33,8 @@ public class OnQuestDialogueInteractToTalk implements Listener {
         }
         int questNpcId = nbtEntity.getPersistentDataContainer().getInteger("quest_npc_id");
 
+        event.setCancelled(true);
+
         if(dialogueStep.getNpc().getId() != questNpcId) {
             return;
         }

@@ -15,6 +15,7 @@ import me.cheesyfreezy.hexrpg.exceptions.quests.QuestNotFoundException;
 import me.cheesyfreezy.hexrpg.listeners.chat.OnChatProcessor;
 import me.cheesyfreezy.hexrpg.listeners.inventory.*;
 import me.cheesyfreezy.hexrpg.listeners.item.*;
+import me.cheesyfreezy.hexrpg.listeners.quests.OnQuestStart;
 import me.cheesyfreezy.hexrpg.listeners.world.block.*;
 import me.cheesyfreezy.hexrpg.listeners.world.entity.*;
 import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableService;
@@ -82,6 +83,7 @@ public class HexRPGPlugin extends JavaPlugin {
 	@Inject private OnReobtainArrowStats onReobtainArrowStats;
 	@Inject private OnRPGItemDrop onRPGItemDrop;
 	@Inject private OnStealingStop onStealingStop;
+	@Inject private OnQuestStart onQuestStart;
 
 	@Inject private QuestParser questParser;
 	@Inject private QuestService questService;
@@ -269,6 +271,9 @@ public class HexRPGPlugin extends JavaPlugin {
 		}
 		if(Feature.getFeature("player-menu.stealing").isEnabled()) {
 			pm.registerEvents(onStealingStop, this);
+		}
+		if(Feature.getFeature("quests").isEnabled()) {
+			pm.registerEvents(onQuestStart, this);
 		}
 	}
 
