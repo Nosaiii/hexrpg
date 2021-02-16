@@ -6,8 +6,8 @@ import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogu
 import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPC;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.QuestStep;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -43,18 +43,29 @@ public class QuestDialogueStep extends QuestStep {
         registerListener(player.getUniqueId(), new OnQuestDialogueFreeze(player));
 
         AtomicInteger dialogueTimer = new AtomicInteger();
-        Bukkit.getServer().getScheduler().runTaskTimer(plugin, () -> {
-            if(currentDialogueIndex > 0) {
-                double readingTime = this.dialogue[currentDialogueIndex - 1].getReadingTime(player.getUniqueId());
 
-                if (dialogueTimer.getAndIncrement() / 20d >= readingTime) {
-                    player.sendMessage(this.dialogue[currentDialogueIndex].getDialogue(player.getUniqueId()));
-                    currentDialogueIndex++;
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if(currentDialogueIndex > 0) {
+                    double readingTime = dialogue[currentDialogueIndex - 1].getReadingTime(player.getUniqueId());
+
+                    if (dialogueTimer.getAndIncrement() / 20d >= readingTime) {
+                        dialogueTimer.set(0);
+
+                        player.sendMessage(dialogue[currentDialogueIndex].getDialogue(player.getUniqueId()));
+                        currentDialogueIndex++;
+
+                        if(currentDialogueIndex == dialogue.length) {
+                            onNext(player);
+                            cancel();
+                        }
+                    }
+                } else {
+                    player.sendMessage(dialogue[0].getDialogue(player.getUniqueId()));
                 }
-            } else {
-                player.sendMessage(this.dialogue[0].getDialogue(player.getUniqueId()));
             }
-        }, 0, 1);
+        }.runTaskTimer(plugin, 0, 1);
     }
 
     public QuestNPC getNpc() {

@@ -42,6 +42,10 @@ public class Quest {
 
         this.file = file;
         this.json = json;
+
+        for (QuestStep step : steps) {
+            step.subscribeObserver(this);
+        }
     }
 
     /**

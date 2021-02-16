@@ -2,6 +2,7 @@ package me.cheesyfreezy.hexrpg.rpg.quests.steps;
 
 import com.google.inject.Inject;
 import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
+import me.cheesyfreezy.hexrpg.rpg.quests.Quest;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
@@ -19,11 +20,13 @@ public abstract class QuestStep {
     private final int id;
 
     private final HashMap<UUID, List<Listener>> registeredListeners;
+    private final List<Quest> questObservers;
 
     public QuestStep(int id) {
         this.id = id;
 
         registeredListeners = new HashMap<>();
+        questObservers = new ArrayList<>();
     }
 
     public abstract void start(Player player);
@@ -59,6 +62,19 @@ public abstract class QuestStep {
 
         for(Listener listenerToRemove : listenersToRemove) {
             HandlerList.unregisterAll(listenerToRemove);
+        }
+    }
+
+    public void subscribeObserver(Quest quest) {
+        if(questObservers.contains(quest)) {
+            return;
+        }
+        questObservers.add(quest);
+    }
+
+    public void onNext(Player player) {
+        for(Quest quest : questObservers) {
+            quest.nextStep(player);
         }
     }
 
