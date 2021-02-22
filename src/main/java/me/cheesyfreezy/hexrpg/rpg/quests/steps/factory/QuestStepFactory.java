@@ -5,6 +5,7 @@ import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.QuestStep;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.factory.mappers.IQuestStepMapper;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.factory.mappers.QuestConcreteDialogueStepMapper;
+import me.cheesyfreezy.hexrpg.rpg.quests.steps.factory.mappers.QuestKillEntityStepMapper;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.factory.mappers.QuestOptionalDialogueStepMapper;
 import org.json.simple.JSONObject;
 
@@ -18,10 +19,12 @@ public class QuestStepFactory {
     @Inject
     public QuestStepFactory(
             QuestConcreteDialogueStepMapper questConcreteDialogueStepMapper,
-            QuestOptionalDialogueStepMapper questOptionalDialogueStepMapper) {
+            QuestOptionalDialogueStepMapper questOptionalDialogueStepMapper,
+            QuestKillEntityStepMapper questKillEntityStepMapper) {
         mappers = new HashMap<>();
         mappers.put("talk_with_npc", questConcreteDialogueStepMapper);
         mappers.put("talk_with_npc_with_items", questOptionalDialogueStepMapper);
+        mappers.put("kill_entity", questKillEntityStepMapper);
     }
 
     public QuestStep map(String key, int stepId, JSONObject jsonData) {
