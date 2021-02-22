@@ -1,6 +1,8 @@
 package me.cheesyfreezy.hexrpg.listeners.quests.queststep.kill;
 
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.kill.QuestKillEntityStep;
+import me.cheesyfreezy.hexrpg.tools.LanguageManager;
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,6 +38,12 @@ public class OnQuestKillEntity implements Listener {
         }
 
         killCount++;
+
+        String killCountString = Integer.toString(killCount);
+        String requiredKillCountString = Integer.toString(questStep.getRequiredKillCount());
+        String entityTypeString = WordUtils.capitalizeFully(questStep.getEntityType().toString().toLowerCase().replace("_", ""));
+        killer.sendMessage(LanguageManager.getMessage("quests.steps.kill-entity.progress", killer.getUniqueId(),true, killCountString, requiredKillCountString, entityTypeString));
+
         if(killCount >= questStep.getRequiredKillCount()) {
             questStep.onNext(this.killer);
         }

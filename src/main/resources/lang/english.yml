@@ -134,6 +134,10 @@ quests:
   quest-rewards: '&f&nRewards:'
   quest-reward-item: '&c - &f{0}'
 
+  steps:
+    kill-entity:
+      progress: '&7&lYou have killed {0}/{1} - ({2})'
+
 literal-translations:
   name: 'Name'
   amount: 'Amount'
