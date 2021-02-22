@@ -31,7 +31,7 @@ public class OnQuestDialogueAtLocation implements Listener {
             return;
         }
 
-        if(!to.isWorldLoaded() || !to.getWorld().equals(dialogueStep.getLocation().getWorld())) {
+        if(!to.getWorld().equals(dialogueStep.getLocation().getWorld())) {
             return;
         }
 
@@ -42,10 +42,7 @@ public class OnQuestDialogueAtLocation implements Listener {
             return;
         }
 
-        if (
-                toX != dialogueStep.getLocation().getBlockX() ||
-                toY != dialogueStep.getLocation().getBlockY() ||
-                toZ != dialogueStep.getLocation().getBlockZ()) {
+        if (dialogueStep.getLocation().distance(to) >= 1) {
             return;
         }
 

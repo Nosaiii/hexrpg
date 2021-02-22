@@ -30,6 +30,7 @@ public class QuestConcreteDialogueStep extends QuestAbstractNPCDialogueStep {
     }
 
     public void startDialogue(Player player) {
-        startDialogueRunnable(player, this, dialogue, i -> {}, () -> onNext(player));
+        registerListener(player.getUniqueId(), new OnQuestDialogueFreeze(player));
+        startDialogueRunnable(player, dialogue, i -> {}, () -> onNext(player));
     }
 }

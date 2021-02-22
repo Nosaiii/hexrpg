@@ -43,6 +43,8 @@ public class QuestOptionalDialogueStep extends QuestAbstractNPCDialogueStep {
 
     @Override
     public void startDialogue(Player player) {
+        registerListener(player.getUniqueId(), new OnQuestDialogueFreeze(player));
+
         if(hasRequiredItems(player)) {
             Consumer<Integer> takeItemCheckConsumer = i -> {
                 if(i + 1 != takeItemAt) {
@@ -55,9 +57,9 @@ public class QuestOptionalDialogueStep extends QuestAbstractNPCDialogueStep {
                 }
             };
 
-            startDialogueRunnable(player, this, acceptDialogue, takeItemCheckConsumer, () -> onNext(player));
+            startDialogueRunnable(player, acceptDialogue, takeItemCheckConsumer, () -> onNext(player));
         } else {
-            startDialogueRunnable(player, this, denyDialogue, i -> {}, () -> {
+            startDialogueRunnable(player, denyDialogue, i -> {}, () -> {
                 registerListener(player.getUniqueId(), new OnQuestDialogueInteractToTalk(player, this));
                 unregisterListener(player.getUniqueId(), OnQuestDialogueFreeze.class);
             });

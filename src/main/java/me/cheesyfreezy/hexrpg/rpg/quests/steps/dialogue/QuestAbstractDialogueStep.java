@@ -40,11 +40,9 @@ public abstract class QuestAbstractDialogueStep extends QuestStep {
 
     public abstract void startDialogue(Player player);
 
-    protected void startDialogueRunnable(Player player, QuestStep step, QuestDialogue[] dialogue, Consumer<Integer> onIteration, Runnable onFinish) {
-        step.unregisterListener(player.getUniqueId(), OnQuestDialogueInteractToTalk.class);
-        step.unregisterListener(player.getUniqueId(), OnQuestDialogueAtLocation.class);
-
-        step.registerListener(player.getUniqueId(), new OnQuestDialogueFreeze(player));
+    protected void startDialogueRunnable(Player player, QuestDialogue[] dialogue, Consumer<Integer> onIteration, Runnable onFinish) {
+        unregisterListener(player.getUniqueId(), OnQuestDialogueInteractToTalk.class);
+        unregisterListener(player.getUniqueId(), OnQuestDialogueAtLocation.class);
 
         AtomicInteger dialogueTimer = new AtomicInteger();
 

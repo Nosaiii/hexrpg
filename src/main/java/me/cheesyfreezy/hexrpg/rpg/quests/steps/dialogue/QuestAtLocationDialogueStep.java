@@ -26,7 +26,7 @@ public class QuestAtLocationDialogueStep extends QuestAbstractDialogueStep {
     }
 
     public void startDialogue(Player player) {
-        startDialogueRunnable(player, this, dialogue, i -> {}, () -> onNext(player));
+        startDialogueRunnable(player, dialogue, i -> {}, () -> onNext(player));
     }
 
     /**
