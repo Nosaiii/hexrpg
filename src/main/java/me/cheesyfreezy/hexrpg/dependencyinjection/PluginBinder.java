@@ -132,7 +132,7 @@ public class PluginBinder extends AbstractModule {
         addSingleton(QuestOptionalDialogueStepMapper.class);
         addSingleton(QuestKillEntityStepMapper.class);
         addSingleton(QuestAtLocationDialogueStepMapper.class);
-        addSingleton(QuestInteractionDialogueStepMapper.class);
+        addSingleton(QuestInteractDialogueStepMapper.class);
         addSingleton(QuestParser.class);
         addSingleton(QuestService.class);
         addSingleton(QuestNPCParser.class);

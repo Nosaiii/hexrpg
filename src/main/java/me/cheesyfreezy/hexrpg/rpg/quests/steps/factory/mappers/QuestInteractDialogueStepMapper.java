@@ -19,7 +19,7 @@ import org.json.simple.JSONObject;
 
 import java.util.HashMap;
 
-public class QuestInteractionDialogueStepMapper implements IQuestStepMapper {
+public class QuestInteractDialogueStepMapper implements IQuestStepMapper {
     @Inject private QuestService questService;
 
     @Override
