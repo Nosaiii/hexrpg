@@ -129,16 +129,26 @@ public class Quest {
      * Calls the start method on the current step of the player
      * @param player The player to start the step for
      */
-    private void callCurrentStep(Player player) {
+    public void callCurrentStep(Player player) {
+        getCurrentStep(player).start(player);
+    }
+
+    /**
+     * Retrieves the current quest step of the given player
+     * @param player The player to retrieve the quest step for
+     * @return A {@link QuestStep} object that the player is currently on. Returns null if no step was bound to the given player
+     */
+    public QuestStep getCurrentStep(Player player) {
         try {
             JSONObject playerSpecificData = getPlayerData(player.getUniqueId());
             int currentStep = ((Long) playerSpecificData.get("step")).intValue();
 
-            QuestStep newStep = steps[currentStep - 1];
-            newStep.start(player);
+            return steps[currentStep - 1];
         } catch (InvalidQuestPlayerData invalidQuestPlayerData) {
             invalidQuestPlayerData.printStackTrace();
         }
+
+        return null;
     }
 
     /**

@@ -15,6 +15,7 @@ import me.cheesyfreezy.hexrpg.listeners.chat.OnChatProcessor;
 import me.cheesyfreezy.hexrpg.listeners.inventory.*;
 import me.cheesyfreezy.hexrpg.listeners.item.*;
 import me.cheesyfreezy.hexrpg.listeners.quests.OnLateRewardReceive;
+import me.cheesyfreezy.hexrpg.listeners.quests.OnPersistenceQuestSteps;
 import me.cheesyfreezy.hexrpg.listeners.quests.OnQuestStart;
 import me.cheesyfreezy.hexrpg.listeners.world.block.*;
 import me.cheesyfreezy.hexrpg.listeners.world.entity.*;
@@ -138,6 +139,7 @@ public class PluginBinder extends AbstractModule {
         addSingleton(QuestService.class);
         addSingleton(QuestNPCParser.class);
         addSingleton(OnLateRewardReceive.class);
+        addSingleton(OnPersistenceQuestSteps.class);
         addSingleton(OnQuestStart.class);
 
         // Static bindings

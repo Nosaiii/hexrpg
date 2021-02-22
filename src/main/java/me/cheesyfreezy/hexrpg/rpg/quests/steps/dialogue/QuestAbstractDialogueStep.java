@@ -10,6 +10,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
@@ -18,10 +20,22 @@ public abstract class QuestAbstractDialogueStep extends QuestStep {
 
     @Inject private HexRPGPlugin plugin;
 
-    private int currentDialogueIndex;
+    private final HashMap<UUID, BukkitRunnable> dialogueRunnables;
 
     public QuestAbstractDialogueStep(int id) {
         super(id);
+
+        dialogueRunnables = new HashMap<>();
+    }
+
+    @Override
+    public void forceQuit(Player player) {
+        BukkitRunnable dialogueRunnable = getDialogueRunnable(player);
+        if(dialogueRunnable != null) {
+            dialogueRunnable.cancel();
+        }
+
+        unregisterListener(player.getUniqueId(), OnQuestDialogueAtLocation.class);
     }
 
     public abstract void startDialogue(Player player);
@@ -34,7 +48,9 @@ public abstract class QuestAbstractDialogueStep extends QuestStep {
 
         AtomicInteger dialogueTimer = new AtomicInteger();
 
-        new BukkitRunnable() {
+        BukkitRunnable dialogueRunnable = new BukkitRunnable() {
+            private int currentDialogueIndex = 0;
+
             @Override
             public void run() {
                 if(currentDialogueIndex > 0) {
@@ -59,6 +75,20 @@ public abstract class QuestAbstractDialogueStep extends QuestStep {
                     currentDialogueIndex++;
                 }
             }
-        }.runTaskTimer(plugin, 0, 1);
+        };
+
+        dialogueRunnable.runTaskTimer(plugin, 0, 1);
+
+        dialogueRunnables.put(player.getUniqueId(), dialogueRunnable);
+    }
+
+    public BukkitRunnable getDialogueRunnable(Player player) {
+        UUID uuid = player.getUniqueId();
+
+        if(!dialogueRunnables.containsKey(uuid)) {
+            return null;
+        }
+
+        return dialogueRunnables.get(uuid);
     }
 }

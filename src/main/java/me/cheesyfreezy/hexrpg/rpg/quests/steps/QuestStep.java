@@ -29,8 +29,23 @@ public abstract class QuestStep {
         questObservers = new ArrayList<>();
     }
 
+    /**
+     * Starts this quest step for the given player
+     * @param player The player to start the quest step for
+     */
     public abstract void start(Player player);
+
+    /**
+     * Finishes off this quest step for the given player
+     * @param player The player to finish the quest step off for
+     */
     public abstract void finish(Player player);
+
+    /**
+     * Forces the player to exit out of this quest step. Do not manually call this. This is automatically called when a player logs off
+     * @param player The player to force exit this quest step for
+     */
+    public abstract void forceQuit(Player player);
 
     /**
      * Registrates a new listener to a UUID for this quest step
@@ -65,6 +80,10 @@ public abstract class QuestStep {
         }
     }
 
+    /**
+     * Subscribes to the quest to the observer pattern of this instance of a quest step. This method should not be called manually.
+     * @param quest The quest to add as an observer for this quest step
+     */
     public void subscribeObserver(Quest quest) {
         if(questObservers.contains(quest)) {
             return;
@@ -72,6 +91,10 @@ public abstract class QuestStep {
         questObservers.add(quest);
     }
 
+    /**
+     * Continues the sequence of quest steps of the quest(s) this quest step is subscribed to for the given player. This method calls the {@code finish} method of the current step and the {@code start} method of the next quest step
+     * @param player The player to continue the quest for
+     */
     public void onNext(Player player) {
         for(Quest quest : questObservers) {
             quest.nextStep(player);

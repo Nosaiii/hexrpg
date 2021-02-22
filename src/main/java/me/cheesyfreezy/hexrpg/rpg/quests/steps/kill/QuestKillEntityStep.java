@@ -26,6 +26,11 @@ public class QuestKillEntityStep extends QuestStep {
         unregisterListener(player.getUniqueId(), OnQuestKillEntity.class);
     }
 
+    @Override
+    public void forceQuit(Player player) {
+        unregisterListener(player.getUniqueId(), OnQuestKillEntity.class);
+    }
+
     /**
      * The type of entity to kill to increase the kill count towards this quest step
      * @return

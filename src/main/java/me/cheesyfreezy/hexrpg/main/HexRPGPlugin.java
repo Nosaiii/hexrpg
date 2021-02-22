@@ -17,6 +17,7 @@ import me.cheesyfreezy.hexrpg.listeners.chat.OnChatProcessor;
 import me.cheesyfreezy.hexrpg.listeners.inventory.*;
 import me.cheesyfreezy.hexrpg.listeners.item.*;
 import me.cheesyfreezy.hexrpg.listeners.quests.OnLateRewardReceive;
+import me.cheesyfreezy.hexrpg.listeners.quests.OnPersistenceQuestSteps;
 import me.cheesyfreezy.hexrpg.listeners.quests.OnQuestStart;
 import me.cheesyfreezy.hexrpg.listeners.world.block.*;
 import me.cheesyfreezy.hexrpg.listeners.world.entity.*;
@@ -35,6 +36,7 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -89,6 +91,7 @@ public class HexRPGPlugin extends JavaPlugin {
 	@Inject private OnRPGItemDrop onRPGItemDrop;
 	@Inject private OnStealingStop onStealingStop;
 	@Inject private OnLateRewardReceive onLateRewardReceive;
+	@Inject private OnPersistenceQuestSteps onPersistenceQuestSteps;
 	@Inject private OnQuestStart onQuestStart;
 
 	@Inject private QuestParser questParser;
@@ -110,12 +113,26 @@ public class HexRPGPlugin extends JavaPlugin {
 		}
 
 		applyConfigurationSettings();
+
+		if(Feature.getFeature("quests").isEnabled()) {
+			for(Player player : Bukkit.getOnlinePlayers()) {
+				onPersistenceQuestSteps.initializeQuests(player);
+			}
+		}
 	}
 	
 	@Override
 	public void onDisable() {
-		PlayerTradingService playerTradingService = dependencyInjector.getInstance(PlayerTradingService.class);
-		playerTradingService.closePendingTrades();
+		if(Feature.getFeature("player-menu.trading").isEnabled()) {
+			PlayerTradingService playerTradingService = dependencyInjector.getInstance(PlayerTradingService.class);
+			playerTradingService.closePendingTrades();
+		}
+
+		if(Feature.getFeature("quests").isEnabled()) {
+			for(Player player : Bukkit.getOnlinePlayers()) {
+				onPersistenceQuestSteps.uninitializeQuests(player);
+			}
+		}
 	}
 
 	private void setupDependencyInjection() {
@@ -292,6 +309,7 @@ public class HexRPGPlugin extends JavaPlugin {
 		}
 		if(Feature.getFeature("quests").isEnabled()) {
 			pm.registerEvents(onLateRewardReceive, this);
+			pm.registerEvents(onPersistenceQuestSteps, this);
 			pm.registerEvents(onQuestStart, this);
 		}
 	}

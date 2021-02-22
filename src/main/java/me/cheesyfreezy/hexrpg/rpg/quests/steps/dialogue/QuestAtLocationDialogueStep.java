@@ -1,12 +1,8 @@
 package me.cheesyfreezy.hexrpg.rpg.quests.steps.dialogue;
 
 import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogueAtLocation;
-import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogueFreeze;
-import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogueInteractToTalk;
-import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPC;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 public class QuestAtLocationDialogueStep extends QuestAbstractDialogueStep {
     private final QuestDialogue[] dialogue;
@@ -25,7 +21,9 @@ public class QuestAtLocationDialogueStep extends QuestAbstractDialogueStep {
     }
 
     @Override
-    public void finish(Player player) {}
+    public void finish(Player player) {
+        unregisterListener(player.getUniqueId(), OnQuestDialogueAtLocation.class);
+    }
 
     public void startDialogue(Player player) {
         startDialogueRunnable(player, this, dialogue, i -> {}, () -> onNext(player));
