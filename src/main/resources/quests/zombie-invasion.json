@@ -98,7 +98,7 @@
           {
             "speaker-npc-id": -1,
             "text": {
-              "english": "I should go back to Richard and tell him there is something very wrong."
+              "english": "Let's see if there is something interesting around here that I can examine."
             }
           }
         ]
@@ -106,6 +106,33 @@
     },
     {
       "id": 2,
+      "type": "interact_dialogue",
+      "data": {
+        "location": {
+          "world": "world",
+          "x": -222,
+          "y": 88,
+          "z": -38
+        },
+        "action": "right",
+        "dialogue": [
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Is this... a z-zombie head?"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "I should immediately report this to Richard and tell him something is very wrong."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
       "type": "talk_with_npc",
       "data": {
         "npc-id": 4,
@@ -180,7 +207,7 @@
       }
     },
     {
-      "id": 3,
+      "id": 4,
       "type": "kill_entity",
       "data": {
         "type": "zombie",
@@ -188,7 +215,7 @@
       }
     },
     {
-      "id": 4,
+      "id": 5,
       "type": "talk_with_npc",
       "data": {
         "npc-id": 4,

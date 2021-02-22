@@ -136,7 +136,7 @@ quests:
 
   steps:
     kill-entity:
-      progress: '&7&lYou have killed {0}/{1} - ({2})'
+      progress: '&7&oYou have killed {0}/{1} - ({2})'
 
 literal-translations:
   name: 'Name'
