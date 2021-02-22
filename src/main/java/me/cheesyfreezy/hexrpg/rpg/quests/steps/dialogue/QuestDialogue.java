@@ -1,7 +1,6 @@
 package me.cheesyfreezy.hexrpg.rpg.quests.steps.dialogue;
 
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 
 import java.util.HashMap;
@@ -11,7 +10,6 @@ public class QuestDialogue {
     private final String speakerName;
     private final ChatColor prefixColor;
     private final HashMap<String, String> localizedMessages;
-    private int speakerNamePadding = 8; // Default padding is '8'
 
     public QuestDialogue(String speakerName, ChatColor prefixColor, HashMap<String, String> localizedMessages) {
         this.speakerName = speakerName;
@@ -31,7 +29,7 @@ public class QuestDialogue {
         }
 
         String message = localizedMessages.get(LanguageManager.getLocalization(uuid));
-        return prefixColor + "" + ChatColor.BOLD + StringUtils.rightPad(speakerName, speakerNamePadding) + " " + ChatColor.WHITE + message;
+        return prefixColor + "" + ChatColor.BOLD + speakerName + " " + ChatColor.WHITE + message;
     }
 
     /**
@@ -50,17 +48,5 @@ public class QuestDialogue {
      */
     public String getSpeakerName() {
         return speakerName;
-    }
-
-    /**
-     * Sets the padding on the right side from the name of the speaker to align it correctly visualy
-     * @param padding The padding to set
-     */
-    public void setSpeakerNamePadding(int padding) {
-        if(padding < 4) {
-            padding = 4;
-        }
-
-        speakerNamePadding = padding;
     }
 }

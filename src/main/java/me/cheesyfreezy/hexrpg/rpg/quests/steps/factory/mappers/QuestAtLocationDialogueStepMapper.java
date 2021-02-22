@@ -60,18 +60,6 @@ public class QuestAtLocationDialogueStepMapper implements IQuestStepMapper {
             dialogue[i] = new QuestDialogue(speakerName, prefixColor, localizedMessages);
         }
 
-        OptionalInt longestNameLengthOptional = Arrays.stream(dialogue)
-                .filter(d -> d.getSpeakerName() != null)
-                .mapToInt(d -> d.getSpeakerName().length())
-                .max();
-        if(longestNameLengthOptional.isPresent()) {
-            int longestNameLength = longestNameLengthOptional.getAsInt();
-
-            for(QuestDialogue questDialogue : dialogue) {
-                questDialogue.setSpeakerNamePadding(longestNameLength);
-            }
-        }
-
         return new QuestAtLocationDialogueStep(stepId, dialogue, location);
     }
 }
