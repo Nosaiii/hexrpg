@@ -18,12 +18,14 @@ public class QuestStepFactory {
             QuestConcreteDialogueStepMapper questConcreteDialogueStepMapper,
             QuestOptionalDialogueStepMapper questOptionalDialogueStepMapper,
             QuestKillEntityStepMapper questKillEntityStepMapper,
-            QuestAtLocationDialogueStepMapper questAtLocationDialogueStepMapper) {
+            QuestAtLocationDialogueStepMapper questAtLocationDialogueStepMapper,
+            QuestInteractionDialogueStepMapper questInteractionDialogueStepMapper) {
         mappers = new HashMap<>();
         mappers.put("talk_with_npc", questConcreteDialogueStepMapper);
         mappers.put("talk_with_npc_with_items", questOptionalDialogueStepMapper);
         mappers.put("kill_entity", questKillEntityStepMapper);
         mappers.put("at_location_dialogue", questAtLocationDialogueStepMapper);
+        mappers.put("interact_dialogue", questInteractionDialogueStepMapper);
     }
 
     public QuestStep map(String key, int stepId, JSONObject jsonData) {
