@@ -1,6 +1,7 @@
 package me.cheesyfreezy.hexrpg.rpg.quests;
 
 import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.exceptions.quests.InvalidQuestJsonData;
 import me.cheesyfreezy.hexrpg.exceptions.quests.QuestNPCNotFoundException;
 import me.cheesyfreezy.hexrpg.rpg.quests.constants.QuestDifficulty;
 import me.cheesyfreezy.hexrpg.rpg.quests.constants.QuestLength;
@@ -29,7 +30,7 @@ public class QuestParser {
      * @param questFile The .json file to parse
      * @return A generated {@link Quest} object
      */
-    public Quest parse(File questFile) {
+    public Quest parse(File questFile) throws InvalidQuestJsonData {
         JSONParser parser = new JSONParser();
 
         try(FileReader reader = new FileReader(questFile)) {
@@ -87,6 +88,10 @@ public class QuestParser {
             return new Quest(id, name, difficulty, length, questRequirementIds, startNPC, questRewards, questSteps, questFile, questJson);
         } catch (IOException | ParseException e) {
             e.printStackTrace();
+        } catch(NullPointerException | ClassCastException e) {
+            InvalidQuestJsonData exception = new InvalidQuestJsonData(questFile);
+            exception.setStackTrace(e.getStackTrace());
+            throw exception;
         }
 
         return null;

@@ -5,7 +5,8 @@ import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogu
 import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPC;
 import org.bukkit.entity.Player;
 
-public class QuestConcreteDialogueStep extends QuestAbstractDialogueStep {
+public class QuestConcreteDialogueStep extends QuestAbstractNPCDialogueStep {
+
     private final QuestDialogue[] dialogue;
 
     public QuestConcreteDialogueStep(int id, QuestNPC npc, QuestDialogue[] dialogue) {

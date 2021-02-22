@@ -12,8 +12,8 @@ public class QuestAtLocationDialogueStep extends QuestAbstractDialogueStep {
     private final QuestDialogue[] dialogue;
     private final Location location;
 
-    public QuestAtLocationDialogueStep(int id, QuestNPC npc, QuestDialogue[] dialogue, Location location) {
-        super(id, npc);
+    public QuestAtLocationDialogueStep(int id, QuestDialogue[] dialogue, Location location) {
+        super(id);
 
         this.dialogue = dialogue;
         this.location = location;

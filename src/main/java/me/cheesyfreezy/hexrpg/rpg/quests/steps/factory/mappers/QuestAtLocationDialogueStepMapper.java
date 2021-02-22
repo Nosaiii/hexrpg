@@ -24,14 +24,6 @@ public class QuestAtLocationDialogueStepMapper implements IQuestStepMapper {
 
     @Override
     public QuestStep map(int stepId, JSONObject jsonData) {
-        int npcId = ((Long) jsonData.get("npc-id")).intValue();
-        QuestNPC interactNpc = null;
-        try {
-            interactNpc = questService.getNPC(npcId);
-        } catch (QuestNPCNotFoundException e) {
-            e.printStackTrace();
-        }
-
         JSONObject locationJson = (JSONObject) jsonData.get("location");
         String locationWorld = (String) locationJson.get("world");
         int locationX = ((Long) locationJson.get("x")).intValue();
@@ -80,6 +72,6 @@ public class QuestAtLocationDialogueStepMapper implements IQuestStepMapper {
             }
         }
 
-        return new QuestAtLocationDialogueStep(stepId, interactNpc, dialogue, location);
+        return new QuestAtLocationDialogueStep(stepId, dialogue, location);
     }
 }

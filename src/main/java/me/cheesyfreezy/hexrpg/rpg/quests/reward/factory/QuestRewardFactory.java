@@ -14,7 +14,7 @@ public class QuestRewardFactory {
         mappers.put("item", new QuestRewardItemMapper());
     }
 
-    public IQuestReward map(String key, JSONObject jsonData) {
+    public IQuestReward map(String key, JSONObject jsonData) throws NullPointerException {
         return mappers.get(key).map(jsonData);
     }
 }

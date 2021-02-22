@@ -11,6 +11,7 @@ import me.cheesyfreezy.hexrpg.commands.shop.CreateshopCmd;
 import me.cheesyfreezy.hexrpg.commands.world.SpawnLootDropCmd;
 import me.cheesyfreezy.hexrpg.commands.world.SpawnQuestNpcCmd;
 import me.cheesyfreezy.hexrpg.dependencyinjection.PluginBinder;
+import me.cheesyfreezy.hexrpg.exceptions.quests.InvalidQuestJsonData;
 import me.cheesyfreezy.hexrpg.exceptions.quests.QuestNotFoundException;
 import me.cheesyfreezy.hexrpg.listeners.chat.OnChatProcessor;
 import me.cheesyfreezy.hexrpg.listeners.inventory.*;
@@ -38,7 +39,10 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
-import java.util.Scanner;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.*;
+import java.util.*;
 
 public class HexRPGPlugin extends JavaPlugin {
 	public final static String PREFIX = ChatColor.GOLD + "[" + ChatColor.RED + "HexRPG" + ChatColor.GOLD + "] ";
@@ -124,7 +128,7 @@ public class HexRPGPlugin extends JavaPlugin {
 	}
 
 	private void setupFiles() {
-		String[] fileNames = new String[] {
+		List<String> fileNames = new ArrayList<>(Arrays.asList(
 				"config/config.yml",
 				"config/drop_table.yml",
 				"config/" + EffectSocketService.FILE_NAME,
@@ -134,14 +138,26 @@ public class HexRPGPlugin extends JavaPlugin {
 				"config/rpgitem.yml",
 				"config/scrolls.yml",
 				"lang/english.yml",
-				"lang/global_lang.yml",
-				"quests/the-plague.json"
-		};
+				"lang/global_lang.yml"
+		));
+
+		try {
+			URI uri = getClass().getResource("/quests").toURI();
+			Map<String, ?> env = new HashMap<>();
+			try (FileSystem zipfs = FileSystems.newFileSystem(uri, env)) {
+				Path path = zipfs.getPath("quests");
+				Files.walk(path)
+						.filter(p -> p.toString().matches("^.*\\.json$"))
+						.forEach(p -> fileNames.add(p.toString().replaceAll("^/", "")));
+			}
+		} catch (IOException | URISyntaxException e) {
+			e.printStackTrace();
+		}
 
 		for(String fileName : fileNames) {
-			File configFile = new File(getDataFolder() + File.separator + fileName);
+			File file = new File(getDataFolder() + File.separator + fileName);
 
-			File parentFolder = configFile.getParentFile();
+			File parentFolder = file.getParentFile();
 			if(!parentFolder.exists()) {
 				parentFolder.mkdirs();
 			}
@@ -149,11 +165,11 @@ public class HexRPGPlugin extends JavaPlugin {
 			InputStream configInputStream = getResource(fileName);
 
 			boolean replace = false;
-			if(!configFile.exists() || (configFile.exists() && replace)) {
+			if(!file.exists() || (file.exists() && replace)) {
 				try {
-					configFile.createNewFile();
+					file.createNewFile();
 
-					try (FileOutputStream configOutputStream = new FileOutputStream(configFile)) {
+					try (FileOutputStream configOutputStream = new FileOutputStream(file)) {
 						BufferedWriter configBufferedWriter = new BufferedWriter(new OutputStreamWriter(configOutputStream));
 						Scanner scanner = new Scanner(configInputStream);
 
@@ -294,8 +310,12 @@ public class HexRPGPlugin extends JavaPlugin {
 		File[] jsonFiles = questsFolder.listFiles((dir, name) -> name.matches("^.*\\.json$"));
 
 		for(File questFile : jsonFiles) {
-			Quest quest = questParser.parse(questFile);
-			questService.registerQuest(quest);
+			try {
+				Quest quest = questParser.parse(questFile);
+				questService.registerQuest(quest);
+			} catch (InvalidQuestJsonData invalidQuestJsonData) {
+				invalidQuestJsonData.printStackTrace();
+			}
 		}
 
 		for(Quest quest : questService.getQuests()) {

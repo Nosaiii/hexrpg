@@ -4,5 +4,5 @@ import me.cheesyfreezy.hexrpg.rpg.quests.reward.IQuestReward;
 import org.json.simple.JSONObject;
 
 public interface IQuestRewardMapper {
-    IQuestReward map(JSONObject jsonData);
+    IQuestReward map(JSONObject jsonData) throws NullPointerException;
 }

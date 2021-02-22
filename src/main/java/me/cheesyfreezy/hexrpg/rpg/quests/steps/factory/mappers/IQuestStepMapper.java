@@ -4,5 +4,5 @@ import me.cheesyfreezy.hexrpg.rpg.quests.steps.QuestStep;
 import org.json.simple.JSONObject;
 
 public interface IQuestStepMapper {
-    QuestStep map(int stepId, JSONObject jsonData);
+    QuestStep map(int stepId, JSONObject jsonData) throws NullPointerException;
 }

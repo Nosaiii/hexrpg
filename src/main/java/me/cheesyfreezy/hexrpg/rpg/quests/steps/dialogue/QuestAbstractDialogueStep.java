@@ -5,7 +5,6 @@ import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogu
 import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogueFreeze;
 import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogueInteractToTalk;
 import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
-import me.cheesyfreezy.hexrpg.rpg.quests.npc.QuestNPC;
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.QuestStep;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -19,16 +18,10 @@ public abstract class QuestAbstractDialogueStep extends QuestStep {
 
     @Inject private HexRPGPlugin plugin;
 
-    private final QuestNPC npc;
-
     private int currentDialogueIndex;
 
-    public QuestAbstractDialogueStep(int id, QuestNPC npc) {
+    public QuestAbstractDialogueStep(int id) {
         super(id);
-
-        this.npc = npc;
-
-        currentDialogueIndex = 0;
     }
 
     public abstract void startDialogue(Player player);
@@ -67,9 +60,5 @@ public abstract class QuestAbstractDialogueStep extends QuestStep {
                 }
             }
         }.runTaskTimer(plugin, 0, 1);
-    }
-
-    public QuestNPC getNpc() {
-        return npc;
     }
 }

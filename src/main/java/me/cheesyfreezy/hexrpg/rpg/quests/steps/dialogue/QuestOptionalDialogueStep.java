@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class QuestOptionalDialogueStep extends QuestAbstractDialogueStep {
-    private final QuestNPC npc;
+public class QuestOptionalDialogueStep extends QuestAbstractNPCDialogueStep {
     private final int takeItemAt;
     private final QuestDialogue[] denyDialogue;
     private final QuestDialogue[] acceptDialogue;
@@ -22,7 +21,6 @@ public class QuestOptionalDialogueStep extends QuestAbstractDialogueStep {
     public QuestOptionalDialogueStep(int id, QuestNPC npc, int takeItemAt, QuestDialogue[] denyDialogue, QuestDialogue[] acceptDialogue, RequiredItem[] requiredItems) {
         super(id, npc);
 
-        this.npc = npc;
         this.takeItemAt = takeItemAt;
         this.denyDialogue = denyDialogue;
         this.acceptDialogue = acceptDialogue;
@@ -78,9 +76,5 @@ public class QuestOptionalDialogueStep extends QuestAbstractDialogueStep {
         }
 
         return true;
-    }
-
-    public QuestNPC getNpc() {
-        return npc;
     }
 }
