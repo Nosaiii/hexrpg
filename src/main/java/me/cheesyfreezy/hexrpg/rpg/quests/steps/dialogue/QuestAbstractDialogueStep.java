@@ -1,6 +1,7 @@
 package me.cheesyfreezy.hexrpg.rpg.quests.steps.dialogue;
 
 import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogueAtLocation;
 import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogueFreeze;
 import me.cheesyfreezy.hexrpg.listeners.quests.queststep.dialogue.OnQuestDialogueInteractToTalk;
 import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
@@ -34,6 +35,8 @@ public abstract class QuestAbstractDialogueStep extends QuestStep {
 
     protected void startDialogueRunnable(Player player, QuestStep step, QuestDialogue[] dialogue, Consumer<Integer> onIteration, Runnable onFinish) {
         step.unregisterListener(player.getUniqueId(), OnQuestDialogueInteractToTalk.class);
+        step.unregisterListener(player.getUniqueId(), OnQuestDialogueAtLocation.class);
+
         step.registerListener(player.getUniqueId(), new OnQuestDialogueFreeze(player));
 
         AtomicInteger dialogueTimer = new AtomicInteger();
