@@ -1,7 +1,6 @@
 package me.cheesyfreezy.hexrpg.listeners.quests.queststep.kill;
 
 import me.cheesyfreezy.hexrpg.rpg.quests.steps.kill.QuestKillEntityStep;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,17 +8,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 public class OnQuestKillEntity implements Listener {
-    private final QuestKillEntityStep questKillEntityStep;
+    private final QuestKillEntityStep questStep;
     private final Player killer;
-    private final EntityType entityType;
-    private final int requiredKillCount;
     private int killCount;
 
-    public OnQuestKillEntity(QuestKillEntityStep questKillEntityStep, Player killer, EntityType entityType, int requiredKillCount) {
-        this.questKillEntityStep = questKillEntityStep;
+    public OnQuestKillEntity(QuestKillEntityStep questStep, Player killer) {
+        this.questStep = questStep;
         this.killer = killer;
-        this.entityType = entityType;
-        this.requiredKillCount = requiredKillCount;
         killCount = 0;
     }
 
@@ -27,7 +22,7 @@ public class OnQuestKillEntity implements Listener {
     public void onEntityDeath(EntityDeathEvent event) {
         LivingEntity entity = event.getEntity();
 
-        if(!entity.getType().equals(entityType)) {
+        if(!entity.getType().equals(questStep.getEntityType())) {
             return;
         }
 
@@ -41,8 +36,8 @@ public class OnQuestKillEntity implements Listener {
         }
 
         killCount++;
-        if(killCount >= requiredKillCount) {
-            questKillEntityStep.onNext(this.killer);
+        if(killCount >= questStep.getRequiredKillCount()) {
+            questStep.onNext(this.killer);
         }
     }
 }

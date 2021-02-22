@@ -18,7 +18,7 @@ public class QuestKillEntityStep extends QuestStep {
 
     @Override
     public void start(Player player) {
-        registerListener(player.getUniqueId(), new OnQuestKillEntity(this, player, entityType, requiredKillCount));
+        registerListener(player.getUniqueId(), new OnQuestKillEntity(this, player));
     }
 
     @Override

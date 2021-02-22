@@ -25,9 +25,7 @@ public class QuestAtLocationDialogueStep extends QuestAbstractDialogueStep {
     }
 
     @Override
-    public void finish(Player player) {
-        unregisterListener(player.getUniqueId(), OnQuestDialogueFreeze.class);
-    }
+    public void finish(Player player) {}
 
     public void startDialogue(Player player) {
         startDialogueRunnable(player, this, dialogue, i -> {}, () -> onNext(player));

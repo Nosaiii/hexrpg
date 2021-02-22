@@ -17,6 +17,12 @@
       "name": "Dann",
       "color": "c",
       "profession": "fletcher"
+    },
+    {
+      "id": 4,
+      "name": "Richard",
+      "color": "c",
+      "profession": "armorer"
     }
   ]
 }
