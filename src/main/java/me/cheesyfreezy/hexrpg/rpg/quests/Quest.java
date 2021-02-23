@@ -191,8 +191,8 @@ public class Quest {
                 player.sendMessage("");
                 player.sendMessage(ChatUtils.getCenteredMessage(questFinishMessage));
                 player.sendMessage("");
-                player.sendMessage(LanguageManager.getMessage("quests.quest-difficulty", uuid, true, difficultyLabel, difficultyValue));
-                player.sendMessage(LanguageManager.getMessage("quests.quest-length", uuid, true, lengthLabel, lengthValue));
+                player.sendMessage(ChatUtils.getCenteredMessage(LanguageManager.getMessage("quests.quest-difficulty", uuid, true, difficultyLabel, difficultyValue)));
+                player.sendMessage(ChatUtils.getCenteredMessage(LanguageManager.getMessage("quests.quest-length", uuid, true, lengthLabel, lengthValue)));
                 player.sendMessage("");
                 player.sendMessage(ChatUtils.getCenteredMessage(LanguageManager.getMessage("quests.quest-rewards", uuid, true)));
                 for(String rewardLabel : rewardLabels) {
