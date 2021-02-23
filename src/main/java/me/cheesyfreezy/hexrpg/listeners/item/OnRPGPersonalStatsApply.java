@@ -1,15 +1,14 @@
 package me.cheesyfreezy.hexrpg.listeners.item;
 
+import com.codingforcookies.armorequip.ArmorEquipEvent;
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
-
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
-import lowbrain.armorequip.ArmorEquipEvent;
-import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 
 public class OnRPGPersonalStatsApply implements Listener {
 	@EventHandler

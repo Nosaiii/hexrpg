@@ -1,10 +1,9 @@
 package me.cheesyfreezy.hexrpg.listeners.inventory;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.CustomInventory;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.backpack.BackPackInventory;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

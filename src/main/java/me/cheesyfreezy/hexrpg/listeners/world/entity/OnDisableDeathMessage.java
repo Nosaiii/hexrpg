@@ -5,8 +5,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
-
 public class OnDisableDeathMessage implements Listener {
 	@EventHandler
 	public void onEntityDeath(PlayerDeathEvent event) {

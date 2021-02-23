@@ -27,6 +27,8 @@
 .idea/**/dbnavigator.xml
 
 # Gradle
+gradle/
+.gradle/
 .idea/**/gradle.xml
 .idea/**/libraries
 
@@ -107,3 +109,6 @@ fabric.properties
 .idea/codestream.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij
+/.idea/codeStyles/
+/.idea/compiler.xml
+/build/

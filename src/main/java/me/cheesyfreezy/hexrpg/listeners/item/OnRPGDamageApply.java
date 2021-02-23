@@ -1,14 +1,16 @@
 package me.cheesyfreezy.hexrpg.listeners.item;
 
-import java.util.ArrayList;
-
-import me.cheesyfreezy.hexrpg.main.Plugin;
+import com.google.inject.Inject;
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
+import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
+import me.cheesyfreezy.hexrpg.rpg.tools.RPGCalculations;
+import me.cheesyfreezy.hexrpg.rpg.tools.RPGCalculations.RPGDamage;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,12 +18,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
-import me.cheesyfreezy.hexrpg.rpg.tools.RPGCalculations;
-import me.cheesyfreezy.hexrpg.rpg.tools.RPGCalculations.RPGDamage;
+import java.util.ArrayList;
 
 public class OnRPGDamageApply implements Listener {
+	@Inject private HexRPGPlugin plugin;
+
 	@EventHandler
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
 		if(!(event.getDamager() instanceof Player) || !(event.getDamager() instanceof Arrow)) {
@@ -59,7 +60,7 @@ public class OnRPGDamageApply implements Listener {
 
 			if(arrow.hasMetadata("rpgdata_combatitem")) {
 				validRpgItems.add((RPGCombatItem) arrow.getMetadata("rpgdata_combatitem").get(0).value());
-				arrow.removeMetadata("rpgdata_combatitem", Plugin.getMain());
+				arrow.removeMetadata("rpgdata_combatitem", plugin);
 			}
 		}
 		

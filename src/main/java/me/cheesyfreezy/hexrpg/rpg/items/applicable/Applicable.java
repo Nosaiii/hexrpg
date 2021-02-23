@@ -1,9 +1,9 @@
 package me.cheesyfreezy.hexrpg.rpg.items.applicable;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-
+import com.google.inject.Inject;
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.cheesyfreezy.hexrpg.rpg.items.RPGItem;
+import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,20 +13,22 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.main.Plugin;
-import me.cheesyfreezy.hexrpg.rpg.items.RPGItem;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 
-public abstract class Applicable<T, K> extends RPGItem {
+public abstract class Applicable extends RPGItem {
+	@Inject private ApplicableService applicableService;
+
 	protected final ApplicableType type;
-	protected final T subType;
+	protected final String subType;
 	
 	private final String itemName;
 	protected final Material itemMaterial;
 	protected final Byte data;
 	private final ArrayList<String> baseLore;
 	
-	public Applicable(ApplicableType type, T subType, String itemName, Material itemMaterial, Byte data, ArrayList<String> baseLore) {
+	public Applicable(ApplicableType type, String subType, String itemName, Material itemMaterial, Byte data, ArrayList<String> baseLore) {
 		this.type = type;
 		this.subType = subType;
 		
@@ -73,25 +75,25 @@ public abstract class Applicable<T, K> extends RPGItem {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public boolean canApply(K targetItem) {
-		return Plugin.getMain().getApplicableService().getCondition(this).test(targetItem);
+	public boolean canApply(RPGCombatItem targetItem) {
+		return applicableService.getCondition(this).test(targetItem);
 	}
 	
-	public ApplicableResult apply(K targetItem, ItemStack item) {
+	public ApplicableResult apply(RPGCombatItem targetItem, ItemStack item) {
 		if(!canApply(targetItem)) {
 			return ApplicableResult.FAILED;
 		}
 		
 		return childApply(targetItem, item);
 	}
-	protected abstract ApplicableResult childApply(K targetItem, ItemStack item);
+	protected abstract ApplicableResult childApply(RPGCombatItem targetItem, ItemStack item);
 	public abstract ArrayList<String> buildLore();
 	
 	public ApplicableType getType() {
 		return type;
 	}
 	
-	public T getSubType() {
+	public String getSubType() {
 		return subType;
 	}
 	

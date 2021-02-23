@@ -1,8 +1,10 @@
 package me.cheesyfreezy.hexrpg.rpg.mechanics.languageselector;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.main.Plugin;
+import com.google.inject.Inject;
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.CustomInventory;
+import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
@@ -25,13 +27,15 @@ import java.util.UUID;
 public class LanguageSelector extends CustomInventory {
     public final static int ROWS_PER_PAGE = 1, PREVIOUS_PAGE_SLOT = 0, NEXT_PAGE_SLOT = 8;
 
+    @Inject private HexRPGPlugin plugin;
+    @Inject private static HexRPGPlugin staticPlugin;
+
     private int currentPage;
 
     public void open(Player player, int page) {
         this.currentPage = page;
 
-        File languagesFolder = new File(Plugin.getMain().getDataFolder() + File.separator + "lang");
-        File[] languageFiles = languagesFolder.listFiles();
+        File[] languageFiles = getLanguagesFolder().listFiles();
 
         int pageCount = getPageCount();
         Inventory inv = Bukkit.getServer().createInventory(player, ROWS_PER_PAGE * 9 + 9, LanguageManager.getMessage("language-menu.title", player.getUniqueId()) + " (" + page + "/" + pageCount + ")");
@@ -81,12 +85,11 @@ public class LanguageSelector extends CustomInventory {
     }
 
     public int getPageCount() {
-        File languagesFolder = new File(Plugin.getMain().getDataFolder() + File.separator + "lang");
-        return (int) Math.ceil((double) languagesFolder.listFiles().length / (ROWS_PER_PAGE * 9));
+        return (int) Math.ceil((double) getLanguagesFolder().listFiles().length / (ROWS_PER_PAGE * 9));
     }
 
     public void setSelectedLanguage(UUID uuid, String fileName) {
-        File languageDataFile = new File(Plugin.getMain().getDataFolder() + File.separator + "data", "language_data.yml");
+        File languageDataFile = getLanguageDataFile();
         YamlConfiguration languageDataConfig = YamlConfiguration.loadConfiguration(languageDataFile);
 
         languageDataConfig.set(uuid.toString(), fileName);
@@ -98,13 +101,20 @@ public class LanguageSelector extends CustomInventory {
     }
 
     public String getSelectedLanguage(UUID uuid) {
-        File languageDataFile = new File(Plugin.getMain().getDataFolder() + File.separator + "data", "language_data.yml");
-        YamlConfiguration languageDataConfig = YamlConfiguration.loadConfiguration(languageDataFile);
+        YamlConfiguration languageDataConfig = YamlConfiguration.loadConfiguration(getLanguageDataFile());
 
         if(languageDataConfig.isSet(uuid.toString())) {
             return languageDataConfig.getString(uuid.toString());
         }
 
-        return Plugin.getMain().getConfig().getString("language-settings.default");
+        return ConfigFile.getConfig("config.yml").getString("language-settings.default");
+    }
+
+    public static File getLanguagesFolder() {
+        return new File(staticPlugin.getDataFolder() + File.separator + "lang");
+    }
+
+    public static File getLanguageDataFile() {
+        return new File(staticPlugin.getDataFolder() + File.separator + "data", "language_data.yml");
     }
 }

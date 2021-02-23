@@ -1,0 +1,246 @@
+{
+  "id": 2,
+  "name": "Zombie Invasion",
+  "difficulty": "Medium",
+  "length": "Short",
+  "quest-requirements": [],
+  "start-npc-id": 4,
+  "rewards": [
+    {
+      "type": "item",
+      "data": {
+        "name": "diamond_sword",
+        "amount": 1
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": 0,
+      "type": "talk_with_npc",
+      "data": {
+        "npc-id": 4,
+        "dialogue": [
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Hello there. Is there something I could help you with today?"
+            }
+          },
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "Good day! Yes, I think I have something interesting you could help me with."
+            }
+          },
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "About two days ago I heard some weird screaming coming from another village down the road."
+            }
+          },
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "I thought it was nothing, until I heard my son tell me about the church in that village being demolished."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Hmm hmm. That sounds very strange. Would you like me to take a look?"
+            }
+          },
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "I would highly appreciate it if you could have a look at the church."
+            }
+          },
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "Come back to me as soon as you can with whatever information you got. Those screams were horrifying."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "I will go ahead and take a look at it."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 1,
+      "type": "at_location_dialogue",
+      "data": {
+        "location": {
+          "world": "world",
+          "x": -215,
+          "y": 87,
+          "z": -36
+        },
+        "dialogue": [
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Wow. This is... indeed horrifying..."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "There is all blood and not a single soul to be heard or seen."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Let's see if there is something interesting around here that I can examine."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "type": "interact_dialogue",
+      "data": {
+        "location": {
+          "world": "world",
+          "x": -222,
+          "y": 88,
+          "z": -38
+        },
+        "action": "right",
+        "dialogue": [
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Is this... a z-zombie head?"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "I should immediately report this to Richard and tell him something is very wrong."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "type": "talk_with_npc",
+      "data": {
+        "npc-id": 4,
+        "dialogue": [
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "Good to see you again. Tell me. What did you see?"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "I would not recommend anyone to go there. The church was full of blood and skulls. I don't know what to say."
+            }
+          },
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "Oh no. I have a slight feeling what is going on."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "What is it?"
+            }
+          },
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "Lately I have heard rumours that there was a invasion of zombies around town and also the surrounding villages."
+            }
+          },
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "The zombies must have gotten to the church first. Oh no..."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Oh no?"
+            }
+          },
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "We might be their prey this night!"
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "What can I do to save you and all of the citizens?"
+            }
+          },
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "Please. I beg you. Kill 15 zombies. That should be enough for us to prepare for more nights of zombies. For now. Kill 15 of them."
+            }
+          },
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "Richard, you can count on me."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "type": "kill_entity",
+      "data": {
+        "type": "zombie",
+        "required-kills": 15
+      }
+    },
+    {
+      "id": 5,
+      "type": "talk_with_npc",
+      "data": {
+        "npc-id": 4,
+        "dialogue": [
+          {
+            "speaker-npc-id": -1,
+            "text": {
+              "english": "I have killed 15 of them. That should be enough for the night."
+            }
+          },
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "Thank you so much, warrior. I can not thank you enough."
+            }
+          },
+          {
+            "speaker-npc-id": 4,
+            "text": {
+              "english": "Please, take this as a reward; A glorious diamond sword to slay other foes in the near future."
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "player-data": []
+}

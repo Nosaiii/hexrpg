@@ -1,6 +1,5 @@
 package me.cheesyfreezy.hexrpg.rpg.tools;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 
 public class Feature {

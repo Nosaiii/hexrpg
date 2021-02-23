@@ -1,27 +1,23 @@
 package me.cheesyfreezy.hexrpg.rpg.items.combatitem;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.cheesyfreezy.hexrpg.rpg.items.RPGAttributeType;
+import me.cheesyfreezy.hexrpg.rpg.items.RPGItem;
+import me.cheesyfreezy.hexrpg.rpg.mechanics.EffectSocketService;
+import me.cheesyfreezy.hexrpg.rpg.tools.ItemType;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
+import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
+import me.cheesyfreezy.hexrpg.tools.RandomTools;
 import org.apache.commons.lang.WordUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.Nullable;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.rpg.items.RPGItem;
-import me.cheesyfreezy.hexrpg.rpg.items.RPGAttributeType;
-import me.cheesyfreezy.hexrpg.rpg.mechanics.EffectSocketService;
-import me.cheesyfreezy.hexrpg.rpg.tools.ItemType;
-import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
-import me.cheesyfreezy.hexrpg.tools.RandomTools;
+import java.util.ArrayList;
 
 public class RPGCombatItem extends RPGItem implements Cloneable {
 	public static final String FILE_NAME = "rpgitem.yml";

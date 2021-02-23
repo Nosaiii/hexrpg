@@ -1,5 +1,7 @@
 package me.cheesyfreezy.hexrpg.listeners.world.block;
 
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -11,6 +13,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.lootdrop.LootDrop;
 
 public class OnOpenLootDrop implements Listener {
+	@Inject private HexRPGPlugin plugin;
+
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if(!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
@@ -27,7 +31,7 @@ public class OnOpenLootDrop implements Listener {
 		}
 		
 		Chest chest = (Chest) block.getState();
-		LootDrop ld = LootDrop.getLootDrop(chest.getLocation());
+		LootDrop ld = LootDrop.getLootDrop(plugin, chest.getLocation());
 		
 		if(ld == null) {
 			return;

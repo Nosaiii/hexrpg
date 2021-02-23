@@ -1,10 +1,12 @@
 package me.cheesyfreezy.hexrpg.listeners.item;
 
-import java.util.Arrays;
-import java.util.Objects;
-
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.cheesyfreezy.hexrpg.rpg.items.applicable.Applicable;
+import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableResult;
+import me.cheesyfreezy.hexrpg.rpg.items.applicable.scroll.RPGScroll;
+import me.cheesyfreezy.hexrpg.rpg.items.applicable.socketeffect.RPGEffectSocket;
+import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -15,12 +17,8 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 
-import de.tr7zw.hexrpg.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.rpg.items.applicable.Applicable;
-import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableResult;
-import me.cheesyfreezy.hexrpg.rpg.items.applicable.scroll.RPGScroll;
-import me.cheesyfreezy.hexrpg.rpg.items.applicable.socketeffect.RPGEffectSocket;
-import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class OnRPGApplicableApply implements Listener {
 	@SuppressWarnings({ "rawtypes", "unchecked" })

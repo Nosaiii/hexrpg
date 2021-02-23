@@ -1,23 +1,18 @@
 package me.cheesyfreezy.hexrpg.rpg.items.applicable.socketeffect;
 
-import java.io.File;
-import java.util.ArrayList;
-
-import me.cheesyfreezy.hexrpg.tools.ConfigFile;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.ItemStack;
-
-import me.cheesyfreezy.hexrpg.main.Plugin;
 import me.cheesyfreezy.hexrpg.rpg.items.applicable.Applicable;
 import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableResult;
 import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableType;
 import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.EffectSocketService;
+import me.cheesyfreezy.hexrpg.tools.ConfigFile;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 
-public class RPGEffectSocket extends Applicable<String, RPGCombatItem> {
+import java.util.ArrayList;
+
+public class RPGEffectSocket extends Applicable {
 	public RPGEffectSocket(String effectSocketKey, ArrayList<String> baseLore) throws NoSuchFieldError {
 		super(
 				ApplicableType.EFFECT_SOCKET,

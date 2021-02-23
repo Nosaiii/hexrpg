@@ -8,7 +8,6 @@ default:
   override-default: true
   rolls: 1
   drops:
-    - '25:rupee:1-2'
     - '0.5:sinister-blade:1'
     - '0.05:xaisians-sword:1'
     - '0.2:xaisians-combat-scroll:1'
@@ -16,8 +15,6 @@ zombie:
   override-default: false
   rolls: 1
   drops:
-    - '50:rupee:1-3'
-    - '5:rupee:8-18'
     - '10:scroll-of-power:1'
     - '10:scroll-of-courage:1'
     - '5:xaisians-combat-scroll:1'
@@ -32,9 +29,6 @@ skeleton:
   override-default: false
   rolls: 2
   drops:
-    - '75:rupee:1-2'
-    - '50:rupee:1-3'
-    - '5:rupee:10-30'
     - '20:bread:1-2'
     - '10:cake:1'
     - '20:apple:1-3'
@@ -55,7 +49,6 @@ sheep:
   override-default: true
   rolls: 3
   drops:
-    - '10:rupee:2-3'
     - '20:white_wool:1'
     - '20:orange_wool:1'
     - '20:red_wool:1'

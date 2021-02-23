@@ -3,6 +3,8 @@ package me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.menus;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.stealing.PlayerStealingService;
 import me.cheesyfreezy.hexrpg.rpg.tools.Feature;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
 import org.bukkit.ChatColor;
@@ -11,12 +13,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.PlayerMenuInventory;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.PlayerMenuOption;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.trading.PlayerTradingService;
 
 public class PlayerMenuMain extends PlayerMenuInventory {
+	@Inject private PlayerTradingService playerTradingService;
+	@Inject private PlayerStealingService playerStealingService;
+
 	private Player player;
 	private Player interactedPlayer;
 	
@@ -58,19 +62,17 @@ public class PlayerMenuMain extends PlayerMenuInventory {
 	}
 	
 	private void openTradeMenu() {
-		PlayerTradingService pts = Plugin.getMain().getPlayerTradingService();
-		
-		if(pts.hasBeenInvited(player)) {
-			Player inviter = pts.getInviterByInvitee(player);
-			pts.startTrade(inviter);
+		if(playerTradingService.hasBeenInvited(player)) {
+			Player inviter = playerTradingService.getInviterByInvitee(player);
+			playerTradingService.startTrade(inviter);
 		} else {
-			pts.invite(player, interactedPlayer, true, true);
+			playerTradingService.invite(player, interactedPlayer, true, true);
 			player.closeInventory();
 		}
 	}
 	
 	private void startStealing() {
-		Plugin.getMain().getPlayerStealingService().steal(player, interactedPlayer);
+		playerStealingService.steal(player, interactedPlayer);
 		player.closeInventory();
 	}
 }

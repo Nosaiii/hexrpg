@@ -16,6 +16,6 @@ public class OnReobtainArrowStats implements Listener {
         }
         RPGCombatItem rpgItem = (RPGCombatItem) arrow.getMetadata("rpgdata_combatarrow").get(0).value();
 
-        event.getItem().setItemStack(rpgItem.update(arrow.getItemStack()));
+        event.getItem().setItemStack(rpgItem.update(event.getItem().getItemStack()));
     }
 }

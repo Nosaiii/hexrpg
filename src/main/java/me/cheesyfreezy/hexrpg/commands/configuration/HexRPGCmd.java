@@ -1,6 +1,7 @@
 package me.cheesyfreezy.hexrpg.commands.configuration;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -14,6 +15,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class HexRPGCmd implements CommandExecutor {
+    @Inject private HexRPGPlugin plugin;
+
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         String command = cmd.getName();
 
@@ -30,16 +33,16 @@ public class HexRPGCmd implements CommandExecutor {
             }
 
             if(args.length == 0) {
-                PluginDescriptionFile descriptionFile = Plugin.getMain().getDescription();
+                PluginDescriptionFile descriptionFile = plugin.getDescription();
                 String version = descriptionFile.getVersion();
                 List<String> authors = descriptionFile.getAuthors();
 
-                sender.sendMessage(ChatColor.GOLD + "-=[" + ChatColor.RED + " HexRPG " + ChatColor.GOLD + "]=-");
+                sender.sendMessage(HexRPGPlugin.PREFIX);
                 sender.sendMessage(ChatColor.GOLD + LanguageManager.getMessage("literal-translations.version", uuid) + ": " + ChatColor.RED + version);
                 sender.sendMessage(ChatColor.GOLD + LanguageManager.getMessage("literal-translations.authors", uuid) + ": " + ChatColor.RED + String.join(", ", authors));
             } else if(args.length == 1) {
                 if(args[0].equalsIgnoreCase("Reload")) {
-                    Plugin.getMain().reloadConfig();
+                    plugin.reloadConfig();
                     sender.sendMessage(LanguageManager.getMessage("plugin.reloaded", uuid, true));
                 } else {
                     sender.sendMessage(LanguageManager.getMessage("command-and-chat-execution.invalid-command-argument", uuid, true));
