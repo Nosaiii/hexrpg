@@ -1,7 +1,8 @@
 package me.cheesyfreezy.hexrpg.rpg.mechanics.lootdrop;
 
+import com.google.inject.Inject;
 import de.tr7zw.changeme.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.main.Plugin;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
@@ -31,14 +32,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LootDrop {
-	private Location location;
-	private LootDropTier tier;
+	@Inject private HexRPGPlugin plugin;
+	@Inject private static HexRPGPlugin staticPlugin;
 
-	private int yGoal;
+	private final Location location;
+	private final LootDropTier tier;
+
+	private final int yGoal;
 	private boolean dropped;
 	private int dropTaskId;
 
-	public static LootDrop create(Location location, @Nullable LootDropTier tier) {
+	public static LootDrop create(HexRPGPlugin plugin, Location location, @Nullable LootDropTier tier) {
 		ConfigFile configFile = ConfigFile.getConfig("loot_drop.yml");
 
 		if (tier == null) {
@@ -67,7 +71,7 @@ public class LootDrop {
 			}
 		}
 
-		File f = getFile();
+		File f = new File(plugin.getDataFolder() + "/data/", "lootdrop_data.yml");
 		YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
 
 		Location keyLocation = location.clone();
@@ -141,8 +145,8 @@ public class LootDrop {
 		return new LootDrop(keyLocation);
 	}
 	
-	public static LootDrop getLootDrop(Location location) {
-		File f = LootDrop.getFile();
+	public static LootDrop getLootDrop(HexRPGPlugin plugin, Location location) {
+		File f = new File(plugin.getDataFolder() + "/data/", "lootdrop_data.yml");
 		YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
 		
 		if(!c.isConfigurationSection(getKeyByLocation(location))) {
@@ -177,7 +181,7 @@ public class LootDrop {
 		}
 		
 		LootDropDropRunnable lddr = new LootDropDropRunnable(this, yGoal);
-		dropTaskId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Plugin.getMain(), lddr, 0, 1);
+		dropTaskId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, lddr, 0, 1);
 	}
 	
 	public void loot() {
@@ -196,7 +200,7 @@ public class LootDrop {
 	}
 	
 	public void remove() {
-		File f = LootDrop.getFile();
+		File f = getFile();
 		YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
 		
 		c.set(getKeyByLocation(location), null);
@@ -272,7 +276,7 @@ public class LootDrop {
 	}
 
 	public static String getKeyByLocation(Location location) {
-		return Integer.toString(location.getBlockX()) + ":" + Integer.toString(location.getBlockY()) + ":" + Integer.toString(location.getBlockZ()) + ":" + location.getWorld().getName();
+		return location.getBlockX() + ":" + location.getBlockY() + ":" + location.getBlockZ() + ":" + location.getWorld().getName();
 	}
 	
 	public static Location getLocationByKey(String key) {
@@ -281,6 +285,6 @@ public class LootDrop {
 	}
 
 	public static File getFile() {
-		return new File(Plugin.getMain().getDataFolder() + "/data/", "lootdrop_data.yml");
+		return new File(staticPlugin.getDataFolder() + "/data/", "lootdrop_data.yml");
 	}
 }

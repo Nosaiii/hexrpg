@@ -2,18 +2,20 @@ package me.cheesyfreezy.hexrpg.rpg.mechanics.droptable;
 
 import java.util.Arrays;
 
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableService;
 import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableType;
 import me.cheesyfreezy.hexrpg.rpg.items.other.Backpack;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
 import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
-import me.cheesyfreezy.hexrpg.rpg.items.other.Rupee;
 import me.cheesyfreezy.hexrpg.tools.RandomTools;
 
 public class DropTableItem {
+	@Inject private ApplicableService applicableService;
+
 	private double dropRate;
 	private String itemKey;
 	private int[] amount;
@@ -46,13 +48,11 @@ public class DropTableItem {
 		ConfigFile scrollsConfig = ConfigFile.getConfig("scrolls.yml");
 		ConfigFile effectSocketConfig = ConfigFile.getConfig("effect_sockets.yml");
 		
-		if(itemKey.equalsIgnoreCase("RUPEE")) {
-			item = new Rupee().getTemporaryItem();
-		} else if(itemKey.equalsIgnoreCase("BACKPACK")) {
+		if(itemKey.equalsIgnoreCase("BACKPACK")) {
 			item = new Backpack(3).getTemporaryItem();
 		} else if(scrollsConfig.getRootKeys().contains(itemKey) || effectSocketConfig.getRootKeys().contains(itemKey)) {
 			ApplicableType type = scrollsConfig.getRootKeys().contains(itemKey) ? ApplicableType.SCROLL : ApplicableType.EFFECT_SOCKET;
-			item = Plugin.getMain().getApplicableService().getReference(type, itemKey).getTemporaryItem();
+			item = applicableService.getReference(type, itemKey).getTemporaryItem();
 		} else if(Arrays.asList(RPGCombatItem.getCollection()).contains(itemKey)) {
 			item = RPGCombatItem.build(itemKey);
 		} else {

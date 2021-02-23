@@ -1,7 +1,8 @@
 package me.cheesyfreezy.hexrpg.listeners.item;
 
+import com.google.inject.Inject;
 import de.tr7zw.changeme.nbtapi.NBTItem;
-import me.cheesyfreezy.hexrpg.main.Plugin;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import me.cheesyfreezy.hexrpg.rpg.tools.RPGCalculations;
 import me.cheesyfreezy.hexrpg.rpg.tools.RPGCalculations.RPGDamage;
@@ -20,6 +21,8 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 
 public class OnRPGDamageApply implements Listener {
+	@Inject private HexRPGPlugin plugin;
+
 	@EventHandler
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
 		if(!(event.getDamager() instanceof Player) || !(event.getDamager() instanceof Arrow)) {
@@ -57,7 +60,7 @@ public class OnRPGDamageApply implements Listener {
 
 			if(arrow.hasMetadata("rpgdata_combatitem")) {
 				validRpgItems.add((RPGCombatItem) arrow.getMetadata("rpgdata_combatitem").get(0).value());
-				arrow.removeMetadata("rpgdata_combatitem", Plugin.getMain());
+				arrow.removeMetadata("rpgdata_combatitem", plugin);
 			}
 		}
 		

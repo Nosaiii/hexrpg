@@ -5,16 +5,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
-
 public class PlayerLevel {
-	private UUID uuid;
+	private final HexRPGPlugin plugin;
 
-	public PlayerLevel(UUID uuid) {
+	private final UUID uuid;
+
+	public PlayerLevel(HexRPGPlugin plugin, UUID uuid) {
+		this.plugin = plugin;
 		this.uuid = uuid;
 	}
 
@@ -75,8 +77,8 @@ public class PlayerLevel {
 		return ConfigFile.getConfig("player_leveling.yml").getInteger("required-exp-per-level." + level);
 	}
 
-	private File getPlayerLevelFile() {
-		return new File(Plugin.getMain().getDataFolder() + "/data/", "player_level.dat");
+	public File getPlayerLevelFile() {
+		return new File(plugin.getDataFolder() + "/data/", "player_level.dat");
 	}
 
 	public static int getEntityExperienceRate(EntityType entityType) {

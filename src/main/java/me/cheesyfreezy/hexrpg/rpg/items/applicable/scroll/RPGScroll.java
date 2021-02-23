@@ -15,7 +15,7 @@ import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableType;
 import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
 import me.cheesyfreezy.hexrpg.tools.RandomTools;
 
-public class RPGScroll extends Applicable<String, RPGCombatItem> {
+public class RPGScroll extends Applicable {
 	private double successRate, destroyRate;
 	private Map<RPGAttributeType, Object> modifiers;
 	

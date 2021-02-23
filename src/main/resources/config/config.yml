@@ -9,6 +9,7 @@ feature-settings:
   loot-drops: true
   backpacks: true
   drop-tables: true
+  quests: true
   player-menu:
     trading: true
     stealing: true
@@ -40,13 +41,6 @@ death-settings:
 player-shop-settings:
   upgrade-slots-cost: 400
   max-rows: 4
-
-# [ECONOMY SETTINGS]
-economy-settings:
-  # Vault is the economy plugin used by the Essentials plugin and many other plugins
-  # Enabling this will replace rupees by the Vault economy system
-  # If rupees are present on a drop table and Vault is enabled, instead of rupees, cash will be stored on the player's bank account
-  vault: false
 
 # [ STATS SETTINGS ]
 stats-settings:

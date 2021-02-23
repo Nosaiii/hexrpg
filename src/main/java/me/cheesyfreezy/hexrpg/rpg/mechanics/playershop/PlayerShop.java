@@ -7,8 +7,11 @@ import java.util.Arrays;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -24,12 +27,15 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.CustomInventory;
 
 public class PlayerShop extends CustomInventory {
-	public static PlayerShop getPlayerShop(Location location) {
-		File f = getFile();
+	@Inject private HexRPGPlugin plugin;
+	@Inject private static HexRPGPlugin staticPlugin;
+	@Inject private Economy economy;
+
+	public static PlayerShop getPlayerShop(HexRPGPlugin plugin, Location location) {
+		File f = new File(plugin.getDataFolder() + "/data/", "shop_data.yml");
 		YamlConfiguration c = YamlConfiguration.loadConfiguration(f);
 		
 		for(String uuid : c.getKeys(false)) {
@@ -169,7 +175,7 @@ public class PlayerShop extends CustomInventory {
 		
 		PlayerShopInventoryUpdater psiu = new PlayerShopInventoryUpdater(player);
 		Runnable psiuRunnable = psiu.getRunnable();
-		psiu.setTaskId(Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Plugin.getMain(), psiuRunnable, 0, 2));
+		psiu.setTaskId(Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, psiuRunnable, 0, 2));
 	}
 	
 	public void update(Player player) {
@@ -393,16 +399,16 @@ public class PlayerShop extends CustomInventory {
 	}
 	
 	public static File getFile() {
-		return new File(Plugin.getMain().getDataFolder() + "/data/", "shop_data.yml");
+		return new File(staticPlugin.getDataFolder() + "/data/", "shop_data.yml");
 	}
 
-	public static String getPriceLabel(Player player, int priceValue) {
+	public String getPriceLabel(Player player, int priceValue) {
 		String priceLabel = "";
 		boolean singularPrice = priceValue == 1;
-		if(Plugin.getMain().getVault() == null) {
+		if(economy == null) {
 			priceLabel = singularPrice ? LanguageManager.getMessage("literal-translations.rupees", player.getUniqueId()) : LanguageManager.getMessage("literal-translations.rupee", player.getUniqueId());
 		} else {
-			priceLabel = singularPrice ? Plugin.getMain().getVault().currencyNameSingular() : Plugin.getMain().getVault().currencyNamePlural();
+			priceLabel = singularPrice ? economy.currencyNameSingular() : economy.currencyNamePlural();
 		}
 
 		return priceLabel;

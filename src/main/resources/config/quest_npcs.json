@@ -1,0 +1,28 @@
+{
+  "npcs": [
+    {
+      "id": 1,
+      "name": "Wyat",
+      "color": "c",
+      "profession": "butcher"
+    },
+    {
+      "id": 2,
+      "name": "Ben",
+      "color": "c",
+      "profession": "weaponsmith"
+    },
+    {
+      "id": 3,
+      "name": "Dann",
+      "color": "c",
+      "profession": "fletcher"
+    },
+    {
+      "id": 4,
+      "name": "Richard",
+      "color": "c",
+      "profession": "armorer"
+    }
+  ]
+}

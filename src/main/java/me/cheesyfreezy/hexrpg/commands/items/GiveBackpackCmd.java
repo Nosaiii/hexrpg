@@ -1,11 +1,9 @@
 package me.cheesyfreezy.hexrpg.commands.items;
 
 import me.cheesyfreezy.hexrpg.rpg.items.other.Backpack;
-import me.cheesyfreezy.hexrpg.rpg.items.other.Rupee;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
 import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

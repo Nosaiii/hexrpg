@@ -1,31 +1,24 @@
 package me.cheesyfreezy.hexrpg.commands.items;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Map;
-
-import me.cheesyfreezy.hexrpg.rpg.items.applicable.Applicable;
+import com.google.inject.Inject;
 import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableService;
 import me.cheesyfreezy.hexrpg.rpg.items.applicable.ApplicableType;
-import me.cheesyfreezy.hexrpg.rpg.items.applicable.socketeffect.RPGEffectSocket;
-import me.cheesyfreezy.hexrpg.rpg.items.combatitem.RPGCombatItem;
-import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
+import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
-import me.cheesyfreezy.hexrpg.rpg.mechanics.EffectSocketService;
-import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
+import java.util.Arrays;
 
 public class GiveRPGEffectSocket implements CommandExecutor {
+    @Inject private ApplicableService applicableService;
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         String command = cmd.getName();
@@ -40,10 +33,10 @@ public class GiveRPGEffectSocket implements CommandExecutor {
                 }
 
                 String[] availableEffectSockets = new String[0];
-                if(Plugin.getMain().getApplicableService().getSingletons(ApplicableType.EFFECT_SOCKET) != null) {
-                    Object[] effectSocketKeysObject = Plugin.getMain().getApplicableService().getSingletons(ApplicableType.EFFECT_SOCKET).entrySet()
+                if(applicableService.getSingletons(ApplicableType.EFFECT_SOCKET) != null) {
+                    Object[] effectSocketKeysObject = applicableService.getSingletons(ApplicableType.EFFECT_SOCKET).entrySet()
                             .stream()
-                            .map(es -> ((Map.Entry<String, RPGEffectSocket>) es).getValue().getSubType())
+                            .map(es -> es.getValue().getSubType())
                             .toArray();
                     availableEffectSockets = Arrays.copyOf(effectSocketKeysObject, effectSocketKeysObject.length, String[].class);
                 }
@@ -65,7 +58,7 @@ public class GiveRPGEffectSocket implements CommandExecutor {
                         player.sendMessage(LanguageManager.getMessage("command-and-chat-execution.effect-sockets.invalid-effect-socket", player.getUniqueId(), true, args[0]));
                         return true;
                     }
-                    ItemStack effectSocketItem = Plugin.getMain().getApplicableService().getReference(ApplicableType.EFFECT_SOCKET, args[0]).getTemporaryItem();
+                    ItemStack effectSocketItem = applicableService.getReference(ApplicableType.EFFECT_SOCKET, args[0]).getTemporaryItem();
 
                     int amount = 1;
                     if (args.length >= 2) {

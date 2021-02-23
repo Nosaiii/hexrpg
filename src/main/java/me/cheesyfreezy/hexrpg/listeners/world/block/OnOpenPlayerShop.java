@@ -1,5 +1,7 @@
 package me.cheesyfreezy.hexrpg.listeners.world.block;
 
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -12,6 +14,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import me.cheesyfreezy.hexrpg.rpg.mechanics.playershop.PlayerShop;
 
 public class OnOpenPlayerShop implements Listener {
+	@Inject private HexRPGPlugin plugin;
+
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
@@ -29,7 +33,7 @@ public class OnOpenPlayerShop implements Listener {
 			return;
 		}
 		
-		PlayerShop shop = PlayerShop.getPlayerShop(block.getLocation());
+		PlayerShop shop = PlayerShop.getPlayerShop(plugin, block.getLocation());
 		if(shop == null) {
 			return;
 		}

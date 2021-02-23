@@ -2,22 +2,24 @@ package me.cheesyfreezy.hexrpg.rpg.mechanics.playermenu.stealing;
 
 import java.util.function.BiConsumer;
 
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.tools.ConfigFile;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 
-import me.cheesyfreezy.hexrpg.main.Plugin;
 import me.cheesyfreezy.hexrpg.tools.RandomTools;
 
 public class StealProcess {
-	private Player stealer;
-	private Player victim;
+	@Inject private HexRPGPlugin plugin;
+
+	private final Player stealer;
+	private final Player victim;
 	
 	private BiConsumer<Player, Player> onSuccess;
 	private BiConsumer<Player, Player> onFailed;
@@ -25,7 +27,7 @@ public class StealProcess {
 	
 	private int taskId;
 	
-	private int progressGoal;
+	private final int progressGoal;
 	private int progress;
 	private BossBar progressBar;
 	
@@ -44,7 +46,7 @@ public class StealProcess {
 		progressBar.addPlayer(stealer);
 		progressBar.setVisible(true);
 		
-		taskId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Plugin.getMain(), () -> {
+		taskId = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
 			progressBar.setProgress(1.0d / progressGoal * progress);
 			
 			if(progress % 5 == 0) {

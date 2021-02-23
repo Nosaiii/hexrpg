@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -49,15 +50,17 @@ public class PlayerTradingService {
 	
 	public void confirmTrade(Player inviter, PlayerMenuTrade pmt) {
 		Player invitee = trading.get(inviter);
-		
-		for(ItemStack excludedItem : inviter.getInventory().addItem(getItemsFromPlayer(invitee, pmt)).values()) {
-			inviter.getWorld().dropItem(inviter.getLocation(), excludedItem);
-		}
-		for(ItemStack excludedItem : invitee.getInventory().addItem(getItemsFromPlayer(inviter, pmt)).values()) {
-			invitee.getWorld().dropItem(invitee.getLocation(), excludedItem);
-		}
-		
+
+		dropExcludedItems(inviter, invitee, pmt);
+		dropExcludedItems(invitee, inviter, pmt);
+
 		closeTrade(inviter, pmt, false);
+	}
+
+	private void dropExcludedItems(Player from, Player to, PlayerMenuTrade pmt) {
+		for(ItemStack excludedItem : from.getInventory().addItem(getItemsFromPlayer(to, pmt)).values()) {
+			from.getWorld().dropItem(from.getLocation(), excludedItem);
+		}
 	}
 	
 	public void closeTrade(Player player, PlayerMenuTrade pmt, boolean forced) {
@@ -128,7 +131,21 @@ public class PlayerTradingService {
 		return null;
 	}
 	
-	public HashMap<Player, Player> getTradingMap() {
-		return trading;
+	public void closePendingTrades() {
+		for(Player player : Bukkit.getOnlinePlayers()) {
+			Inventory inv = player.getOpenInventory().getTopInventory();
+			if(inv == null) {
+				continue;
+			}
+
+			if(CustomInventory.hasCache(inv)) {
+				if(CustomInventory.getInventoryObject(inv) instanceof PlayerMenuTrade) {
+					PlayerMenuTrade pmt = (PlayerMenuTrade) CustomInventory.getInventoryObject(inv);
+					closeTrade(player, pmt, true);
+				} else {
+					player.closeInventory();
+				}
+			}
+		}
 	}
 }

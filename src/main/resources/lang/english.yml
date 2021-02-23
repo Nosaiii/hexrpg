@@ -8,6 +8,7 @@ command-and-chat-execution:
 
   invalid-player: '&cYou have entered an invalid player that either does not exist or is not online!'
   invalid-amount: '&cYou have entered an invalid amount!'
+  invalid-number: '&cYou have entered an invalid number!'
 
   backpacks:
     invalid-size: '&cYou have entered an invalid size for a backpack!'
@@ -48,6 +49,9 @@ command-and-chat-execution:
 
   chat-processor:
     cancelled: '&7The action has been cancelled!'
+
+  quests:
+    invalid-npc: '&cYou have entered an invalid ID for the quest npc!'
 
 backpacks:
   backpacks-stacking-not-allowed: '&cYou cannot store backpacks inside of other backpacks!'
@@ -123,6 +127,17 @@ language-menu:
 plugin:
   reloaded: '&aThe plugin has successfully been reloaded!'
 
+quests:
+  quest-completed: '&aCongratulations on completing ''&9&l{0}''!'
+  quest-difficulty: '&c{0}&f: {1}'
+  quest-length: '&c{0}&f: {1}'
+  quest-rewards: '&f&nRewards:'
+  quest-reward-item: '&c - &f{0}'
+
+  steps:
+    kill-entity:
+      progress: '&7&oYou have killed {0}/{1} - ({2})'
+
 literal-translations:
   name: 'Name'
   amount: 'Amount'
@@ -162,3 +177,17 @@ literal-translations:
 
   version: 'Version'
   authors: 'Authors'
+
+  you: 'You'
+
+  difficulty: 'Difficulty'
+  easy: 'Easy'
+  medium: 'Medium'
+  hard: 'Hard'
+  master: 'Master'
+  grand-master: 'Grand Master'
+
+  length: 'Length'
+  short: 'Short'
+  long: 'Long'
+  very-long: 'Very long'

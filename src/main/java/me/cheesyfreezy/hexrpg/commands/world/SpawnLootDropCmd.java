@@ -1,5 +1,7 @@
 package me.cheesyfreezy.hexrpg.commands.world;
 
+import com.google.inject.Inject;
+import me.cheesyfreezy.hexrpg.main.HexRPGPlugin;
 import me.cheesyfreezy.hexrpg.tools.LanguageManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,6 +19,8 @@ import me.cheesyfreezy.hexrpg.tools.PrimitiveTypeTools;
 import java.util.UUID;
 
 public class SpawnLootDropCmd implements CommandExecutor {
+	@Inject private HexRPGPlugin plugin;
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		String command = cmd.getName();
@@ -64,7 +68,7 @@ public class SpawnLootDropCmd implements CommandExecutor {
 					return true;
 				}
 				
-				LootDrop ld = LootDrop.create(location, null);
+				LootDrop ld = LootDrop.create(plugin, location, null);
 				ld.drop();
 
 				sender.sendMessage(LanguageManager.getMessage("command-and-chat-execution.loot-drop.dropped", uuid, true));
