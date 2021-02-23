@@ -71,6 +71,10 @@ public abstract class QuestStep {
      * @param <T> The type of the listener to unregistrate
      */
     public <T extends Listener> void unregisterListener(UUID uuid, Class<T> clazz) {
+        if(!registeredListeners.containsKey(uuid)) {
+            return;
+        }
+
         List<Listener> listenersToRemove = registeredListeners.get(uuid).stream()
                 .filter(l -> l.getClass() == clazz)
                 .collect(Collectors.toList());
