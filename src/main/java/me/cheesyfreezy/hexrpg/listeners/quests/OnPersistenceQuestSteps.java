@@ -30,6 +30,10 @@ public class OnPersistenceQuestSteps implements Listener {
                 continue;
             }
 
+            if(quest.hasFinished(player.getUniqueId())) {
+                continue;
+            }
+
             quest.callCurrentStep(player);
         }
     }
